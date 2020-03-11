@@ -29,6 +29,12 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
         therapists.add(new TherapistSearchResult("Nombre3 Apellido3", 150, 4.5));
         therapists.add(new TherapistSearchResult("Nombre4 Apellido4", 150, 4.5));
         therapists.add(new TherapistSearchResult("Nombre5 Apellido5", 150, 4.5));
+        therapists.add(new TherapistSearchResult("Nombre6 Apellido6", 150, 4.5));
+        therapists.add(new TherapistSearchResult("Nombre7 Apellido7", 150, 4.5));
+        therapists.add(new TherapistSearchResult("Nombre8 Apellido8", 150, 4.5));
+        therapists.add(new TherapistSearchResult("Nombre9 Apellido9", 150, 4.5));
+        therapists.add(new TherapistSearchResult("Nombre10 Apellido10", 150, 4.5));
+        therapists.add(new TherapistSearchResult("Nombre11 Apellido11", 150, 4.5));
 
         mAdapter = new TherapistSearchResultAdapter(this, therapists);
         listView.setAdapter(mAdapter);
