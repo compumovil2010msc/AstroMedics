@@ -36,7 +36,7 @@ public class BookAppointment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(view.getContext(), TherapistFilterActivity.class);
+                Intent intent=new Intent(view.getContext(), BookAppointmentLocationActivity.class);
                 startActivity(intent);
             }
         });
