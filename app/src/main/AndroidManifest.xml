@@ -29,8 +29,10 @@
             android:value="@string/api_key" />
 
         <activity
+            android:name=".views.TherapistDetailsActivity"/>
+        <activity
             android:name=".views.TherapistSearchResultActivity"
-            android:theme="@style/AppThemeWithActionBar"/>
+            android:theme="@style/AppThemeWithActionBar" />
         <activity
             android:name=".views.TherapistFilterActivity"
             android:theme="@style/AppThemeWithActionBar" />

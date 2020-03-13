@@ -2,7 +2,10 @@ package com.example.astromedics.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.astromedics.R;
@@ -38,5 +41,13 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
 
         mAdapter = new TherapistSearchResultAdapter(this, therapists);
         listView.setAdapter(mAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(view.getContext(), TherapistDetailsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
