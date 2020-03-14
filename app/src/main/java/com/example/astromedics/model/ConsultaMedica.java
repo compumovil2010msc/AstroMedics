@@ -1,22 +1,30 @@
 package com.example.astromedics.model;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class ConsultaMedica {
     private Terapeuta terapeuta;
     private String ubicacion; // esto podria cambiarse por algo de los mapas
-    private Date fechaInicio;
-    private Date fechaFinal;
+    private LocalDateTime fechaInicio;
+    private int horas;
     private String imagen;
 
-    public ConsultaMedica(Terapeuta terapeuta, String ubicacion, Date fechaInicio, Date fechaFinal, String imagen )
+    public ConsultaMedica(Terapeuta terapeuta, String ubicacion, LocalDateTime fechaInicio, int horas, String imagen )
     {
         this.terapeuta = terapeuta;
         this.ubicacion = ubicacion;
         this.fechaInicio = fechaInicio;
-        this.fechaFinal = fechaFinal;
+        this.horas = horas;
         this.imagen = imagen;
+    }
+
+    public String getHora()
+    {
+        return this.fechaInicio.getHour() + " - " + this.fechaInicio.plus( this.horas , ChronoUnit.HOURS).getHour();
     }
 
     public String getImagen()
@@ -41,7 +49,6 @@ public class ConsultaMedica {
 
     public String getFecha()
     {
-        SimpleDateFormat ft = new SimpleDateFormat ("E dd M");
-        return ft.format(this.fechaInicio);
+        return this.fechaInicio.getDayOfWeek().toString() + " " + fechaInicio.getDayOfMonth() + " " + fechaInicio.getMonth();
     }
 }

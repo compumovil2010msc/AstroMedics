@@ -2,6 +2,7 @@ package com.example.astromedics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -12,15 +13,14 @@ import com.example.astromedics.adapters.AdapterConsultaMedica;
 import com.example.astromedics.model.ConsultaMedica;
 import com.example.astromedics.model.Terapeuta;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Agenda extends AppCompatActivity {
 
-    String[] mProjection;
-    Cursor mCursor;
-    AdapterConsultaMedica acm;
     ListView lv;
     List<ConsultaMedica> consultas;
 
@@ -43,6 +43,17 @@ public class Agenda extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ConsultaMedica cm = consultas.get(position);
 
+                System.out.println("hola");
+
+                Bundle bd = new Bundle();
+                bd.putString("especializacion", cm.getEspecializacion_terapeuta());
+                bd.putString("fecha", cm.getFecha());
+                bd.putString("hora", cm.getHora() );
+                bd.putString("ubicacion", cm.getUbicacion() );
+
+                Intent intent = new Intent(getBaseContext(), AgendaDetalle.class);
+                intent.putExtra("bundle", bd);
+                startActivity(intent);
             }
         });
     }
@@ -52,10 +63,19 @@ public class Agenda extends AppCompatActivity {
         ConsultaMedica cm = new ConsultaMedica(
                 new Terapeuta("john", "fonoaudiologo"),
                 "esto es una direccion",
-                new Date(),
-                new Date(),
+                LocalDateTime.now(),
+                2,
                 "harold"
         ) ;
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
+        consultas.add( cm );
         consultas.add( cm );
         consultas.add( cm );
         consultas.add( cm );
