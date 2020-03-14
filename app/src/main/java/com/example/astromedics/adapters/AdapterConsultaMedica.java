@@ -1,6 +1,7 @@
-package com.example.astromedics.adaptadores;
+package com.example.astromedics.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -12,17 +13,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.astromedics.R;
-import com.example.astromedics.modelo.ConsultaMedica;
+import com.example.astromedics.model.ConsultaMedica;
+
+import java.util.List;
 
 public class AdapterConsultaMedica extends ArrayAdapter<ConsultaMedica>{
-    public AdapterConsultaMedica(@NonNull Context context, int resource, int textViewResourceId, @NonNull ConsultaMedica[] objects) {
-        super(context, resource, textViewResourceId, objects);
+    int resourceLayout;
+
+    public AdapterConsultaMedica(Context context, int resource, List<ConsultaMedica> items) {
+        super(context, resource, items);
+        this.resourceLayout = resource;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
 
+        if (view == null) {
+            LayoutInflater vi;
+            vi = LayoutInflater.from(getContext());
+            view = vi.inflate( this.resourceLayout, null);
+        }
         ConsultaMedica cm = getItem(position);
 
         if (cm != null)
@@ -39,14 +50,13 @@ public class AdapterConsultaMedica extends ArrayAdapter<ConsultaMedica>{
             ((ImageView) view.findViewById(R.id.c_m_imagen))
                     .setImageResource(
                             view.getResources().getIdentifier(
-                                    cursor.getString(INDEX_imagen).toLowerCase(),
+                                    cm.getImagen(),
                                     "drawable",
-                                    context.getPackageName()
+                                    this.getContext().getPackageName()
                                     )
                     );
         }
-
-        return super.getView(position, convertView, parent);
+        return view;
     }
 
     //    public View newView(Context context, Cursor cursor, ViewGroup parent) {
