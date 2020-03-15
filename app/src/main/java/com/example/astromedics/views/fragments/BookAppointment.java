@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.astromedics.R;
 import com.example.astromedics.views.BookAppointmentLocationActivity;
+import com.example.astromedics.views.TherapistDetailsActivity;
 import com.example.astromedics.views.TherapistFilterActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -36,7 +37,7 @@ public class BookAppointment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(view.getContext(), TherapistFilterActivity.class);
+                Intent intent=new Intent(view.getContext(), TherapistDetailsActivity.class);
                 startActivity(intent);
             }
         });
