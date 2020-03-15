@@ -10,23 +10,21 @@ import android.view.ViewGroup;
 
 import com.example.astromedics.R;
 
-public class History extends Fragment {
+public class TherapistInfo extends Fragment {
 
-    public History() {
+    public TherapistInfo() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        return inflater.inflate(R.layout.fragment_therapist_info, container, false);
     }
-
 }

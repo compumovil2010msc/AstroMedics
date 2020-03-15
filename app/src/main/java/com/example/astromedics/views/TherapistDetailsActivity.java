@@ -12,6 +12,8 @@ import com.example.astromedics.adapters.PageAdapter;
 import com.example.astromedics.views.fragments.BookAppointment;
 import com.example.astromedics.views.fragments.History;
 import com.example.astromedics.views.fragments.Settings;
+import com.example.astromedics.views.fragments.TherapistAppointmentsAvailable;
+import com.example.astromedics.views.fragments.TherapistInfo;
 import com.google.android.material.tabs.TabLayout;
 
 public class TherapistDetailsActivity extends AppCompatActivity {
@@ -54,11 +56,11 @@ public class TherapistDetailsActivity extends AppCompatActivity {
     }
 
     private void setUpViewPager(ViewPager viewPager){
-        PageAdapter pageAdapter=new PageAdapter(getSupportFragmentManager());
-        Fragment agendarCita=new BookAppointment();
-        Fragment historial=new History();
-        pageAdapter.addFragment(agendarCita);
-        pageAdapter.addFragment(historial);
+        PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager());
+        Fragment appointmentsAvailable =new TherapistAppointmentsAvailable();
+        Fragment therapistInfo = new TherapistInfo();
+        pageAdapter.addFragment(appointmentsAvailable);
+        pageAdapter.addFragment(therapistInfo);
         viewPager.setAdapter(pageAdapter);
     }
 }
