@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.astromedics.adapters.AdapterConsultaMedica;
 import com.example.astromedics.model.ConsultaMedica;
@@ -29,21 +33,29 @@ public class Agenda extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agenda);
         consultas = new ArrayList<ConsultaMedica>();
+
         conseguirConsultas();
 
         lv = findViewById(R.id.listViewAgenda);
 
         AdapterConsultaMedica customAdapter = new AdapterConsultaMedica(
-                this, R.layout.consulta_medica, consultas);
+                this, R.layout.consulta_medica, consultas
+        );
+
+        // ArrayAdapter customAdapter = new ArrayAdapter<String>(
+        //         this, R.layout.support_simple_spinner_dropdown_item, conseguirNombreConsultas()
+        // );
 
         lv.setAdapter(customAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ConsultaMedica cm = consultas.get(position);
+                Log.i("prueba", "holaaaa");
+                Toast.makeText(getBaseContext(), "El item seleccionado es: "+ consultas.get(position).getNombre_terapeuta(),
+                        Toast.LENGTH_LONG).show();
 
-                System.out.println("hola");
+                ConsultaMedica cm = consultas.get(position);
 
                 Bundle bd = new Bundle();
                 bd.putString("especializacion", cm.getEspecializacion_terapeuta());
@@ -56,6 +68,19 @@ public class Agenda extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    List conseguirNombreConsultas()
+    {
+        List arr = new ArrayList<String>();
+        arr.add("hola");
+        arr.add("hola");
+        arr.add("hola");
+        arr.add("hola");
+        arr.add("hola");
+        arr.add("hola");
+        arr.add("hola");
+        return arr;
     }
 
     void conseguirConsultas()

@@ -37,10 +37,5 @@
             android:text="Fecha" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/c_m_like"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_weight="0.1"
-        android:text="Button" />
+   
 </LinearLayout>
