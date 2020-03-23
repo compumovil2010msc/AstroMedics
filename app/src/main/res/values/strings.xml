@@ -3,6 +3,7 @@
     <string name="text_book_appointment">Agendar Cita</string>
     <string name="text_history">Historial</string>
     <string name="text_settings">Configuración</string>
+    <string name="reports">Reportes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
