@@ -3,6 +3,7 @@ package com.example.astromedics;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AgendaDetalle extends AppCompatActivity {
@@ -25,5 +26,14 @@ public class AgendaDetalle extends AppCompatActivity {
 
         ((TextView)findViewById(R.id.agenda_detalle_ubicacion))
                 .setText(bd.getString("ubicacion"));
+
+        ((ImageView)findViewById(R.id.agenda_detalle_imagen))
+                .setImageResource(
+                        getResources().getIdentifier(
+                                bd.getString("imagen"),
+                                "drawable",
+                                getPackageName()
+                        )
+                );
     }
 }

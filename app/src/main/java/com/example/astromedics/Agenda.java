@@ -42,18 +42,12 @@ public class Agenda extends AppCompatActivity {
                 this, R.layout.consulta_medica, consultas
         );
 
-        // ArrayAdapter customAdapter = new ArrayAdapter<String>(
-        //         this, R.layout.support_simple_spinner_dropdown_item, conseguirNombreConsultas()
-        // );
-
         lv.setAdapter(customAdapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("prueba", "holaaaa");
-                Toast.makeText(getBaseContext(), "El item seleccionado es: "+ consultas.get(position).getNombre_terapeuta(),
-                        Toast.LENGTH_LONG).show();
 
                 ConsultaMedica cm = consultas.get(position);
 
@@ -62,25 +56,13 @@ public class Agenda extends AppCompatActivity {
                 bd.putString("fecha", cm.getFecha());
                 bd.putString("hora", cm.getHora() );
                 bd.putString("ubicacion", cm.getUbicacion() );
+                bd.putString("imagen", cm.getImagen() );
 
                 Intent intent = new Intent(getBaseContext(), AgendaDetalle.class);
                 intent.putExtra("bundle", bd);
                 startActivity(intent);
             }
         });
-    }
-
-    List conseguirNombreConsultas()
-    {
-        List arr = new ArrayList<String>();
-        arr.add("hola");
-        arr.add("hola");
-        arr.add("hola");
-        arr.add("hola");
-        arr.add("hola");
-        arr.add("hola");
-        arr.add("hola");
-        return arr;
     }
 
     void conseguirConsultas()
