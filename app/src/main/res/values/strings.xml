@@ -7,7 +7,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_book_appointment_location">Map</string>
-    <string name="api_key"></string>
+    <string name="api_key">AIzaSyAOybeBU1UWfnwWG3NcWoOvtRcqE66bKo4</string>
 
     <string-array name="therapyTypes">
         <item>Fonoaudiologia</item>
