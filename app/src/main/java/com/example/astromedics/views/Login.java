@@ -32,7 +32,8 @@ public class Login extends AppCompatActivity {
                     Intent intent=new Intent(view.getContext(),HomeUser.class);
                     startActivity(intent);
                 } else if (user.equals("terapeuta@gmail.com")){
-
+                    Intent intent=new Intent(view.getContext(),HomeTherapist.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "No se pudo realizar la autenticacion", Toast.LENGTH_SHORT).show();
                 }

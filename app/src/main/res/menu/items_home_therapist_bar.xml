@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_calendar"
+        android:enabled="true"
+        android:icon="@drawable/calendar"
+        android:title="@string/text_therapist_book_appointment"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_reports"
+        android:enabled="true"
+        android:icon="@drawable/ic_insert_drive_file_black_24dp"
+        android:title="@string/reports"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:enabled="true"
+        android:icon="@drawable/settings"
+        android:title="@string/text_settings"
+        app:showAsAction="ifRoom" />
+</menu>
