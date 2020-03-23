@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AstroMedics</string>
+    <string name="text_therapist_book_appointment">Agenda</string>
     <string name="text_book_appointment">Agendar Cita</string>
     <string name="text_history">Historial</string>
     <string name="text_settings">Configuración</string>

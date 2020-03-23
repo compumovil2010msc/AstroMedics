@@ -5,7 +5,7 @@
         android:id="@+id/action_calendar"
         android:enabled="true"
         android:icon="@drawable/calendar"
-        android:title="@string/text_book_appointment"
+        android:title="@string/text_therapist_book_appointment"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_reports"
