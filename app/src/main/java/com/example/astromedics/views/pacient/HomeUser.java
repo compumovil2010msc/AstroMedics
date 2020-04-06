@@ -80,12 +80,12 @@ public class HomeUser extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager) {
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager());
-        Fragment agendarCita = new BookAppointment();
-        Fragment historial = new History();
-        Fragment configuracion = new Settings();
-        pageAdapter.addFragment(agendarCita);
-        pageAdapter.addFragment(historial);
-        pageAdapter.addFragment(configuracion);
+        Fragment bookAppointment = new BookAppointment();
+        Fragment history = new History();
+        Fragment settings = new Settings();
+        pageAdapter.addFragment(bookAppointment);
+        pageAdapter.addFragment(history);
+        pageAdapter.addFragment(settings);
         viewPager.setAdapter(pageAdapter);
     }
 }

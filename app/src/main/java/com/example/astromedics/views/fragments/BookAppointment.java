@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.astromedics.AgendaDetalle;
+import com.example.astromedics.views.pacient.AgendaDetalle;
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.AdapterConsultaMedica;
 import com.example.astromedics.model.old.ConsultaMedica;

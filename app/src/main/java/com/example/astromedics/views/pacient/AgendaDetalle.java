@@ -1,10 +1,12 @@
-package com.example.astromedics;
+package com.example.astromedics.views.pacient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.astromedics.R;
 
 public class AgendaDetalle extends AppCompatActivity {
 
