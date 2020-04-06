@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.TherapistSearchResultAdapter;
-import com.example.astromedics.model.TherapistSearchResult;
+import com.example.astromedics.old.TherapistSearchResult;
 
 import java.util.ArrayList;
 

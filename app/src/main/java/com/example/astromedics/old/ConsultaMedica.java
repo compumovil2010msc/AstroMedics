@@ -1,10 +1,7 @@
-package com.example.astromedics.model;
+package com.example.astromedics.old;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 public class ConsultaMedica {
     private Terapeuta terapeuta;

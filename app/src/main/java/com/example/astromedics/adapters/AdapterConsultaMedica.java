@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.astromedics.R;
-import com.example.astromedics.model.ConsultaMedica;
+import com.example.astromedics.old.ConsultaMedica;
 
 import java.util.List;
 

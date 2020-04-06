@@ -1,22 +1,17 @@
 package com.example.astromedics.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.astromedics.R;
-import com.example.astromedics.model.TherapistSearchResult;
+import com.example.astromedics.old.TherapistSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;

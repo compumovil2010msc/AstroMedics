@@ -13,11 +13,8 @@ import android.widget.ListView;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.TherapistAvailableAppointmentAdapter;
-import com.example.astromedics.adapters.TherapistSearchResultAdapter;
-import com.example.astromedics.model.TherapistAvailableAppointment;
-import com.example.astromedics.model.TherapistSearchResult;
+import com.example.astromedics.old.TherapistAvailableAppointment;
 import com.example.astromedics.views.HomeUser;
-import com.example.astromedics.views.TherapistDetailsActivity;
 
 import java.util.ArrayList;
 

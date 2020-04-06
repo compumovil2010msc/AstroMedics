@@ -1,4 +1,4 @@
-package com.example.astromedics.model;
+package com.example.astromedics.old;
 
 public class TherapistAvailableAppointment {
     private int startHour;
