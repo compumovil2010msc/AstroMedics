@@ -1,4 +1,4 @@
-package com.example.astromedics.views;
+package com.example.astromedics.views.pacient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.TherapistSearchResultAdapter;
 import com.example.astromedics.model.old.TherapistSearchResult;
+import com.example.astromedics.views.pacient.TherapistDetailsActivity;
 
 import java.util.ArrayList;
 

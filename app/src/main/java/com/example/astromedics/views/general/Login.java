@@ -1,4 +1,4 @@
-package com.example.astromedics.views;
+package com.example.astromedics.views.general;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.PersonRepository;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.repository.test.TestPersonRepository;
+import com.example.astromedics.views.pacient.HomeUser;
+import com.example.astromedics.views.therapist.HomeTherapist;
 
 public class Login extends AppCompatActivity {
 

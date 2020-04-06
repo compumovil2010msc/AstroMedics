@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.astromedics.R;
+import com.example.astromedics.views.general.Login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(view.getContext(),Login.class);
+                Intent intent=new Intent(view.getContext(),
+                                         Login.class);
                 startActivity(intent);
             }
         });

@@ -1,4 +1,4 @@
-package com.example.astromedics.views;
+package com.example.astromedics.views.pacient;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;

@@ -1,4 +1,4 @@
-package com.example.astromedics.views;
+package com.example.astromedics.views.pacient;
 
 import androidx.fragment.app.FragmentActivity;
 

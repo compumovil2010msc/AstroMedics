@@ -17,7 +17,7 @@ import com.example.astromedics.R;
 import com.example.astromedics.adapters.AdapterConsultaMedica;
 import com.example.astromedics.model.old.ConsultaMedica;
 import com.example.astromedics.model.old.Terapeuta;
-import com.example.astromedics.views.BookAppointmentLocationActivity;
+import com.example.astromedics.views.pacient.BookAppointmentLocationActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDateTime;
