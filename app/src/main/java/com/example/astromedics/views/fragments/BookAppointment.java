@@ -93,8 +93,8 @@ public class BookAppointment extends Fragment {
     void conseguirConsultas()
     {
         ConsultaMedica cm = new ConsultaMedica(
-                new Terapeuta("john", "fonoaudiologo"),
-                "esto es una direccion",
+                new Terapeuta("Nombre1 Apellido1", "Fonoaudiologo"),
+                "Carrera 1 # 1-1",
                 LocalDateTime.now(),
                 2,
                 "harold"
