@@ -13,10 +13,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TestRepository {
+public class RepositorySimulator {
+    private static RepositorySimulator instance;
     private List<Person> persons;
 
+    public static RepositorySimulator getInstance() {
+        if (instance == null) {
+            instance = new RepositorySimulator();
+            instance.init();
+        }
+
+        return instance;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
     private void init() {
+        persons = new ArrayList<>();
         persons.add(getTestTherapist1());
         persons.add(getTestTherapist2());
         persons.add(getPacient1());
@@ -80,7 +95,6 @@ public class TestRepository {
                                             3003619443L,
                                             "Carrera 71D # 55-54",
                                             "charlie2634@gmail.com",
-                                            "charie2634",
                                             "test1",
                                             new Date(),
                                             enphasis,
@@ -147,7 +161,6 @@ public class TestRepository {
                                             3003619443L,
                                             "Carrera 71D # 55-54",
                                             "pjaime@gmail.com",
-                                            "pjaime",
                                             "test1",
                                             new Date(),
                                             enphasis,
@@ -181,7 +194,6 @@ public class TestRepository {
                                       3003746587L,
                                       "Carrera 1 # 2-3",
                                       "camilocardenas@gmail.com",
-                                      "ccardenas",
                                       "test1",
                                       new Date(),
                                       medicalRecord,
@@ -213,7 +225,6 @@ public class TestRepository {
                                       3004529384L,
                                       "Carrera 2 # 4-5",
                                       "srodriguez@gmail.com",
-                                      "srodriguez",
                                       "test1",
                                       new Date(),
                                       medicalRecord,

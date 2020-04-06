@@ -1,4 +1,4 @@
-package com.example.astromedics.old;
+package com.example.astromedics.model.old;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

@@ -1,4 +1,4 @@
-package com.example.astromedics.old;
+package com.example.astromedics.model.old;
 
 public class Terapeuta {
     String nombre;

@@ -1,7 +1,5 @@
 package com.example.astromedics.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,33 +7,61 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.astromedics.R;
+import com.example.astromedics.model.Pacient;
+import com.example.astromedics.model.Person;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.PersonRepository;
+import com.example.astromedics.repository.Repository;
+import com.example.astromedics.repository.test.TestPersonRepository;
 
 public class Login extends AppCompatActivity {
 
-    private Button iniciarSesion;
-    private EditText username, password;
-
+    private Button loginButton;
+    private EditText emailEditText, passwordEditText;
+    private PersonRepository personRepository = new TestPersonRepository();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        username = findViewById(R.id.email_login);
-        password = findViewById(R.id.password_login);
-        iniciarSesion = findViewById(R.id.button_authenticate);
-        iniciarSesion.setOnClickListener(new View.OnClickListener() {
+        inflateViews();
+        setListeners();
+    }
+
+    private void inflateViews() {
+        emailEditText = findViewById(R.id.email_login);
+        passwordEditText = findViewById(R.id.password_login);
+        loginButton = findViewById(R.id.button_authenticate);
+    }
+
+    private void setListeners() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = username.getText().toString();
-                if(user.equals("paciente@gmail.com")) {
-                    Intent intent=new Intent(view.getContext(),HomeUser.class);
+                String email = emailEditText.getText()
+                                            .toString();
+                String password = passwordEditText.getText()
+                                                  .toString();
+                Person person = Repository.getInstance()
+                                          .getPersonRepository()
+                                          .login(email,
+                                                 password);
+                if (person == null){
+                    Toast.makeText(getApplicationContext(),
+                                   getString(R.string.activity_login_failed),
+                                   Toast.LENGTH_SHORT)
+                         .show();
+                } else if(person instanceof Pacient){
+                    Intent intent = new Intent(view.getContext(),
+                                               HomeUser.class);
                     startActivity(intent);
-                } else if (user.equals("terapeuta@gmail.com")){
-                    Intent intent=new Intent(view.getContext(),HomeTherapist.class);
+                } else if(person instanceof Therapist){
+                    Intent intent = new Intent(view.getContext(),
+                                               HomeTherapist.class);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No se pudo realizar la autenticacion", Toast.LENGTH_SHORT).show();
                 }
             }
         });

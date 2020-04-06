@@ -15,8 +15,8 @@ import android.widget.ListView;
 import com.example.astromedics.AgendaDetalle;
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.AdapterConsultaMedica;
-import com.example.astromedics.old.ConsultaMedica;
-import com.example.astromedics.old.Terapeuta;
+import com.example.astromedics.model.old.ConsultaMedica;
+import com.example.astromedics.model.old.Terapeuta;
 import com.example.astromedics.views.BookAppointmentLocationActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

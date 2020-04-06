@@ -9,7 +9,7 @@ public class Therapist extends Person {
     private List<Appointment> appointments;
 
     public Therapist(int personId, int identificationNumber, String name, long houseNumber, long phoneNumber, String address, String email,
-                     String user, String password, Date admissionDate, List<String> enphasis,
+                     String password, Date admissionDate, List<String> enphasis,
                      List<EducationalFormation> educationalFormation, List<Appointment> appointments) {
         super(personId,
               identificationNumber,
@@ -18,7 +18,6 @@ public class Therapist extends Person {
               phoneNumber,
               address,
               email,
-              user,
               password,
               admissionDate);
         this.enphasis = enphasis;

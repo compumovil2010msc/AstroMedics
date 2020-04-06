@@ -14,7 +14,7 @@ public class Person {
     private String password;
     private Date admissionDate;
 
-    public Person(int personId, int identificationNumber, String name, long houseNumber, long phoneNumber, String address, String email, String user,
+    public Person(int personId, int identificationNumber, String name, long houseNumber, long phoneNumber, String address, String email,
                   String password, Date admissionDate) {
         this.personId = personId;
         this.identificationNumber = identificationNumber;
@@ -23,7 +23,6 @@ public class Person {
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
-        this.user = user;
         this.password = password;
         this.admissionDate = admissionDate;
     }
@@ -82,14 +81,6 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getPassword() {

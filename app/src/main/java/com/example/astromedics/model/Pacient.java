@@ -8,7 +8,7 @@ public class Pacient extends Person{
     private List<MedicalConsultation> medicalHistory;
 
     public Pacient(int personId, int identificationNumber, String name, long houseNumber, long phoneNumber, String address, String email,
-                   String user, String password, Date admissionDate, MedicalRecord medicalRecord,
+                   String password, Date admissionDate, MedicalRecord medicalRecord,
                    List<MedicalConsultation> medicalHistory) {
         super(personId,
               identificationNumber,
@@ -17,7 +17,6 @@ public class Pacient extends Person{
               phoneNumber,
               address,
               email,
-              user,
               password,
               admissionDate);
         this.medicalRecord = medicalRecord;

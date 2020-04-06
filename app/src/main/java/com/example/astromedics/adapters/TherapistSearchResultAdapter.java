@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.astromedics.R;
-import com.example.astromedics.old.TherapistSearchResult;
+import com.example.astromedics.model.old.TherapistSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
