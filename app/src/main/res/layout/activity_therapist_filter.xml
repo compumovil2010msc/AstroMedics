@@ -18,6 +18,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/therapist_filter_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Busqueda de citas"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout1"
         android:layout_width="match_parent"
@@ -27,11 +39,11 @@
         android:layout_marginEnd="16dp"
         android:clickable="false"
         android:enabled="false"
-        android:hint="Ubicacion"
+        android:hint="@string/therapist_filter_location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/therapist_filter_info">
 
         <EditText
             android:id="@+id/therapist_filter_location_name"
@@ -60,7 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Tipo de Cita" />
+            android:text="@string/therapist_filter_emphasis" />
 
         <Spinner
             android:id="@+id/spinner"
@@ -82,26 +94,64 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <EditText
-            android:id="@+id/therapist_filter_startDate"
+        <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:clickable="true"
-            android:focusable="false"
-            android:hint="Fecha Inicial"
-            android:inputType="date"
-            android:maxLines="1" />
+            android:layout_weight="0.3"
+            android:text="@string/therapist_filter_start_date" />
 
         <EditText
-            android:id="@+id/therapist_filter_endDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:id="@+id/therapist_filter_start_date"
+            android:layout_weight="0.7"
             android:clickable="true"
             android:focusable="false"
-            android:hint="Fecha Final"
-            android:inputType="date"
-            android:maxLines="1" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="@string/therapist_filter_end_date" />
+
+        <EditText
+            android:id="@+id/therapist_filter_end_date"
+            android:layout_weight="0.7"
+            android:clickable="true"
+            android:focusable="false"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/therapist_filter_caldendar_card_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <CalendarView
+            android:id="@+id/therapist_filter_calendar_view"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+    </androidx.cardview.widget.CardView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

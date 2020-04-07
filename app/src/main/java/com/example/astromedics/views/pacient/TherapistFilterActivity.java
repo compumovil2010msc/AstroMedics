@@ -1,28 +1,39 @@
 package com.example.astromedics.views.pacient;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
+import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.astromedics.R;
+import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.model.Localization;
-import com.example.astromedics.views.fragments.DatePickerFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.Date;
 
 public class TherapistFilterActivity extends AppCompatActivity {
     public static String LOCATION = "localization";
     private Localization localization;
-    EditText startDate, endDate;
     private FloatingActionButton button;
-    private EditText locationNameEditText;
+    private EditText locationNameEditText, startDateEditText, endDateEditText;
+    private CardView calendarCardView;
+    private CalendarView calendarView;
+    private TherapistDate therapistDate;
+    private Date startDate, endDate;
+
+    enum TherapistDate {
+        START_DATE,
+        END_DATE
+    }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_therapist_filter);
@@ -36,26 +47,57 @@ public class TherapistFilterActivity extends AppCompatActivity {
         localization = (Localization) getIntent().getSerializableExtra(LOCATION);
     }
 
-    private void inflateViews(){
+    private void inflateViews() {
         locationNameEditText = findViewById(R.id.therapist_filter_location_name);
+        startDateEditText = findViewById(R.id.therapist_filter_start_date);
+        endDateEditText = findViewById(R.id.therapist_filter_end_date);
         button = findViewById(R.id.therapist_filter_confirmFilters);
-        startDate = findViewById(R.id.therapist_filter_startDate);
-        endDate = findViewById(R.id.therapist_filter_endDate);
+        calendarView = findViewById(R.id.therapist_filter_calendar_view);
+        calendarCardView = findViewById(R.id.therapist_filter_caldendar_card_view);
     }
 
-    private void addListeners(){
-        startDate.setOnClickListener(new View.OnClickListener() {
+    private void addListeners() {
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onClick(View view) {
-                showDatePickerDialog(startDate);
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
+                Date selectedDate = new ApplicationDateFormat().createDate(year, month + 1, day + 1);
+
+                if (therapistDate == TherapistDate.START_DATE) {
+                    calendarView.setDate(selectedDate.getTime());
+                    startDate = selectedDate;
+                    endDate = null;
+                    startDateEditText.setText(new ApplicationDateFormat().toString(startDate));
+                    endDateEditText.setText("");
+                    endDateEditText.setEnabled(true);
+                    calendarCardView.setVisibility(View.INVISIBLE);
+                } else {
+                    endDate = selectedDate;
+                    endDateEditText.setText(new ApplicationDateFormat().toString(endDate));
+                    calendarCardView.setVisibility(View.INVISIBLE);
+                }
             }
         });
-        endDate.setOnClickListener(new View.OnClickListener() {
+
+        startDateEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDatePickerDialog(endDate);
+                calendarView.setMinDate(0);
+                calendarView.setMinDate(new Date().getTime());
+                calendarCardView.setVisibility(View.VISIBLE);
+                therapistDate = TherapistDate.START_DATE;
             }
         });
+
+        endDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendarView.setMinDate(0);
+                calendarView.setMinDate(startDate.getTime());
+                calendarCardView.setVisibility(View.VISIBLE);
+                therapistDate = TherapistDate.END_DATE;
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,21 +108,7 @@ public class TherapistFilterActivity extends AppCompatActivity {
         });
     }
 
-    private void setInitialValues(){
+    private void setInitialValues() {
         locationNameEditText.setText(localization.getName());
     }
-
-    private void showDatePickerDialog(final EditText editText) {
-        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
-                final String selectedDate = day + " / " + (month + 1) + " / " + year;
-                editText.setText(selectedDate);
-            }
-        });
-        newFragment.show(getSupportFragmentManager(),
-                         "datePicker");
-    }
-
 }

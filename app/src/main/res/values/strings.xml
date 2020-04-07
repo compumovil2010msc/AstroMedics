@@ -24,6 +24,10 @@
     <string name="maps_current_location">Ubicación Actual</string>
     <string name="justification_undefined_permission">UNDEFINED JUSTIFICATION.</string>
     <string name="justification_location_permission">Es necesario otorgar permisos sobre de ubicacion para algunas funciones de la aplicación.</string>
+    <string name="therapist_filter_location">Ubicacion</string>
+    <string name="therapist_filter_emphasis">Tipo de Cita</string>
+    <string name="therapist_filter_end_date">Fecha final</string>
+    <string name="therapist_filter_start_date">Fecha inicial</string>
 
     <string-array name="therapyTypes">
         <item>Fonoaudiologia</item>
