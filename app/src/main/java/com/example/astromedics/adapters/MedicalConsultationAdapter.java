@@ -19,11 +19,7 @@ import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation> {
     private int resourceLayout;
@@ -47,15 +43,7 @@ public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation
         Therapist therapist = Repository.getInstance()
                                         .getTherapistRepository()
                                         .getTherapist(medicalConsultation);
-        Appointment appointment = null;
-
-        for (Appointment auxiliarAppointment : therapist.getAppointments()) {
-            if (auxiliarAppointment.getMedicalConsultation() != null && auxiliarAppointment.getMedicalConsultation()
-                                                                                           .getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
-                appointment = auxiliarAppointment;
-            }
-        }
-
+        Appointment appointment = therapist.getAppointment(medicalConsultation);
 
         if (medicalConsultation != null && therapist != null && appointment != null) {
             ((TextView) view.findViewById(R.id.medical_consultation_name))

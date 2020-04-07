@@ -1,9 +1,10 @@
 package com.example.astromedics.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Pacient extends Person{
+public class Pacient extends Person implements Serializable {
     private MedicalRecord medicalRecord;
     private List<MedicalConsultation> medicalHistory;
 

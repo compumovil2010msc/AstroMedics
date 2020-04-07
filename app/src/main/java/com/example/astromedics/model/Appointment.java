@@ -1,8 +1,9 @@
 package com.example.astromedics.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Appointment {
+public class Appointment implements Serializable {
     private int AppointmentId;
     private Date startDate;
     private Date endDate;

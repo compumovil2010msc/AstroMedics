@@ -17,7 +17,7 @@ import com.example.astromedics.repository.interfaces.PersonRepository;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.repository.test.TestPersonRepository;
 import com.example.astromedics.session.Session;
-import com.example.astromedics.views.pacient.HomeUser;
+import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
 
 public class Login extends AppCompatActivity {
@@ -59,7 +59,7 @@ public class Login extends AppCompatActivity {
                 } else if(person instanceof Pacient){
                     Session.getInstance().setEmail(person.getEmail());
                     Intent intent = new Intent(view.getContext(),
-                                               HomeUser.class);
+                                               HomeUserActivity.class);
                     startActivity(intent);
                 } else if(person instanceof Therapist){
                     Session.getInstance().setEmail(person.getEmail());

@@ -16,7 +16,7 @@ import com.example.astromedics.views.fragments.History;
 import com.example.astromedics.views.fragments.Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeUser extends AppCompatActivity {
+public class HomeUserActivity extends AppCompatActivity {
     MenuItem prevMenuItem;
 
     @Override

@@ -1,8 +1,9 @@
 package com.example.astromedics.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MedicalRecord {
+public class MedicalRecord implements Serializable {
     private int medicalRecordId;
     private String bloodType;
     private double weight;

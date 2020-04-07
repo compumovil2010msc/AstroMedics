@@ -1,9 +1,10 @@
 package com.example.astromedics.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Therapist extends Person {
+public class Therapist extends Person implements Serializable {
     private List<String> emphasis;
     private List<EducationalFormation> educationalFormation;
     private List<Appointment> appointments;
@@ -47,5 +48,18 @@ public class Therapist extends Person {
 
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
+    }
+
+    public Appointment getAppointment(MedicalConsultation medicalConsultation) {
+        Appointment returnable = null;
+
+        for (Appointment appointment : this.getAppointments()) {
+            if (appointment.getMedicalConsultation() != null && appointment.getMedicalConsultation()
+                                                                           .getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
+                returnable = appointment;
+            }
+        }
+
+        return returnable;
     }
 }

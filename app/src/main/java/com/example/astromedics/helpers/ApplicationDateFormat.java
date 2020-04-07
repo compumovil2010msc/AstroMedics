@@ -43,4 +43,11 @@ public class ApplicationDateFormat {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy", spanishLocale);
         return simpleDateFormat.format(date);
     }
+
+    public String getHoursAndMinutes(Date date){
+        Locale spanishLocale = new Locale("es",
+                                          "ES");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", spanishLocale);
+        return simpleDateFormat.format(date);
+    }
 }

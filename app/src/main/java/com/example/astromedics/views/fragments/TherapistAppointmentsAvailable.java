@@ -14,7 +14,7 @@ import android.widget.ListView;
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.old.TherapistAvailableAppointmentAdapter;
 import com.example.astromedics.model.old.TherapistAvailableAppointment;
-import com.example.astromedics.views.pacient.HomeUser;
+import com.example.astromedics.views.pacient.HomeUserActivity;
 
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class TherapistAppointmentsAvailable extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(view.getContext(), HomeUser.class);
+                Intent intent=new Intent(view.getContext(), HomeUserActivity.class);
                 startActivity(intent);
             }
         });

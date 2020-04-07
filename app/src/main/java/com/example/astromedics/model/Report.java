@@ -1,6 +1,8 @@
 package com.example.astromedics.model;
 
-public class Report {
+import java.io.Serializable;
+
+public class Report implements Serializable {
     private int reportId;
 
     public int getReportId() {

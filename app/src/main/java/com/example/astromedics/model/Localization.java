@@ -1,6 +1,8 @@
 package com.example.astromedics.model;
 
-public class Localization {
+import java.io.Serializable;
+
+public class Localization implements Serializable {
     private double latitude;
     private double longitude;
     private String name;

@@ -13,19 +13,18 @@ import androidx.fragment.app.Fragment;
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.MedicalConsultationAdapter;
 import com.example.astromedics.model.MedicalConsultation;
-import com.example.astromedics.model.old.ConsultaMedica;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
-import com.example.astromedics.views.pacient.AgendaDetalle;
-import com.example.astromedics.views.pacient.BookAppointmentLocationActivity;
+import com.example.astromedics.views.pacient.BookAppointmentDetails;
+import com.example.astromedics.views.pacient.BookAppointmentLocationSelectionActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
 public class BookAppointment extends Fragment {
-    FloatingActionButton floatingActionButton;
-    List<MedicalConsultation> medicalConsultations;
-    ListView medicalConsultationListView;
+    private FloatingActionButton floatingActionButton;
+    private List<MedicalConsultation> medicalConsultations;
+    private ListView medicalConsultationListView;
 
     public BookAppointment() {
 
@@ -58,7 +57,7 @@ public class BookAppointment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(),
-                                           BookAppointmentLocationActivity.class);
+                                           BookAppointmentLocationSelectionActivity.class);
                 startActivity(intent);
             }
         });
@@ -74,7 +73,9 @@ public class BookAppointment extends Fragment {
         medicalConsultationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent = new Intent(getContext(), BookAppointmentDetails.class);
+                intent.putExtra(BookAppointmentDetails.MEDICAL_CONSULTATION, medicalConsultations.get(position));
+                startActivity(intent);
             }
         });
     }

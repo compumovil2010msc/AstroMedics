@@ -23,7 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Arrays;
 import java.util.Locale;
 
-public class BookAppointmentLocationActivity extends FragmentActivity implements OnMapReadyCallback {
+public class BookAppointmentLocationSelectionActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FloatingActionButton button;
@@ -32,7 +32,7 @@ public class BookAppointmentLocationActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_appointment_location);
+        setContentView(R.layout.activity_book_appointment_location_selection);
 
         button = findViewById(R.id.confirmLocation);
 

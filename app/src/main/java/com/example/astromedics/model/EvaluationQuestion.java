@@ -1,6 +1,8 @@
 package com.example.astromedics.model;
 
-public class EvaluationQuestion {
+import java.io.Serializable;
+
+public class EvaluationQuestion implements Serializable {
     private int evaluationQuestionId;
     private String question;
     private String answer;

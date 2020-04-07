@@ -1,6 +1,8 @@
 package com.example.astromedics.model;
 
-public class Evolution {
+import java.io.Serializable;
+
+public class Evolution implements Serializable {
     private int evolutionId;
 
     public int getEvolutionId() {

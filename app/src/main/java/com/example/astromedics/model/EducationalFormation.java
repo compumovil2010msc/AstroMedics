@@ -1,8 +1,9 @@
 package com.example.astromedics.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class EducationalFormation {
+public class EducationalFormation implements Serializable {
     private int EducationalFormationId;
     private String title;
     private String institution;
