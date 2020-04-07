@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Therapist extends Person implements Serializable {
+    private int medicalConsultationPrice;
     private List<String> emphasis;
     private List<EducationalFormation> educationalFormation;
     private List<Appointment> appointments;
@@ -64,7 +65,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     public Therapist(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
-                     String password, Date admissionDate, List<String> emphasis,
+                     String password, Date admissionDate, int medicalConsultationPrice, List<String> emphasis,
                      List<EducationalFormation> educationalFormation, List<Appointment> appointments) {
         super(identificationNumber,
               name,
@@ -75,9 +76,18 @@ public class Therapist extends Person implements Serializable {
               email,
               password,
               admissionDate);
+        this.medicalConsultationPrice = medicalConsultationPrice;
         this.emphasis = emphasis;
         this.educationalFormation = educationalFormation;
         this.appointments = appointments;
+    }
+
+    public int getMedicalConsultationPrice() {
+        return medicalConsultationPrice;
+    }
+
+    public void setMedicalConsultationPrice(int medicalConsultationPrice) {
+        this.medicalConsultationPrice = medicalConsultationPrice;
     }
 
     public List<String> getEmphasis() {
@@ -104,16 +114,34 @@ public class Therapist extends Person implements Serializable {
         this.appointments = appointments;
     }
 
-    public int getNumberOfAppointments() {
+    public int getNumberOfCompletedMedicalConsultations() {
         int returnable = 0;
 
         for (Appointment appointment : getAppointments()) {
             if (appointment.getMedicalConsultation() != null && appointment.getMedicalConsultation()
-                                                                           .getCalification() > 0) {
+                                                                           .getCalification() > 0 && appointment.getEndDate()
+                                                                                                                .before(new Date())) {
                 returnable++;
             }
         }
 
         return returnable;
+    }
+
+    public double getAverageCalification() {
+        int numberOfAppointments = 0;
+        double sumOfCalifications = 0;
+
+        for (Appointment appointment : getAppointments()) {
+            if (appointment.getMedicalConsultation() != null && appointment.getMedicalConsultation()
+                                                                           .getCalification() > 0 && appointment.getEndDate()
+                                                                                                                .before(new Date())) {
+                numberOfAppointments++;
+                sumOfCalifications += appointment.getMedicalConsultation()
+                                                 .getCalification();
+            }
+        }
+
+        return numberOfAppointments > 0 ? sumOfCalifications / numberOfAppointments : 0;
     }
 }

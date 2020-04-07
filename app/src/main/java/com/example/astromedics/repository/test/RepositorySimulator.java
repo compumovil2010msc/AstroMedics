@@ -39,20 +39,35 @@ public class RepositorySimulator {
         Pacient pacient1 = getPacient1();
         Pacient pacient2 = getPacient2();
 
-        MedicalConsultation medicalConsultation = new MedicalConsultation(1,
-                                                                          null,
-                                                                          null,
-                                                                          new Localization(4.629,
-                                                                                           -74.0642,
-                                                                                           "Pontificia Universidad Javeriana"),
-                                                                          0.0,
-                                                                          "Fonoaudiologia");
+        MedicalConsultation medicalConsultation1 = new MedicalConsultation(1,
+                                                                           null,
+                                                                           null,
+                                                                           new Localization(4.629,
+                                                                                            -74.0642,
+                                                                                            "Pontificia Universidad Javeriana"),
+                                                                           0.0,
+                                                                           "Fonoaudiologia");
         therapist1.getAppointments()
-                  .get(1)
-                  .setMedicalConsultation(medicalConsultation);
-        medicalConsultation.setAppointment(therapist1.getAppointments()
-                                                     .get(0));
-        pacient1.addMedicalHistory(medicalConsultation);
+                  .get(0)
+                  .setMedicalConsultation(medicalConsultation1);
+        medicalConsultation1.setAppointment(therapist1.getAppointments()
+                                                      .get(0));
+        pacient1.addMedicalHistory(medicalConsultation1);
+
+        MedicalConsultation medicalConsultation2 = new MedicalConsultation(2,
+                                                                           null,
+                                                                           null,
+                                                                           new Localization(4.629,
+                                                                                            -74.0642,
+                                                                                            "Pontificia Universidad Javeriana"),
+                                                                           4.9,
+                                                                           "Fonoaudiologia");
+        therapist2.getAppointments()
+                  .get(0)
+                  .setMedicalConsultation(medicalConsultation2);
+        medicalConsultation2.setAppointment(therapist2.getAppointments()
+                                                      .get(0));
+        pacient1.addMedicalHistory(medicalConsultation2);
 
         persons.add(therapist1);
         persons.add(therapist2);
@@ -119,6 +134,7 @@ public class RepositorySimulator {
                                             "terapeuta",
                                             "terapeuta",
                                             new Date(),
+                                            35000,
                                             emphasis,
                                             educationalFormation,
                                             appointments);
@@ -154,12 +170,12 @@ public class RepositorySimulator {
         List<Appointment> appointments = new ArrayList<>();
         appointments.add(new Appointment(3,
                                          new ApplicationDateFormat().createDate(2020,
-                                                                                04,
+                                                                                03,
                                                                                 10,
                                                                                 14,
                                                                                 0),
                                          new ApplicationDateFormat().createDate(2020,
-                                                                                04,
+                                                                                03,
                                                                                 10,
                                                                                 16,
                                                                                 0),
@@ -185,6 +201,7 @@ public class RepositorySimulator {
                                             "pjaime@gmail.com",
                                             "test1",
                                             new Date(),
+                                            40000,
                                             emphasis,
                                             educationalFormation,
                                             appointments);

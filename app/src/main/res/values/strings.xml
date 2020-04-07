@@ -29,6 +29,9 @@
     <string name="therapist_filter_end_date">Fecha final</string>
     <string name="therapist_filter_start_date">Fecha inicial</string>
     <string name="therapist_filter_fill_all_fields">Es necesario llenar todos los campos para realizar la busqueda</string>
+    <string name="therapist_adapter_currency">COP</string>
+    <string name="therapist_adapter_no_califications">El terapeuta aun no ha recibido calificaciones</string>
+    <string name="therapist_adapter_number_of_medical_consultations">consulta(s)</string>
     <string name="emphasis_speech_therapy">Fonoaudiología</string>
     <string name="emphasis_physiotherapy">Fisioterapia</string>
     <string name="emphasis_psychology">Psicología</string>

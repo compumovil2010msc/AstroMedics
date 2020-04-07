@@ -37,7 +37,7 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:textColor="#909090"
+                android:textColor="@color/colorLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Universidad Javeriana" />
@@ -74,7 +74,7 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:textColor="#909090"
+                android:textColor="@color/colorLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Universidad Javeriana" />

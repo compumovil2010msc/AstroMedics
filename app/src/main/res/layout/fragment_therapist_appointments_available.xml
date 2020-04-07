@@ -49,7 +49,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#909090"/>
+        android:background="@color/colorLight"/>
 
     <ListView
         android:id="@+id/therapist_available_appointment_list"

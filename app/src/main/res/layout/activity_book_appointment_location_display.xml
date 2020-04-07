@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/book_appointment_location_display_info"
-                android:textColor="#909090" />
+                android:textColor="@color/colorLight" />
 
             <TextView
                 android:id="@+id/book_appointment_location_display_name"
