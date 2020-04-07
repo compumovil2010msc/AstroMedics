@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Busqueda de citas"
+        android:text="@string/therapist_filter_info"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,11 +75,10 @@
             android:text="@string/therapist_filter_emphasis" />
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/therapist_filter_therapy_types"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:entries="@array/therapyTypes" />
+            android:layout_weight="0.7" />
     </LinearLayout>
 
     <LinearLayout

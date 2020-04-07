@@ -1,4 +1,4 @@
-package com.example.astromedics.adapters.old;
+package com.example.astromedics.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.astromedics.R;
-import com.example.astromedics.model.old.TherapistSearchResult;
+import com.example.astromedics.model.Therapist;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TherapistSearchResultAdapter  extends ArrayAdapter<TherapistSearchResult> {
+public class TherapistAdapter extends ArrayAdapter<Therapist> {
 
     private Context mContext;
-    private List<TherapistSearchResult> therapists = new ArrayList<>();
+    private List<Therapist> therapists = new ArrayList<>();
 
-    public TherapistSearchResultAdapter(Context context, List<TherapistSearchResult> items) {
+    public TherapistAdapter(Context context, List<Therapist> items) {
         super(context, 0, items);
         mContext = context;
         therapists = items;
@@ -32,10 +32,10 @@ public class TherapistSearchResultAdapter  extends ArrayAdapter<TherapistSearchR
         View listItem = convertView;
 
         if(listItem == null){
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.therapist_search_result, parent, false);
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.list_view_therapist_search_result, parent, false);
         }
 
-        TherapistSearchResult currentTherapist = therapists.get(position);
+        Therapist currentTherapist = therapists.get(position);
 
         TextView name = (TextView) listItem.findViewById(R.id.SearchResultName);
         name.setText(currentTherapist.getName());

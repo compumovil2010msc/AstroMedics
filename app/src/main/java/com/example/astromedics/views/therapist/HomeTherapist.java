@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.astromedics.R;
-import com.example.astromedics.adapters.old.PageAdapter;
+import com.example.astromedics.adapters.PageAdapter;
 import com.example.astromedics.views.fragments.Reports;
 import com.example.astromedics.views.fragments.Settings;
 import com.example.astromedics.views.fragments.TherapistBookAppointment;

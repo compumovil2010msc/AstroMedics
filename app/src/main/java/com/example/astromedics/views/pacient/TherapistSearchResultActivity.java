@@ -1,51 +1,78 @@
 package com.example.astromedics.views.pacient;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.astromedics.R;
-import com.example.astromedics.adapters.old.TherapistSearchResultAdapter;
-import com.example.astromedics.model.old.TherapistSearchResult;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
+import com.example.astromedics.R;
+import com.example.astromedics.adapters.TherapistAdapter;
+import com.example.astromedics.model.Localization;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.Repository;
+
+import java.util.Date;
+import java.util.List;
 
 public class TherapistSearchResultActivity extends AppCompatActivity {
+    public static String LOCATION = "localization";
+    public static String EMPHASIS = "emphasis";
+    public static String START_DATE = "start_date";
+    public static String END_DATE = "end_date";
 
-    private ListView listView;
-    private TherapistSearchResultAdapter mAdapter;
+    private Localization localization;
+    private String emphasis;
+    private Date startDate, endDate;
+
+    ListView listView;
+    List<Therapist> therapists;
+    private TherapistAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_therapist_search_result);
+        obtainObjects();
+        inflateViews();
+        getAvailableTherapist();
+        addTherapistToList();
+        addListeners();
+    }
 
-        listView = (ListView) findViewById(R.id.therapist_search_result);
+    private void obtainObjects() {
+        localization = (Localization) getIntent().getSerializableExtra(LOCATION);
+        startDate = (Date) getIntent().getSerializableExtra(START_DATE);
+        endDate = (Date) getIntent().getSerializableExtra(END_DATE);
+        emphasis = (String) getIntent().getSerializableExtra(EMPHASIS);
+    }
 
-        ArrayList<TherapistSearchResult> therapists = new ArrayList<>();
-        therapists.add(new TherapistSearchResult("Nombre1 Apellido1", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre2 Apellido2", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre3 Apellido3", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre4 Apellido4", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre5 Apellido5", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre6 Apellido6", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre7 Apellido7", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre8 Apellido8", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre9 Apellido9", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre10 Apellido10", 150, 4.5));
-        therapists.add(new TherapistSearchResult("Nombre11 Apellido11", 150, 4.5));
+    private void inflateViews() {
+        listView = (ListView) findViewById(R.id.therapist_search_result_list_view);
+    }
 
-        mAdapter = new TherapistSearchResultAdapter(this, therapists);
+    private void getAvailableTherapist() {
+        therapists = Repository.getInstance()
+                               .getTherapistRepository()
+                               .finAvailableTherapists(startDate,
+                                                       endDate);
+
+    }
+
+    private void addTherapistToList(){
+        mAdapter = new TherapistAdapter(this,
+                                        therapists);
         listView.setAdapter(mAdapter);
+    }
 
+    private void addListeners(){
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(view.getContext(), TherapistDetailsActivity.class);
+                Intent intent = new Intent(view.getContext(),
+                                           TherapistDetailsActivity.class);
                 startActivity(intent);
             }
         });

@@ -28,12 +28,11 @@
     <string name="therapist_filter_emphasis">Tipo de Cita</string>
     <string name="therapist_filter_end_date">Fecha final</string>
     <string name="therapist_filter_start_date">Fecha inicial</string>
-
-    <string-array name="therapyTypes">
-        <item>Fonoaudiologia</item>
-        <item>Psicologia</item>
-        <item>Fisioterapia</item>
-    </string-array>
+    <string name="therapist_filter_fill_all_fields">Es necesario llenar todos los campos para realizar la busqueda</string>
+    <string name="emphasis_speech_therapy">Fonoaudiología</string>
+    <string name="emphasis_physiotherapy">Fisioterapia</string>
+    <string name="emphasis_psychology">Psicología</string>
+    <string name="therapist_filter_info">Busqueda de citas</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

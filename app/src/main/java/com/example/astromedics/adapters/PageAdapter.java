@@ -1,4 +1,4 @@
-package com.example.astromedics.adapters.old;
+package com.example.astromedics.adapters;
 
 import java.util.ArrayList;
 import java.util.List;

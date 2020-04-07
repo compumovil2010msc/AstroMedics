@@ -6,6 +6,10 @@ import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.interfaces.TherapistRepository;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class TestTherapistRepository implements TherapistRepository {
     @Override
     public Therapist getTherapist(String email) {
@@ -33,5 +37,24 @@ public class TestTherapistRepository implements TherapistRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Therapist> finAvailableTherapists(Date startDate, Date endDate) {
+        List<Therapist> returnable = new ArrayList<>();
+
+        for (Person person : RepositorySimulator.getInstance()
+                                                .getPersons()) {
+            if (person instanceof Therapist) {
+                for (Appointment appointment : ((Therapist) person).getAppointments()) {
+                    if (appointment.getMedicalConsultation() == null && appointment.getStartDate().after(startDate) && appointment.getStartDate().before(endDate)) {
+                        returnable.add((Therapist) person);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return returnable;
     }
 }
