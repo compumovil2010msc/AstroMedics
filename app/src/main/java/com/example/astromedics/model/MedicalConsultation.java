@@ -2,20 +2,20 @@ package com.example.astromedics.model;
 
 public class MedicalConsultation {
     private int medicalConsultationId;
-    private Appointment appointment;
     private Evolution evolution;
     private Report report;
     private Localization localization;
     private double calification;
+    private String emphasis;
 
-    public MedicalConsultation(int medicalConsultationId, Appointment appointment, Evolution evolution, Report report, Localization localization,
-                               double calification) {
+    public MedicalConsultation(int medicalConsultationId, Evolution evolution, Report report,
+                               Localization localization, double calification, String emphasis) {
         this.medicalConsultationId = medicalConsultationId;
-        this.appointment = appointment;
         this.evolution = evolution;
         this.report = report;
         this.localization = localization;
         this.calification = calification;
+        this.emphasis = emphasis;
     }
 
     public int getMedicalConsultationId() {
@@ -24,14 +24,6 @@ public class MedicalConsultation {
 
     public void setMedicalConsultationId(int medicalConsultationId) {
         this.medicalConsultationId = medicalConsultationId;
-    }
-
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
     }
 
     public Evolution getEvolution() {
@@ -64,5 +56,13 @@ public class MedicalConsultation {
 
     public void setCalification(double calification) {
         this.calification = calification;
+    }
+
+    public String getEmphasis() {
+        return emphasis;
+    }
+
+    public void setEmphasis(String emphasis) {
+        this.emphasis = emphasis;
     }
 }

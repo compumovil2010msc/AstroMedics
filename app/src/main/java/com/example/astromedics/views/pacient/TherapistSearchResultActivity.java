@@ -9,9 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.astromedics.R;
-import com.example.astromedics.adapters.TherapistSearchResultAdapter;
+import com.example.astromedics.adapters.old.TherapistSearchResultAdapter;
 import com.example.astromedics.model.old.TherapistSearchResult;
-import com.example.astromedics.views.pacient.TherapistDetailsActivity;
 
 import java.util.ArrayList;
 

@@ -13,14 +13,14 @@ import com.example.astromedics.R;
 import com.example.astromedics.model.Pacient;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Therapist;
-import com.example.astromedics.repository.PersonRepository;
+import com.example.astromedics.repository.interfaces.PersonRepository;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.repository.test.TestPersonRepository;
+import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.HomeUser;
 import com.example.astromedics.views.therapist.HomeTherapist;
 
 public class Login extends AppCompatActivity {
-
     private Button loginButton;
     private EditText emailEditText, passwordEditText;
     private PersonRepository personRepository = new TestPersonRepository();
@@ -57,10 +57,12 @@ public class Login extends AppCompatActivity {
                                    Toast.LENGTH_SHORT)
                          .show();
                 } else if(person instanceof Pacient){
+                    Session.getInstance().setEmail(person.getEmail());
                     Intent intent = new Intent(view.getContext(),
                                                HomeUser.class);
                     startActivity(intent);
                 } else if(person instanceof Therapist){
+                    Session.getInstance().setEmail(person.getEmail());
                     Intent intent = new Intent(view.getContext(),
                                                HomeTherapist.class);
                     startActivity(intent);

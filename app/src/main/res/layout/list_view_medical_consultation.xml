@@ -6,7 +6,7 @@
     android:padding="36px">
 
     <ImageView
-        android:id="@+id/c_m_imagen"
+        android:id="@+id/medical_consultation_photo"
         android:layout_width="69dp"
         android:layout_height="69dp"
         android:layout_marginRight="36px"
@@ -19,19 +19,19 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/c_m_nombre"
+            android:id="@+id/medical_consultation_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nombre" />
 
         <TextView
-            android:id="@+id/c_m_especializacion"
+            android:id="@+id/medical_consultation_emphasis"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Especializacion" />
 
         <TextView
-            android:id="@+id/c_m_fecha"
+            android:id="@+id/medical_consultation_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Fecha" />

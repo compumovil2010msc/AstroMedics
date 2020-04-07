@@ -1,7 +1,7 @@
 package com.example.astromedics.repository.test;
 
 import com.example.astromedics.model.Person;
-import com.example.astromedics.repository.PersonRepository;
+import com.example.astromedics.repository.interfaces.PersonRepository;
 
 public class TestPersonRepository implements PersonRepository {
     @Override

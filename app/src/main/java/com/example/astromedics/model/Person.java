@@ -3,36 +3,27 @@ package com.example.astromedics.model;
 import java.util.Date;
 
 public class Person {
-    private int personId;
     private int identificationNumber;
     private String name;
+    private String photoURL;
     private long houseNumber;
     private long phoneNumber;
     private String address;
     private String email;
-    private String user;
     private String password;
     private Date admissionDate;
 
-    public Person(int personId, int identificationNumber, String name, long houseNumber, long phoneNumber, String address, String email,
+    public Person(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
                   String password, Date admissionDate) {
-        this.personId = personId;
         this.identificationNumber = identificationNumber;
         this.name = name;
+        this.photoURL = photoURL;
         this.houseNumber = houseNumber;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.email = email;
         this.password = password;
         this.admissionDate = admissionDate;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
     }
 
     public int getIdentificationNumber() {
@@ -49,6 +40,14 @@ public class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
     }
 
     public long getHouseNumber() {

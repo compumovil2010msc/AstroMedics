@@ -10,14 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.astromedics.R;
-import com.example.astromedics.adapters.PageAdapter;
-import com.example.astromedics.views.fragments.BookAppointment;
+import com.example.astromedics.adapters.old.PageAdapter;
+import com.example.astromedics.views.pacient.fragments.BookAppointment;
 import com.example.astromedics.views.fragments.History;
 import com.example.astromedics.views.fragments.Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeUser extends AppCompatActivity {
-
     MenuItem prevMenuItem;
 
     @Override

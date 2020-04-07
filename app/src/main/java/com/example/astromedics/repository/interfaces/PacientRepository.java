@@ -1,10 +1,11 @@
-package com.example.astromedics.repository;
+package com.example.astromedics.repository.interfaces;
 
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.MedicalRecord;
 import com.example.astromedics.model.Pacient;
 
+import java.util.List;
+
 public interface PacientRepository {
-    MedicalRecord getMedicalRecord(Pacient pacient);
-    MedicalConsultation getMedicalConsultation(Pacient pacient);
+    Pacient getPacient(String email);
 }

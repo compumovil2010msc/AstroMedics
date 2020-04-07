@@ -4,33 +4,33 @@ import java.util.Date;
 import java.util.List;
 
 public class Therapist extends Person {
-    private List<String> enphasis;
+    private List<String> emphasis;
     private List<EducationalFormation> educationalFormation;
     private List<Appointment> appointments;
 
-    public Therapist(int personId, int identificationNumber, String name, long houseNumber, long phoneNumber, String address, String email,
-                     String password, Date admissionDate, List<String> enphasis,
+    public Therapist(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
+                     String password, Date admissionDate, List<String> emphasis,
                      List<EducationalFormation> educationalFormation, List<Appointment> appointments) {
-        super(personId,
-              identificationNumber,
+        super(identificationNumber,
               name,
+              photoURL,
               houseNumber,
               phoneNumber,
               address,
               email,
               password,
               admissionDate);
-        this.enphasis = enphasis;
+        this.emphasis = emphasis;
         this.educationalFormation = educationalFormation;
         this.appointments = appointments;
     }
 
-    public List<String> getEnphasis() {
-        return enphasis;
+    public List<String> getEmphasis() {
+        return emphasis;
     }
 
-    public void setEnphasis(List<String> enphasis) {
-        this.enphasis = enphasis;
+    public void setEmphasis(List<String> emphasis) {
+        this.emphasis = emphasis;
     }
 
     public List<EducationalFormation> getEducationalFormation() {

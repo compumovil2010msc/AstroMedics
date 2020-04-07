@@ -8,10 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.astromedics.R;
-import com.example.astromedics.adapters.PageAdapter;
-import com.example.astromedics.views.fragments.BookAppointment;
-import com.example.astromedics.views.fragments.History;
-import com.example.astromedics.views.fragments.Settings;
+import com.example.astromedics.adapters.old.PageAdapter;
 import com.example.astromedics.views.fragments.TherapistAppointmentsAvailable;
 import com.example.astromedics.views.fragments.TherapistInfo;
 import com.google.android.material.tabs.TabLayout;

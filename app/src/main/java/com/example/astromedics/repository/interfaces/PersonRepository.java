@@ -1,4 +1,4 @@
-package com.example.astromedics.repository;
+package com.example.astromedics.repository.interfaces;
 
 import com.example.astromedics.model.Person;
 
