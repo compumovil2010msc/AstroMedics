@@ -34,7 +34,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     public static String LOCATION = "localization";
     private Localization localization;
     private GoogleMap mMap;
-    private FloatingActionButton button;
+    private FloatingActionButton showIndicationsButton;
     private Place selectedPlace;
     private TextView locationNameTevtView;
 
@@ -56,7 +56,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     }
 
     private void inflateViews() {
-        button = findViewById(R.id.confirmLocation);
+        showIndicationsButton = findViewById(R.id.book_appointment_location_display_show_indications);
         locationNameTevtView = findViewById(R.id.book_appointment_location_display_name);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.googleMap);
@@ -68,7 +68,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     }
 
     private void setListeners() {
-        button.setOnClickListener(new View.OnClickListener() {
+        showIndicationsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(v.getContext(), TherapistFilterActivity.class);

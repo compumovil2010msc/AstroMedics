@@ -10,15 +10,14 @@
     tools:context=".views.pacient.BookAppointmentLocationDisplayActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/confirmLocation"
+        android:id="@+id/book_appointment_location_display_show_indications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/colorPrimary"
         android:clickable="true"
-        android:enabled="false"
-        android:src="@drawable/ic_check_black_24dp"
+        android:src="@drawable/ic_directions_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
