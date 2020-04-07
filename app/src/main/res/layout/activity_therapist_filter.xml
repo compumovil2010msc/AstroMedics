@@ -7,16 +7,16 @@
     tools:context=".views.pacient.TherapistFilterActivity">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/confirmFilters"
+        android:id="@+id/therapist_filter_confirmFilters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:clickable="true"
         android:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
         android:src="@drawable/ic_check_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputLayout1"
@@ -25,6 +25,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:clickable="false"
+        android:enabled="false"
         android:hint="Ubicacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,13 +34,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/therapist_filter_location_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
-            android:text="Pontificia Universidad Javeriana"
             android:clickable="false"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:inputType="text"
+            android:text="" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,13 +60,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Tipo de Cita"/>
+            android:text="Tipo de Cita" />
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_weight="0.7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="0.7"
             android:entries="@array/therapyTypes" />
     </LinearLayout>
 
@@ -81,7 +83,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <EditText
-            android:id="@+id/startDate"
+            android:id="@+id/therapist_filter_startDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -92,7 +94,7 @@
             android:maxLines="1" />
 
         <EditText
-            android:id="@+id/endDate"
+            android:id="@+id/therapist_filter_endDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -102,32 +104,4 @@
             android:inputType="date"
             android:maxLines="1" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:text="Ordenar por"/>
-
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:entries="@array/orderingOptions"
-            android:layout_weight="0.7"/>
-    </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

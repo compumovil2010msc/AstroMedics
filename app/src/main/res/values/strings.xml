@@ -30,11 +30,6 @@
         <item>Psicologia</item>
         <item>Fisioterapia</item>
     </string-array>
-    <string-array name="orderingOptions">
-        <item>Fecha de Ingreso</item>
-        <item>Numero de Consultas</item>
-        <item>Valoracion</item>
-    </string-array>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

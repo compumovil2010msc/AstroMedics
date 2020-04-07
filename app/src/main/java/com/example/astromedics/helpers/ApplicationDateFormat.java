@@ -37,17 +37,20 @@ public class ApplicationDateFormat {
         return cal.getTime();
     }
 
-    public String toString(Date date){
-        Locale spanishLocale = new Locale("es",
-                                          "ES");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy", spanishLocale);
+    public Locale getLocale() {
+        return new Locale("es",
+                          "ES");
+    }
+
+    public String toString(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy",
+                                                                 getLocale());
         return simpleDateFormat.format(date);
     }
 
-    public String getHoursAndMinutes(Date date){
-        Locale spanishLocale = new Locale("es",
-                                          "ES");
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa", spanishLocale);
+    public String getHoursAndMinutes(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa",
+                                                                 getLocale());
         return simpleDateFormat.format(date);
     }
 }

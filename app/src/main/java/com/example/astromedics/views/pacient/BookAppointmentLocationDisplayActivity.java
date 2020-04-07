@@ -6,11 +6,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.astromedics.R;
+import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.Localization;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -28,7 +28,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -41,7 +40,6 @@ import com.google.maps.model.EncodedPolyline;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class BookAppointmentLocationDisplayActivity extends FragmentActivity implements OnMapReadyCallback {
     public static String LOCATION = "localization";
@@ -50,7 +48,6 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     private LatLng currentLocation, selectedLocation;
     private GoogleMap googleMap;
     private FloatingActionButton showIndicationsButton;
-    private Place selectedPlace;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
@@ -64,7 +61,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(),
                               getString(R.string.api_key),
-                              Locale.US);
+                              new ApplicationDateFormat().getLocale());
         }
         obtainObjects();
         inflateViews();
@@ -147,7 +144,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     }
 
     private void refreshMap() {
-        if(googleMap != null){
+        if (googleMap != null) {
             googleMap.clear();
 
             googleMap.addMarker(new MarkerOptions().position(selectedLocation)
@@ -195,7 +192,8 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
                                         if (points1 != null) {
                                             List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
                                             for (com.google.maps.model.LatLng coord1 : coords1) {
-                                                path.add(new LatLng(coord1.lat, coord1.lng));
+                                                path.add(new LatLng(coord1.lat,
+                                                                    coord1.lng));
                                             }
                                         }
                                     }
@@ -205,7 +203,8 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
                                         //Decode polyline and add points to list of route coordinates
                                         List<com.google.maps.model.LatLng> coords = points.decodePath();
                                         for (com.google.maps.model.LatLng coord : coords) {
-                                            path.add(new LatLng(coord.lat, coord.lng));
+                                            path.add(new LatLng(coord.lat,
+                                                                coord.lng));
                                         }
                                     }
                                 }
@@ -219,7 +218,9 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
         }
 
         if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(5);
+            PolylineOptions opts = new PolylineOptions().addAll(path)
+                                                        .color(Color.BLUE)
+                                                        .width(5);
             googleMap.addPolyline(opts);
         }
 
@@ -240,7 +241,10 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
         int height = getResources().getDisplayMetrics().heightPixels;
         int padding = (int) (width * 0.25);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, width, height, padding);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds,
+                                                                        width,
+                                                                        height,
+                                                                        padding);
 
         googleMap.animateCamera(cameraUpdate);
     }
