@@ -1,5 +1,6 @@
 package com.example.astromedics.views.pacient;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,10 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.DownloadImageTask;
+import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
@@ -18,7 +21,11 @@ import com.example.astromedics.repository.Repository;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookAppointmentDetails extends AppCompatActivity {
+    private BookAppointmentDetails instance = this;
     public static String MEDICAL_CONSULTATION = "MedicalConsultation";
+    private PermissionHandler permissionHandler = new PermissionHandler(this);
+    protected static final int MY_LOCATION_PERMISSION = 503;
+
     private Therapist therapist;
     private MedicalConsultation medicalConsultation;
     private Appointment appointment;
@@ -75,11 +82,24 @@ public class BookAppointmentDetails extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BookAppointmentLocationDisplayActivity.class);
-                intent.putExtra(BookAppointmentLocationDisplayActivity.LOCATION, medicalConsultation.getLocalization());
-                startActivity(intent);
+                ActivityCompat.requestPermissions(instance,
+                                                  new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                                  MY_LOCATION_PERMISSION);
             }
         });
+    }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_LOCATION_PERMISSION:
+                Intent intent = new Intent(getApplicationContext(),
+                                           BookAppointmentLocationDisplayActivity.class);
+                intent.putExtra(BookAppointmentLocationDisplayActivity.LOCATION,
+                                medicalConsultation.getLocalization());
+                startActivity(intent);
+                break;
+        }
     }
 }

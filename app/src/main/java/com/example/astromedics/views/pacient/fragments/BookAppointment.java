@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.MedicalConsultationAdapter;
+import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
@@ -22,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 public class BookAppointment extends Fragment {
+    private PermissionHandler permissionHandler;
     private FloatingActionButton floatingActionButton;
     private List<MedicalConsultation> medicalConsultations;
     private ListView medicalConsultationListView;
