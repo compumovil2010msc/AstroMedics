@@ -20,6 +20,8 @@ import com.example.astromedics.views.pacient.BookAppointmentDetails;
 import com.example.astromedics.views.pacient.BookAppointmentLocationSelectionActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BookAppointment extends Fragment {
@@ -75,18 +77,28 @@ public class BookAppointment extends Fragment {
         medicalConsultationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getContext(), BookAppointmentDetails.class);
-                intent.putExtra(BookAppointmentDetails.MEDICAL_CONSULTATION, medicalConsultations.get(position));
+                Intent intent = new Intent(getContext(),
+                                           BookAppointmentDetails.class);
+                intent.putExtra(BookAppointmentDetails.MEDICAL_CONSULTATION,
+                                medicalConsultations.get(position));
                 startActivity(intent);
             }
         });
     }
 
     void getMedicalConsultations() {
-        medicalConsultations = Repository.getInstance()
-                                         .getPacientRepository()
-                                         .getPacient(Session.getInstance()
-                                                            .getEmail())
-                                         .getMedicalHistory();
+        medicalConsultations = new ArrayList<>();
+
+        for (MedicalConsultation medicalConsultation : Repository.getInstance()
+                                                                 .getPacientRepository()
+                                                                 .getPacient(Session.getInstance()
+                                                                                    .getEmail())
+                                                                 .getMedicalHistory()) {
+            if (medicalConsultation.getAppointment()
+                                   .getEndDate()
+                                   .after(new Date())) {
+                medicalConsultations.add(medicalConsultation);
+            }
+        }
     }
 }

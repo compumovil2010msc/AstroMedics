@@ -49,17 +49,4 @@ public class Therapist extends Person implements Serializable {
     public void setAppointments(List<Appointment> appointments) {
         this.appointments = appointments;
     }
-
-    public Appointment getAppointment(MedicalConsultation medicalConsultation) {
-        Appointment returnable = null;
-
-        for (Appointment appointment : this.getAppointments()) {
-            if (appointment.getMedicalConsultation() != null && appointment.getMedicalConsultation()
-                                                                           .getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
-                returnable = appointment;
-            }
-        }
-
-        return returnable;
-    }
 }

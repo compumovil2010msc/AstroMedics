@@ -43,9 +43,8 @@ public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation
         Therapist therapist = Repository.getInstance()
                                         .getTherapistRepository()
                                         .getTherapist(medicalConsultation);
-        Appointment appointment = therapist.getAppointment(medicalConsultation);
 
-        if (medicalConsultation != null && therapist != null && appointment != null) {
+        if (medicalConsultation != null && therapist != null && medicalConsultation.getAppointment() != null) {
             ((TextView) view.findViewById(R.id.medical_consultation_name))
                     .setText(therapist.getName());
 
@@ -53,7 +52,7 @@ public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation
                     .setText(medicalConsultation.getEmphasis());
 
             ((TextView) view.findViewById(R.id.medical_consultation_date))
-                    .setText(new ApplicationDateFormat().toString(appointment.getStartDate()));
+                    .setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment().getStartDate()));
 
             new DownloadImageTask((ImageView) view.findViewById(R.id.medical_consultation_photo))
                     .execute(therapist.getPhotoURL());

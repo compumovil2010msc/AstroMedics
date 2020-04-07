@@ -28,7 +28,6 @@ public class BookAppointmentDetails extends AppCompatActivity {
 
     private Therapist therapist;
     private MedicalConsultation medicalConsultation;
-    private Appointment appointment;
 
     private FloatingActionButton floatingActionButton;
     ImageView photoImageView;
@@ -49,7 +48,6 @@ public class BookAppointmentDetails extends AppCompatActivity {
         therapist = Repository.getInstance()
                               .getTherapistRepository()
                               .getTherapist(medicalConsultation);
-        appointment = therapist.getAppointment(medicalConsultation);
     }
 
     private void inflateViews() {
@@ -70,12 +68,12 @@ public class BookAppointmentDetails extends AppCompatActivity {
         therapistTextView.setText(therapist.getName());
         locationTextView.setText(medicalConsultation.getLocalization()
                                                     .getName());
-        dateTextView.setText(new ApplicationDateFormat().toString(therapist.getAppointment(medicalConsultation)
-                                                                           .getStartDate()));
-        startDateTextView.setText(new ApplicationDateFormat().getHoursAndMinutes(therapist.getAppointment(medicalConsultation)
-                                                                                          .getStartDate()));
-        endDateTextView.setText(new ApplicationDateFormat().getHoursAndMinutes(therapist.getAppointment(medicalConsultation)
-                                                                                        .getEndDate()));
+        dateTextView.setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment()
+                                                                                     .getStartDate()));
+        startDateTextView.setText(new ApplicationDateFormat().getHoursAndMinutes(medicalConsultation.getAppointment()
+                                                                                                    .getStartDate()));
+        endDateTextView.setText(new ApplicationDateFormat().getHoursAndMinutes(medicalConsultation.getAppointment()
+                                                                                                  .getEndDate()));
     }
 
     private void setListeners() {

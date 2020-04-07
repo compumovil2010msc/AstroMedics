@@ -16,9 +16,9 @@ public class ApplicationDateFormat {
         cal.set(Calendar.YEAR,
                 year);
         cal.set(Calendar.MONTH,
-                month);
+                month - 1);
         cal.set(Calendar.DAY_OF_MONTH,
-                date);
+                date - 1);
         return cal.getTime();
     }
 
@@ -27,10 +27,10 @@ public class ApplicationDateFormat {
         cal.set(Calendar.YEAR,
                 year);
         cal.set(Calendar.MONTH,
-                month);
+                month - 1);
         cal.set(Calendar.DAY_OF_MONTH,
-                date);
-        cal.set(Calendar.HOUR,
+                date - 1);
+        cal.set(Calendar.HOUR_OF_DAY,
                 hour);
         cal.set(Calendar.MINUTE,
                 minute);

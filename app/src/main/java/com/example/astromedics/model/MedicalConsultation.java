@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class MedicalConsultation implements Serializable {
     private int medicalConsultationId;
+    private Appointment appointment;
     private Evolution evolution;
     private Report report;
     private Localization localization;
@@ -26,6 +27,14 @@ public class MedicalConsultation implements Serializable {
 
     public void setMedicalConsultationId(int medicalConsultationId) {
         this.medicalConsultationId = medicalConsultationId;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
 
     public Evolution getEvolution() {

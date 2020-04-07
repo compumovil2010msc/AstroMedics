@@ -50,6 +50,8 @@ public class RepositorySimulator {
         therapist1.getAppointments()
                   .get(1)
                   .setMedicalConsultation(medicalConsultation);
+        medicalConsultation.setAppointment(therapist1.getAppointments()
+                                                     .get(0));
         pacient1.addMedicalHistory(medicalConsultation);
 
         persons.add(therapist1);
@@ -86,12 +88,12 @@ public class RepositorySimulator {
         List<Appointment> appointments = new ArrayList<>();
         appointments.add(new Appointment(1,
                                          new ApplicationDateFormat().createDate(2020,
-                                                                                04,
+                                                                                05,
                                                                                 10,
                                                                                 14,
                                                                                 0),
                                          new ApplicationDateFormat().createDate(2020,
-                                                                                04,
+                                                                                05,
                                                                                 10,
                                                                                 16,
                                                                                 0),
