@@ -40,14 +40,17 @@ public class TestTherapistRepository implements TherapistRepository {
     }
 
     @Override
-    public List<Therapist> finAvailableTherapists(Date startDate, Date endDate) {
+    public List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate) {
         List<Therapist> returnable = new ArrayList<>();
 
         for (Person person : RepositorySimulator.getInstance()
                                                 .getPersons()) {
-            if (person instanceof Therapist) {
+            if (person instanceof Therapist && ((Therapist) person).getEmphasis()
+                                                                   .contains(emphasis)) {
                 for (Appointment appointment : ((Therapist) person).getAppointments()) {
-                    if (appointment.getMedicalConsultation() == null && appointment.getStartDate().after(startDate) && appointment.getStartDate().before(endDate)) {
+                    if (appointment.getMedicalConsultation() == null && appointment.getStartDate()
+                                                                                   .after(startDate) && appointment.getStartDate()
+                                                                                                                   .before(endDate)) {
                         returnable.add((Therapist) person);
                         break;
                     }

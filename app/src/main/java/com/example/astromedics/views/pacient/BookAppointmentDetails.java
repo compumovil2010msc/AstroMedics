@@ -64,7 +64,7 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private void setViewsValues() {
         new DownloadImageTask(photoImageView)
                 .execute(therapist.getPhotoURL());
-        emphasisTextView.setText(medicalConsultation.getEmphasis());
+        emphasisTextView.setText(Therapist.Emphasis.toString(medicalConsultation.getEmphasis(), getApplicationContext()));
         therapistTextView.setText(therapist.getName());
         locationTextView.setText(medicalConsultation.getLocalization()
                                                     .getName());

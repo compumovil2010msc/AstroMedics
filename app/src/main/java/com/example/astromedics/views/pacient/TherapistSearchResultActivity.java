@@ -24,7 +24,7 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
     public static String END_DATE = "end_date";
 
     private Localization localization;
-    private String emphasis;
+    private Therapist.Emphasis emphasis;
     private Date startDate, endDate;
 
     ListView listView;
@@ -46,7 +46,7 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
         localization = (Localization) getIntent().getSerializableExtra(LOCATION);
         startDate = (Date) getIntent().getSerializableExtra(START_DATE);
         endDate = (Date) getIntent().getSerializableExtra(END_DATE);
-        emphasis = (String) getIntent().getSerializableExtra(EMPHASIS);
+        emphasis = (Therapist.Emphasis) getIntent().getSerializableExtra(EMPHASIS);
     }
 
     private void inflateViews() {
@@ -56,18 +56,19 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
     private void getAvailableTherapist() {
         therapists = Repository.getInstance()
                                .getTherapistRepository()
-                               .finAvailableTherapists(startDate,
+                               .finAvailableTherapists(emphasis,
+                                                       startDate,
                                                        endDate);
 
     }
 
-    private void addTherapistToList(){
+    private void addTherapistToList() {
         mAdapter = new TherapistAdapter(this,
                                         therapists);
         listView.setAdapter(mAdapter);
     }
 
-    private void addListeners(){
+    private void addListeners() {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

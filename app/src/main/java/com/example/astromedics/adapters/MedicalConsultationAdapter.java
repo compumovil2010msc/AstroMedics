@@ -49,7 +49,7 @@ public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation
                     .setText(therapist.getName());
 
             ((TextView) view.findViewById(R.id.medical_consultation_emphasis))
-                    .setText(medicalConsultation.getEmphasis());
+                    .setText(Therapist.Emphasis.speech_therapy.toString(medicalConsultation.getEmphasis(), getContext()));
 
             ((TextView) view.findViewById(R.id.medical_consultation_date))
                     .setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment().getStartDate()));

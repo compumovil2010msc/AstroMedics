@@ -11,5 +11,5 @@ import java.util.List;
 public interface TherapistRepository {
     Therapist getTherapist(String email);
     Therapist getTherapist(MedicalConsultation medicalConsultation);
-    List<Therapist> finAvailableTherapists(Date startDate, Date endDate);
+    List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate);
 }

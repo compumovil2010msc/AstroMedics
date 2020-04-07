@@ -115,8 +115,9 @@ public class TherapistFilterActivity extends AppCompatActivity {
                     intent.putExtra(TherapistSearchResultActivity.LOCATION,
                                     localization);
                     intent.putExtra(TherapistSearchResultActivity.EMPHASIS,
-                                    therapyTypesSpinner.getSelectedItem()
-                                                       .toString());
+                                    Therapist.Emphasis.fromString(therapyTypesSpinner.getSelectedItem()
+                                                                                     .toString(),
+                                                                  getApplicationContext()));
                     intent.putExtra(TherapistSearchResultActivity.START_DATE,
                                     startDate);
                     intent.putExtra(TherapistSearchResultActivity.END_DATE,

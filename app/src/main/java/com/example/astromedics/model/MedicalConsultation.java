@@ -9,10 +9,10 @@ public class MedicalConsultation implements Serializable {
     private Report report;
     private Localization localization;
     private double calification;
-    private String emphasis;
+    private Therapist.Emphasis emphasis;
 
     public MedicalConsultation(int medicalConsultationId, Evolution evolution, Report report,
-                               Localization localization, double calification, String emphasis) {
+                               Localization localization, double calification, Therapist.Emphasis emphasis) {
         this.medicalConsultationId = medicalConsultationId;
         this.evolution = evolution;
         this.report = report;
@@ -69,11 +69,11 @@ public class MedicalConsultation implements Serializable {
         this.calification = calification;
     }
 
-    public String getEmphasis() {
+    public Therapist.Emphasis getEmphasis() {
         return emphasis;
     }
 
-    public void setEmphasis(String emphasis) {
+    public void setEmphasis(Therapist.Emphasis emphasis) {
         this.emphasis = emphasis;
     }
 }

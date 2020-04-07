@@ -46,7 +46,7 @@ public class RepositorySimulator {
                                                                                             -74.0642,
                                                                                             "Pontificia Universidad Javeriana"),
                                                                            0.0,
-                                                                           "Fonoaudiologia");
+                                                                           Therapist.Emphasis.speech_therapy);
         therapist1.getAppointments()
                   .get(0)
                   .setMedicalConsultation(medicalConsultation1);
@@ -61,7 +61,7 @@ public class RepositorySimulator {
                                                                                             -74.0642,
                                                                                             "Pontificia Universidad Javeriana"),
                                                                            4.9,
-                                                                           "Fonoaudiologia");
+                                                                           Therapist.Emphasis.speech_therapy);
         therapist2.getAppointments()
                   .get(0)
                   .setMedicalConsultation(medicalConsultation2);
@@ -76,9 +76,8 @@ public class RepositorySimulator {
     }
 
     private Therapist getTestTherapist1() {
-        List<String> emphasis = new ArrayList<>();
-        emphasis.add("Fonoaudiologia");
-        emphasis.add("Terapia Ocupacional");
+        List<Therapist.Emphasis> emphasis = new ArrayList<>();
+        emphasis.add(Therapist.Emphasis.speech_therapy);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
         educationalFormation.add(new EducationalFormation(1,
                                                           "Fonoaudiologo",
@@ -143,9 +142,8 @@ public class RepositorySimulator {
     }
 
     private Therapist getTestTherapist2() {
-        List<String> emphasis = new ArrayList<>();
-        emphasis.add("Fonoaudiologia");
-        emphasis.add("Terapia Ocupacional");
+        List<Therapist.Emphasis> emphasis = new ArrayList<>();
+        emphasis.add(Therapist.Emphasis.psychology);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
         educationalFormation.add(new EducationalFormation(3,
                                                           "Fonoaudiologo",

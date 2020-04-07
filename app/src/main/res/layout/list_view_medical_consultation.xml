@@ -14,7 +14,7 @@
 
         <ImageView
             android:id="@+id/medical_consultation_photo"
-            android:layout_width="49dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"

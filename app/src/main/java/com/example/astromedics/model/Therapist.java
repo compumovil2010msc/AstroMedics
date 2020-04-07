@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Therapist extends Person implements Serializable {
     private int medicalConsultationPrice;
-    private List<String> emphasis;
+    private List<Emphasis> emphasis;
     private List<EducationalFormation> educationalFormation;
     private List<Appointment> appointments;
 
@@ -65,7 +65,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     public Therapist(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
-                     String password, Date admissionDate, int medicalConsultationPrice, List<String> emphasis,
+                     String password, Date admissionDate, int medicalConsultationPrice, List<Emphasis> emphasis,
                      List<EducationalFormation> educationalFormation, List<Appointment> appointments) {
         super(identificationNumber,
               name,
@@ -90,11 +90,11 @@ public class Therapist extends Person implements Serializable {
         this.medicalConsultationPrice = medicalConsultationPrice;
     }
 
-    public List<String> getEmphasis() {
+    public List<Emphasis> getEmphasis() {
         return emphasis;
     }
 
-    public void setEmphasis(List<String> emphasis) {
+    public void setEmphasis(List<Emphasis> emphasis) {
         this.emphasis = emphasis;
     }
 
