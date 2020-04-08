@@ -29,7 +29,6 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private MedicalConsultation medicalConsultation;
 
     private FloatingActionButton floatingActionButton;
-    ImageView photoImageView;
     TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView;
 
     @Override
@@ -51,7 +50,6 @@ public class BookAppointmentDetails extends AppCompatActivity {
 
     private void inflateViews() {
         floatingActionButton = findViewById(R.id.book_appointment_details_action_button);
-        photoImageView = findViewById(R.id.book_appointment_details_image);
         emphasisTextView = findViewById(R.id.book_appointment_details_emphasis);
         therapistTextView = findViewById(R.id.book_appointment_details_therapist_name);
         locationTextView = findViewById(R.id.book_appointment_details_location_name);
@@ -61,8 +59,6 @@ public class BookAppointmentDetails extends AppCompatActivity {
     }
 
     private void setViewsValues() {
-        new DownloadImageTask(photoImageView)
-                .execute(therapist.getPhotoURL());
         emphasisTextView.setText(Therapist.Emphasis.toString(medicalConsultation.getEmphasis(),
                                                              getApplicationContext()));
         therapistTextView.setText(therapist.getName());
