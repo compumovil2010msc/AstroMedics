@@ -148,6 +148,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     public List<Date> getAvailableDays(Date startDate, Date endDate) {
+        List<Date> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();
 
         for (Appointment appointment : getAppointments()) {
