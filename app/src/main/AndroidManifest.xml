@@ -29,6 +29,9 @@
             android:value="@string/api_key" />
 
         <activity
+            android:name=".views.pacient.BookAppointmentHistoryDetails"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
             android:name=".views.pacient.TherapistDetails"
             android:theme="@style/AppThemeWithActionBar" />
         <activity

@@ -20,6 +20,12 @@
     <string name="book_appointment_details_end_date">Hora de terminación</string>
     <string name="book_appointment_details_date">Fecha</string>
     <string name="book_appointment_details_therapist_name">Terapeuta</string>
+    <string name="book_appointment_history_details_title">Información de la consulta</string>
+    <string name="book_appointment_history_details_location">Ubicación</string>
+    <string name="book_appointment_history_details_start_date">Hora de inicio</string>
+    <string name="book_appointment_history_details_end_date">Hora de terminación</string>
+    <string name="book_appointment_history_details_date">Fecha</string>
+    <string name="book_appointment_history_details_therapist_name">Terapeuta</string>
     <string name="book_appointment_location_display_info">Información de la ubicación</string>
     <string name="maps_current_location">Ubicación Actual</string>
     <string name="justification_undefined_permission">UNDEFINED JUSTIFICATION.</string>

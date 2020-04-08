@@ -19,6 +19,7 @@ import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.BookAppointmentDetails;
+import com.example.astromedics.views.pacient.BookAppointmentHistoryDetails;
 import com.example.astromedics.views.pacient.BookAppointmentLocationSelectionActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -69,8 +70,8 @@ public class History extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(),
-                                           BookAppointmentDetails.class);
-                intent.putExtra(BookAppointmentDetails.MEDICAL_CONSULTATION,
+                                           BookAppointmentHistoryDetails.class);
+                intent.putExtra(BookAppointmentHistoryDetails.MEDICAL_CONSULTATION,
                                 medicalConsultations.get(position));
                 startActivity(intent);
             }
