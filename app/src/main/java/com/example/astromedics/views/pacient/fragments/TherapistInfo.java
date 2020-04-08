@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.EducationalFormationAdapter;
@@ -16,7 +17,7 @@ import com.example.astromedics.model.Therapist;
 
 public class TherapistInfo extends Fragment {
     Therapist therapist;
-    ListView educationalFormationListView;
+    RecyclerView educationalFormationRecyclerView;
     TextView therapistNameTextView, memberSinceTextView, numberOfConsultationTextView, calificationTextView;
 
     public TherapistInfo(Therapist therapist) {
@@ -40,7 +41,7 @@ public class TherapistInfo extends Fragment {
     }
 
     private void inflateViews(View view) {
-        educationalFormationListView = view.findViewById(R.id.therapist_info_educational_formation);
+        educationalFormationRecyclerView = view.findViewById(R.id.therapist_info_educational_formation);
         therapistNameTextView = view.findViewById(R.id.therapist_info_name);
         memberSinceTextView = view.findViewById(R.id.therapist_info_member_since);
         numberOfConsultationTextView = view.findViewById(R.id.therapist_info_number_of_medical_consultations);
@@ -52,8 +53,9 @@ public class TherapistInfo extends Fragment {
         memberSinceTextView.setText(new ApplicationDateFormat().toString(therapist.getAdmissionDate()));
         numberOfConsultationTextView.setText(String.valueOf(therapist.getNumberOfCompletedMedicalConsultations()));
         calificationTextView.setText(String.valueOf(therapist.getAverageCalification()));
-        EducationalFormationAdapter educationalFormationAdapter = new EducationalFormationAdapter(getContext(),
-                                                                                                  therapist.getEducationalFormation());
-        educationalFormationListView.setAdapter(educationalFormationAdapter);
+        EducationalFormationAdapter educationalFormationAdapter = new EducationalFormationAdapter(therapist.getEducationalFormation());
+        educationalFormationRecyclerView.setHasFixedSize(true);
+        educationalFormationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        educationalFormationRecyclerView.setAdapter(educationalFormationAdapter);
     }
 }

@@ -105,7 +105,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/therapist_info_educational_formation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
