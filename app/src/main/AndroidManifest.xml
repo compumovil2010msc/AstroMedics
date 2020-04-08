@@ -28,7 +28,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
 
-        <activity android:name=".views.pacient.BookAppointmentLocationDisplayActivity" />
+        <activity
+            android:name=".views.pacient.TherapistDetails"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".views.pacient.BookAppointmentLocationDisplayActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".views.pacient.BookAppointmentDetails"
             android:theme="@style/AppThemeWithActionBar" />

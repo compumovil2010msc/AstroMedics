@@ -14,7 +14,6 @@ import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.DownloadImageTask;
 import com.example.astromedics.helpers.PermissionHandler;
-import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
@@ -64,7 +63,8 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private void setViewsValues() {
         new DownloadImageTask(photoImageView)
                 .execute(therapist.getPhotoURL());
-        emphasisTextView.setText(Therapist.Emphasis.toString(medicalConsultation.getEmphasis(), getApplicationContext()));
+        emphasisTextView.setText(Therapist.Emphasis.toString(medicalConsultation.getEmphasis(),
+                                                             getApplicationContext()));
         therapistTextView.setText(therapist.getName());
         locationTextView.setText(medicalConsultation.getLocalization()
                                                     .getName());
@@ -77,6 +77,17 @@ public class BookAppointmentDetails extends AppCompatActivity {
     }
 
     private void setListeners() {
+        therapistTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),
+                                           TherapistDetails.class);
+                intent.putExtra(TherapistDetails.THERAPIST,
+                                therapist);
+                startActivity(intent);
+            }
+        });
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

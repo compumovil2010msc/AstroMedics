@@ -62,9 +62,7 @@
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView">
@@ -102,8 +100,10 @@
                         android:id="@+id/book_appointment_details_therapist_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:text=""
-                        android:textColor="@color/colorLight" />
+                        android:textAllCaps="true"
+                        android:textColor="#0000FF" />
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -10,12 +10,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.astromedics.BuildConfig;
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.EducationalFormationAdapter;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.model.Therapist;
 
 public class TherapistInfo extends Fragment {
+    public static final String FRAGMENT_TAG = BuildConfig.APPLICATION_ID + ".THERAPIST_INFO_TAG";
+
     Therapist therapist;
     RecyclerView educationalFormationRecyclerView;
     TextView therapistNameTextView, memberSinceTextView, numberOfConsultationTextView, calificationTextView;
