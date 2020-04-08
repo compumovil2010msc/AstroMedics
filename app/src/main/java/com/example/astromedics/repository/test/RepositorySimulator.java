@@ -9,6 +9,7 @@ import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.MedicalRecord;
 import com.example.astromedics.model.Pacient;
 import com.example.astromedics.model.Person;
+import com.example.astromedics.model.Report;
 import com.example.astromedics.model.Therapist;
 
 import java.util.ArrayList;

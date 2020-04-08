@@ -2,6 +2,9 @@ package com.example.astromedics.views.pacient.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +12,9 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.MedicalConsultationAdapter;
-import com.example.astromedics.helpers.PermissionHandler;
+import com.example.astromedics.adapters.MedicalConsultationHistoryAdapter;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
@@ -25,13 +26,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookAppointment extends Fragment {
-    private FloatingActionButton floatingActionButton;
+public class History extends Fragment {
     private List<MedicalConsultation> medicalConsultations;
     LinearLayout noAppointmentsLinearLayout;
     private ListView medicalConsultationListView;
 
-    public BookAppointment() {
+    public History() {
 
     }
 
@@ -43,7 +43,7 @@ public class BookAppointment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_book_appointment,
+        final View view = inflater.inflate(R.layout.fragment_history,
                                            container,
                                            false);
         initViews(view);
@@ -53,22 +53,12 @@ public class BookAppointment extends Fragment {
     }
 
     private void initViews(View view) {
-        noAppointmentsLinearLayout = view.findViewById(R.id.book_appointment_no_appointments);
-        floatingActionButton = view.findViewById(R.id.book_appointment_add_appointment);
-        medicalConsultationListView = view.findViewById(R.id.book_appointment_appointments);
+        noAppointmentsLinearLayout = view.findViewById(R.id.history_no_appointments);
+        medicalConsultationListView = view.findViewById(R.id.history_appointments);
     }
 
     private void setListeners(final View view) {
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(),
-                                           BookAppointmentLocationSelectionActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        MedicalConsultationAdapter customAdapter = new MedicalConsultationAdapter(
+        MedicalConsultationHistoryAdapter customAdapter = new MedicalConsultationHistoryAdapter(
                 view.getContext(),
                 medicalConsultations
         );
@@ -98,7 +88,7 @@ public class BookAppointment extends Fragment {
                                                                      .getMedicalHistory()) {
                 if (medicalConsultation.getAppointment()
                                        .getEndDate()
-                                       .after(new Date())) {
+                                       .before(new Date())) {
                     medicalConsultations.add(medicalConsultation);
                 }
             }

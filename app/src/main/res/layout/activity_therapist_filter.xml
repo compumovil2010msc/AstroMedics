@@ -151,7 +151,7 @@
         <CalendarView
             android:id="@+id/therapist_filter_calendar_view"
             android:layout_width="300dp"
-            android:layout_height="300dp" />
+            android:layout_height="400dp" />
     </androidx.cardview.widget.CardView>
 
 

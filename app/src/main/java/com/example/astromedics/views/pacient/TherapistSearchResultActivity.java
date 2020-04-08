@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
     private Therapist.Emphasis emphasis;
     private Date startDate, endDate;
 
+    LinearLayout noTherapistLinearLayout;
     ListView listView;
     List<Therapist> therapists;
     private TherapistAdapter mAdapter;
@@ -52,6 +54,7 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
     }
 
     private void inflateViews() {
+        noTherapistLinearLayout = findViewById(R.id.therapist_searh_result_no_terapists);
         listView = (ListView) findViewById(R.id.therapist_search_result_list_view);
     }
 
@@ -68,6 +71,10 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
                            ex.getMessage(),
                            Toast.LENGTH_SHORT)
                  .show();
+        }
+
+        if (therapists == null || therapists.size() == 0) {
+            noTherapistLinearLayout.setVisibility(View.VISIBLE);
         }
     }
 

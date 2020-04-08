@@ -54,6 +54,12 @@
     <string name="therapist_available_appointment_confirm_dialog_yes">Agendar</string>
     <string name="therapist_available_appointment_confirm_dialog_no">Cancelar</string>
     <string name="therapist_available_appointment_confirm_dialog_message">¿Esta seguro que desea agendar la cita con el terapeuta [THERAPIST] para el [DAY] a las [TIME]?</string>
+    <string name="book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
+    <string name="therapist_search_result_no_therapists">No se encontraron terapeutas disponibles</string>
+    <string name="history_no_history">Todavia no tienes consultas historicas</string>
+    <string name="history_no_calification">CALIFICACIÓN PENDIENTE</string>
+    <string name="history_calification">Calificación</string>
+    <string name="medical_consultation_history_report_available">Reporte Disponible!</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

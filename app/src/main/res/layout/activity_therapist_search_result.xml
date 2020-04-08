@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".views.pacient.TherapistSearchResultActivity">
 
+    <LinearLayout
+        android:id="@+id/therapist_searh_result_no_terapists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            android:src="@drawable/planet" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="@string/therapist_search_result_no_therapists" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/therapist_search_result_list_view"
         android:layout_width="0dp"
