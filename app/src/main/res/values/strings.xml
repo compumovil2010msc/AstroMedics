@@ -49,6 +49,7 @@
     <string name="educational_formation_graduated">Graduado</string>
     <string name="educational_formation_graduated_yes">Si</string>
     <string name="educational_formation_graduated_no">No</string>
+    <string name="therapist_available_appointment_info">Citas Disponibles</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

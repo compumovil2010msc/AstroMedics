@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".views.fragments.TherapistAppointmentsAvailable">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".views.pacient.fragments.TherapistAvailableAppointments">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,13 +32,12 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="24dp"
-                android:text="Citas Disponibles" />
+                android:text="@string/therapist_available_appointment_info" />
 
             <Spinner
-                android:id="@+id/spinner3"
+                android:id="@+id/therapist_available_appointments_day_list"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/weekDays"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
@@ -51,8 +48,9 @@
         android:layout_height="1dp"
         android:background="@color/colorLight"/>
 
-    <ListView
-        android:id="@+id/therapist_available_appointment_list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:padding="18dp"
+        android:id="@+id/therapist_available_appointment_hour_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

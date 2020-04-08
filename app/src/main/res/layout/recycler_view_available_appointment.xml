@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/ic_today_black_24dp" />
 
     <TextView
-        android:id="@+id/appointment_hour"
+        android:id="@+id/available_appointment_hour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"

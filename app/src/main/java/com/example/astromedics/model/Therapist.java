@@ -3,9 +3,11 @@ package com.example.astromedics.model;
 import android.content.Context;
 
 import com.example.astromedics.R;
+import com.example.astromedics.helpers.DateComparator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -143,5 +145,21 @@ public class Therapist extends Person implements Serializable {
         }
 
         return numberOfAppointments > 0 ? sumOfCalifications / numberOfAppointments : 0;
+    }
+
+    public List<Date> getAvailableDays() {
+        List<Date> returnable = new ArrayList<>();
+        DateComparator dateComparator = new DateComparator();
+
+        for (Appointment appointment : getAppointments()) {
+            if (appointment.getMedicalConsultation() == null && Collections.binarySearch(returnable,
+                                                                                         appointment.getStartDate(),
+                                                                                         dateComparator) < 0 && appointment.getStartDate()
+                                                                                                                           .after(new Date())) {
+                returnable.add(appointment.getStartDate());
+            }
+        }
+
+        return returnable;
     }
 }

@@ -13,7 +13,7 @@ import com.example.astromedics.adapters.PageAdapter;
 import com.example.astromedics.helpers.DownloadImageTask;
 import com.example.astromedics.model.Localization;
 import com.example.astromedics.model.Therapist;
-import com.example.astromedics.views.fragments.TherapistAppointmentsAvailable;
+import com.example.astromedics.views.pacient.fragments.TherapistAvailableAppointments;
 import com.example.astromedics.views.pacient.fragments.TherapistInfo;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -94,7 +94,7 @@ public class TherapistAvailableAppointmentsActivity extends AppCompatActivity {
 
     private void setUpViewPager(ViewPager viewPager) {
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager());
-        Fragment appointmentsAvailable = new TherapistAppointmentsAvailable();
+        Fragment appointmentsAvailable = new TherapistAvailableAppointments(therapist, localization, emphasis, startDate, endDate);
         Fragment therapistInfo = new TherapistInfo(therapist);
         pageAdapter.addFragment(appointmentsAvailable);
         pageAdapter.addFragment(therapistInfo);
