@@ -14,7 +14,8 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/colorPrimary"
         android:clickable="true"
-        android:src="@drawable/ic_my_location_black_24dp"
+        android:src="@drawable/ic_attachment_white_24dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -139,6 +140,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
+                        android:textColor="@color/colorLight" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="16dp"
+                        android:text="@string/book_appointment_history_details_calification"
+                        android:textColor="#000000" />
+
+                    <EditText
+                        android:id="@+id/book_appointment_history_details_calification_editable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:inputType="numberDecimal"/>
+
+                    <TextView
+                        android:id="@+id/book_appointment_history_details_calification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:textColor="@color/colorLight" />
                 </LinearLayout>
 

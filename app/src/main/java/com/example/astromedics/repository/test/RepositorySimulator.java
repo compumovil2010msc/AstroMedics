@@ -67,13 +67,14 @@ public class RepositorySimulator {
                                                                            new Localization(4.629,
                                                                                             -74.0642,
                                                                                             "Pontificia Universidad Javeriana"),
-                                                                           4.9,
+                                                                           0.0,
                                                                            Therapist.Emphasis.speech_therapy);
         therapist2.getAppointments()
                   .get(0)
                   .setMedicalConsultation(medicalConsultation2);
         medicalConsultation2.setAppointment(therapist2.getAppointments()
                                                       .get(0));
+        medicalConsultation2.setReport(new Report());
         pacient1.addMedicalHistory(medicalConsultation2);
 
         persons.add(therapist1);

@@ -70,4 +70,35 @@ public class TestPacientRepository implements PacientRepository {
 
         return medicalConsultation;
     }
+
+    @Override
+    public MedicalConsultation setCalification(Pacient pacient, MedicalConsultation medicalConsultation, double calification) throws Exception {
+        RepositorySimulator repository = RepositorySimulator.getInstance();
+        MedicalConsultation returnable = null;
+        List<Person> persons = repository.getPersons();
+
+        if (calification <= 0 || calification > 5) {
+            throw new Exception("Por favor ingrese un valor valido (0 - 5)");
+        }
+
+        for (Person person : persons) {
+            if (person.getEmail()
+                      .equals(pacient.getEmail()) && person instanceof Pacient) {
+                for (MedicalConsultation currentMedicalConsultation : ((Pacient) person).getMedicalHistory()) {
+                    if (currentMedicalConsultation.getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
+                        if (currentMedicalConsultation.getCalification() > 0) {
+                            throw new Exception("La consulta medica ya tiene calificación");
+                        } else {
+                            currentMedicalConsultation.setCalification(calification);
+                            returnable = currentMedicalConsultation;
+                        }
+                    }
+                }
+            }
+        }
+
+        repository.setPersons(persons);
+
+        return returnable;
+    }
 }

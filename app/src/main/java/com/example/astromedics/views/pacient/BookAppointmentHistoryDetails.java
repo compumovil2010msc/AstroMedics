@@ -1,21 +1,20 @@
 package com.example.astromedics.views.pacient;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
-import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookAppointmentHistoryDetails extends AppCompatActivity {
@@ -24,9 +23,11 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
 
     private Therapist therapist;
     private MedicalConsultation medicalConsultation;
+    private boolean currentlySaving = false;
 
     private FloatingActionButton floatingActionButton;
-    TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView;
+    EditText calificationEditText;
+    TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView, calificationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
         dateTextView = findViewById(R.id.book_appointment_history_details_date);
         startDateTextView = findViewById(R.id.book_appointment_history_details_start_date);
         endDateTextView = findViewById(R.id.book_appointment_history_details_end_date);
+        calificationTextView = findViewById(R.id.book_appointment_history_details_calification);
+        calificationEditText = findViewById(R.id.book_appointment_history_details_calification_editable);
     }
 
     private void setViewsValues() {
@@ -76,6 +79,20 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
                                                                                                     .getStartDate()));
         endDateTextView.setText(new ApplicationDateFormat().getHoursAndMinutes(medicalConsultation.getAppointment()
                                                                                                   .getEndDate()));
+
+        if (medicalConsultation.getCalification() > 0) {
+            calificationTextView.setVisibility(View.VISIBLE);
+            calificationTextView.setText(String.valueOf(medicalConsultation.getCalification()));
+
+            if (medicalConsultation.getReport() != null) {
+                floatingActionButton.setVisibility(View.VISIBLE);
+            }
+        } else {
+            calificationEditText.setVisibility(View.VISIBLE);
+            floatingActionButton.setVisibility(View.VISIBLE);
+            floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_save_black_24dp));
+            currentlySaving = true;
+        }
     }
 
     private void setListeners() {
@@ -93,8 +110,47 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (currentlySaving && calificationEditText.getText()
+                                                           .toString() != null && calificationEditText.getText()
+                                                                                                      .toString() != "") {
+                    double calification = Double.parseDouble(calificationEditText.getText()
+                                                                                 .toString());
+                    calification = Double.parseDouble(String.format("%.2f",calification));
+                    try {
+                        medicalConsultation = Repository.getInstance()
+                                                        .getPacientRepository()
+                                                        .setCalification(
+                                                                Repository.getInstance()
+                                                                          .getPacientRepository()
+                                                                          .getPacient(Session.getInstance()
+                                                                                             .getEmail()),
+                                                                medicalConsultation,
+                                                                calification);
+                        Intent intent = new Intent(getApplicationContext(),
+                                                   BookAppointmentHistoryDetails.class);
+                        intent.putExtra(BookAppointmentHistoryDetails.MEDICAL_CONSULTATION,
+                                        medicalConsultation);
+                        startActivity(intent);
+                    } catch (Exception ex) {
+                        Toast.makeText(getApplicationContext(),
+                                       ex.getMessage(),
+                                       Toast.LENGTH_SHORT)
+                             .show();
+                    }
+                } else if (medicalConsultation.getReport() != null) {
+                    Toast.makeText(getApplicationContext(),
+                                   "Showing report!",
+                                   Toast.LENGTH_SHORT)
+                         .show();
+                }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(getApplicationContext(),
+                                      HomeUserActivity.class);
+        startActivity(setIntent);
     }
 }
