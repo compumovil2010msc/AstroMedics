@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -13,9 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.TherapistAvailableAppointmentAdapter;
-import com.example.astromedics.helpers.ApplicationDateFormat;
+import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.Localization;
 import com.example.astromedics.model.Therapist;
+import com.example.astromedics.model.dto.ApplicationDate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +32,9 @@ public class TherapistAvailableAppointments extends Fragment {
     private RecyclerView appointmentListRecyclerView;
     private Spinner appointmentDaysSpinner;
     private TherapistAvailableAppointmentAdapter therapistAvailableAppointmentAdapter;
+
+    List<ApplicationDate> availableDays;
+    List<Appointment> availableAppointmentsPerDay;
 
     public TherapistAvailableAppointments(Therapist therapist, Localization localization, Therapist.Emphasis emphasis, Date startDate, Date endDate) {
         this.therapist = therapist;
@@ -62,28 +67,42 @@ public class TherapistAvailableAppointments extends Fragment {
     }
 
     private void setInitialValues() {
+        availableDays = new ArrayList<>();
+        availableAppointmentsPerDay = new ArrayList<>();
 
-        List<String> availableDays = new ArrayList<>();
-        ApplicationDateFormat applicationDateFormat = new ApplicationDateFormat();
-
-        for(Date date: therapist.getAvailableDays()){
-            availableDays.add(applicationDateFormat.toString(date));
+        for (Date date : therapist.getAvailableDays(startDate,
+                                                    endDate)) {
+            availableDays.add(new ApplicationDate(date));
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
-                                                                android.R.layout.simple_spinner_item,
-                                                                availableDays.toArray(new String[0]));
+        ArrayAdapter<ApplicationDate> adapter = new ArrayAdapter<ApplicationDate>(getContext(),
+                                                                                  android.R.layout.simple_spinner_item,
+                                                                                  availableDays.toArray(new ApplicationDate[0]));
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         appointmentDaysSpinner.setAdapter(adapter);
 
-
         appointmentListRecyclerView.setHasFixedSize(true);
         appointmentListRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        therapistAvailableAppointmentAdapter = new TherapistAvailableAppointmentAdapter(therapist.getAppointments());
+        therapistAvailableAppointmentAdapter = new TherapistAvailableAppointmentAdapter(availableAppointmentsPerDay);
         appointmentListRecyclerView.setAdapter(therapistAvailableAppointmentAdapter);
     }
 
     private void addListeners() {
+        appointmentDaysSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Date selectedDate = availableDays.get(i)
+                                                 .getDate();
+                availableAppointmentsPerDay = therapist.getAvailableAppointmentsByDate(selectedDate);
+                therapistAvailableAppointmentAdapter = new TherapistAvailableAppointmentAdapter(availableAppointmentsPerDay);
+                appointmentListRecyclerView.setAdapter(therapistAvailableAppointmentAdapter);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 }

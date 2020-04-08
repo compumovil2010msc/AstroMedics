@@ -49,7 +49,8 @@
         android:background="@color/colorLight"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:padding="18dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
         android:id="@+id/therapist_available_appointment_hour_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

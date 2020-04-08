@@ -147,6 +147,25 @@ public class Therapist extends Person implements Serializable {
         return numberOfAppointments > 0 ? sumOfCalifications / numberOfAppointments : 0;
     }
 
+    public List<Date> getAvailableDays(Date startDate, Date endDate) {
+        DateComparator dateComparator = new DateComparator();
+
+        for (Appointment appointment : getAppointments()) {
+            if (appointment.getMedicalConsultation() == null
+                    && new DateComparator().between(appointment.getStartDate(), startDate, endDate)
+                    && Collections.binarySearch(returnable,
+                                                appointment.getStartDate(),
+                                                dateComparator) < 0 && appointment.getStartDate()
+                                                                                  .after(new Date())) {
+                returnable.add(appointment.getStartDate());
+            }
+        }
+
+        Collections.sort(returnable);
+
+        return returnable;
+    }
+
     public List<Date> getAvailableDays() {
         List<Date> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();
@@ -157,6 +176,23 @@ public class Therapist extends Person implements Serializable {
                                                                                          dateComparator) < 0 && appointment.getStartDate()
                                                                                                                            .after(new Date())) {
                 returnable.add(appointment.getStartDate());
+            }
+        }
+
+        Collections.sort(returnable);
+
+        return returnable;
+    }
+
+    public List<Appointment> getAvailableAppointmentsByDate(Date date) {
+        List<Appointment> returnable = new ArrayList<>();
+        DateComparator dateComparator = new DateComparator();
+
+        for (Appointment appointment : getAppointments()) {
+            if (appointment.getMedicalConsultation() == null
+                    && dateComparator.equals(appointment.getStartDate(),
+                                             date)) {
+                returnable.add(appointment);
             }
         }
 

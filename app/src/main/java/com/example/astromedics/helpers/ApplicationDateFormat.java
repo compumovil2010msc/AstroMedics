@@ -20,7 +20,7 @@ public class ApplicationDateFormat {
         cal.set(Calendar.MONTH,
                 month - 1);
         cal.set(Calendar.DAY_OF_MONTH,
-                date - 1);
+                date);
         return cal.getTime();
     }
 
@@ -31,7 +31,7 @@ public class ApplicationDateFormat {
         cal.set(Calendar.MONTH,
                 month - 1);
         cal.set(Calendar.DAY_OF_MONTH,
-                date - 1);
+                date);
         cal.set(Calendar.HOUR_OF_DAY,
                 hour);
         cal.set(Calendar.MINUTE,

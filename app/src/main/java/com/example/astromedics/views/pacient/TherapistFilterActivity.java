@@ -68,7 +68,7 @@ public class TherapistFilterActivity extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int day) {
                 Date selectedDate = new ApplicationDateFormat().createDate(year,
                                                                            month + 1,
-                                                                           day + 1);
+                                                                           day);
 
                 if (therapistDate == TherapistDate.START_DATE) {
                     calendarView.setDate(selectedDate.getTime());

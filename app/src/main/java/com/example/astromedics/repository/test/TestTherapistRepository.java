@@ -1,5 +1,6 @@
 package com.example.astromedics.repository.test;
 
+import com.example.astromedics.helpers.DateComparator;
 import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Person;
@@ -48,9 +49,9 @@ public class TestTherapistRepository implements TherapistRepository {
             if (person instanceof Therapist && ((Therapist) person).getEmphasis()
                                                                    .contains(emphasis)) {
                 for (Appointment appointment : ((Therapist) person).getAppointments()) {
-                    if (appointment.getMedicalConsultation() == null && appointment.getStartDate()
-                                                                                   .after(startDate) && appointment.getStartDate()
-                                                                                                                   .before(endDate)) {
+                    if (appointment.getMedicalConsultation() == null && new DateComparator().between(appointment.getStartDate(),
+                                                                                                     startDate,
+                                                                                                     endDate)) {
                         returnable.add((Therapist) person);
                         break;
                     }
