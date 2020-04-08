@@ -14,6 +14,7 @@ public class TestPersonRepository implements PersonRepository {
                 return person;
             }
         }
-        return null;
+
+        throw new Exception("Credenciales incorrectas");
     }
 }

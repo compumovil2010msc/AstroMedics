@@ -21,14 +21,15 @@ public class TestPacientRepository implements PacientRepository {
                 return (Pacient) person;
             }
         }
-        return null;
+
+        throw new Exception("No se encontró la persona solicitada");
     }
 
     @Override
     public MedicalConsultation createMedicalConsultation(Pacient pacient, Therapist therapist, Therapist.Emphasis emphasis, Localization localization,
                                                          Appointment appointment) throws Exception {
         RepositorySimulator repository = RepositorySimulator.getInstance();
-
+        boolean settedPacient = false, settedTherapist = false;
         MedicalConsultation medicalConsultation = new MedicalConsultation(repository.medicalConsultationId++,
                                                                           null,
                                                                           null,
@@ -41,18 +42,28 @@ public class TestPacientRepository implements PacientRepository {
         for (Person person : persons) {
             if (person.getEmail()
                       .equals(pacient.getEmail()) && person instanceof Pacient) {
+                settedPacient = true;
                 ((Pacient) person).addMedicalHistory(medicalConsultation);
             }
 
             if (person.getEmail()
                       .equals(therapist.getEmail()) && person instanceof Therapist) {
                 for (Appointment currentAppointment : ((Therapist) person).getAppointments()) {
-                    if (currentAppointment.getAppointmentId() == appointment.getAppointmentId()) {
+                    if (currentAppointment.getAppointmentId() == appointment.getAppointmentId() && currentAppointment.getMedicalConsultation() == null) {
+                        settedTherapist = true;
                         currentAppointment.setMedicalConsultation(medicalConsultation);
                         medicalConsultation.setAppointment(appointment);
                     }
                 }
             }
+        }
+
+        if (!settedPacient) {
+            throw new Exception("No se encontro el paciente");
+        }
+
+        if (!settedTherapist) {
+            throw new Exception("No se encontro el terapeuta");
         }
 
         repository.setPersons(persons);

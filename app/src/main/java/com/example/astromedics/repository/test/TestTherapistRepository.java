@@ -21,7 +21,8 @@ public class TestTherapistRepository implements TherapistRepository {
                 return (Therapist) person;
             }
         }
-        return null;
+
+        throw new Exception("No se encontró la persona solicitada");
     }
 
     @Override
@@ -37,7 +38,8 @@ public class TestTherapistRepository implements TherapistRepository {
                 }
             }
         }
-        return null;
+
+        throw new Exception("No se encontró la persona solicitada");
     }
 
     @Override
