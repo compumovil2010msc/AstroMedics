@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import com.example.astromedics.model.Localization;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,12 +56,19 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
     }
 
     private void getAvailableTherapist() {
-        therapists = Repository.getInstance()
-                               .getTherapistRepository()
-                               .finAvailableTherapists(emphasis,
-                                                       startDate,
-                                                       endDate);
-
+        try {
+            therapists = Repository.getInstance()
+                                   .getTherapistRepository()
+                                   .finAvailableTherapists(emphasis,
+                                                           startDate,
+                                                           endDate);
+        } catch (Exception ex) {
+            therapists = new ArrayList<>();
+            Toast.makeText(getApplicationContext(),
+                           ex.getMessage(),
+                           Toast.LENGTH_SHORT)
+                 .show();
+        }
     }
 
     private void addTherapistToList() {

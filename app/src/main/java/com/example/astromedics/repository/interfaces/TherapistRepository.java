@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface TherapistRepository {
-    Therapist getTherapist(String email);
-    Therapist getTherapist(MedicalConsultation medicalConsultation);
-    List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate);
+    Therapist getTherapist(String email) throws Exception;
+    Therapist getTherapist(MedicalConsultation medicalConsultation) throws Exception;
+    List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate) throws Exception;
 }

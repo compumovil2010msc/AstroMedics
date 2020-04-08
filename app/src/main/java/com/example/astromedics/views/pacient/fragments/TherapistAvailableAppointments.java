@@ -1,5 +1,8 @@
 package com.example.astromedics.views.pacient.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,10 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.TherapistAvailableAppointmentAdapter;
+import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.Localization;
+import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.model.dto.ApplicationDate;
+import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
+import com.example.astromedics.views.pacient.HomeUserActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +34,7 @@ import java.util.List;
 
 public class TherapistAvailableAppointments extends Fragment {
     private Therapist therapist;
+    private Appointment selectedAppointment;
     private Localization localization;
     private Therapist.Emphasis emphasis;
     private Date startDate, endDate;
@@ -96,6 +106,54 @@ public class TherapistAvailableAppointments extends Fragment {
                                                  .getDate();
                 availableAppointmentsPerDay = therapist.getAvailableAppointmentsByDate(selectedDate);
                 therapistAvailableAppointmentAdapter = new TherapistAvailableAppointmentAdapter(availableAppointmentsPerDay);
+                therapistAvailableAppointmentAdapter.setOnItemClickListener(new TherapistAvailableAppointmentAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        selectedAppointment = availableAppointmentsPerDay.get(position);
+
+                        new AlertDialog.Builder(getContext())
+                                .setTitle(getString(R.string.therapist_available_appointment_confirm_dialog_info))
+                                .setMessage(getString(R.string.therapist_available_appointment_confirm_dialog_message)
+                                                    .replace("[THERAPIST]",
+                                                             therapist.getName())
+                                                    .replace("[DAY]",
+                                                             new ApplicationDateFormat().toString(selectedAppointment.getStartDate()))
+                                                    .replace("[TIME]",
+                                                             new ApplicationDateFormat().getHoursAndMinutes(selectedAppointment.getStartDate())))
+                                .setIcon(getResources().getDrawable(R.drawable.ic_today_black_24dp,
+                                                                    null))
+                                .setPositiveButton(getString(R.string.therapist_available_appointment_confirm_dialog_yes),
+                                                   new DialogInterface.OnClickListener() {
+
+                                                       public void onClick(DialogInterface dialog, int whichButton) {
+                                                           try {
+                                                               MedicalConsultation createdMedicalConsultarion = Repository.getInstance()
+                                                                                                                          .getPacientRepository()
+                                                                                                                          .createMedicalConsultation(Repository.getInstance()
+                                                                                                                                                               .getPacientRepository()
+                                                                                                                                                               .getPacient(Session.getInstance()
+                                                                                                                                                                                  .getEmail()),
+                                                                                                                                                     therapist,
+                                                                                                                                                     emphasis,
+                                                                                                                                                     localization,
+                                                                                                                                                     selectedAppointment);
+
+                                                               Intent intent = new Intent(getContext(),
+                                                                                          HomeUserActivity.class);
+                                                               startActivity(intent);
+                                                           } catch (Exception ex) {
+                                                               Toast.makeText(getContext(),
+                                                                              ex.getMessage(),
+                                                                              Toast.LENGTH_SHORT)
+                                                                    .show();
+                                                           }
+                                                       }
+                                                   })
+                                .setNegativeButton(getString(R.string.therapist_available_appointment_confirm_dialog_no),
+                                                   null)
+                                .show();
+                    }
+                });
                 appointmentListRecyclerView.setAdapter(therapistAvailableAppointmentAdapter);
             }
 

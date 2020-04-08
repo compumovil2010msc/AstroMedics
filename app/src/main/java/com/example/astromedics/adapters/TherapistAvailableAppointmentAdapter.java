@@ -18,9 +18,15 @@ import java.util.List;
 public class TherapistAvailableAppointmentAdapter extends RecyclerView.Adapter<TherapistAvailableAppointmentAdapter.TherapistAvailableAppointmentViewHolder> {
 
     private List<Appointment> therapists = new ArrayList<>();
+    private OnItemClickListener onItemClickListener;
 
     public TherapistAvailableAppointmentAdapter(List<Appointment> items) {
         therapists = items;
+        this.onItemClickListener = null;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -35,7 +41,7 @@ public class TherapistAvailableAppointmentAdapter extends RecyclerView.Adapter<T
 
     @Override
     public void onBindViewHolder(@NonNull TherapistAvailableAppointmentViewHolder holder, int position) {
-        holder.setValues(therapists.get(position));
+        holder.setValues(therapists.get(position), onItemClickListener, position);
     }
 
     @Override
@@ -57,9 +63,21 @@ public class TherapistAvailableAppointmentAdapter extends RecyclerView.Adapter<T
             hourTextView = view.findViewById(R.id.available_appointment_hour);
         }
 
-        public void setValues(Appointment appointment) {
+        public void setValues(Appointment appointment, OnItemClickListener onItemClickListener, int position) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(onItemClickListener != null){
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
             ApplicationDateFormat applicationDateFormat = new ApplicationDateFormat();
             hourTextView.setText(applicationDateFormat.getHoursAndMinutes(appointment.getStartDate()) + " - " + applicationDateFormat.getHoursAndMinutes(appointment.getEndDate()));
         }
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
     }
 }

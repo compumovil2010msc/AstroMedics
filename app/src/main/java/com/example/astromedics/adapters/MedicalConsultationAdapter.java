@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,25 +45,33 @@ public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation
                                           false);
         }
         MedicalConsultation medicalConsultation = medicalConsultations.get(position);
-        Therapist therapist = Repository.getInstance()
-                                        .getTherapistRepository()
-                                        .getTherapist(medicalConsultation);
 
-        if (medicalConsultation != null && therapist != null && medicalConsultation.getAppointment() != null) {
-            ((TextView) view.findViewById(R.id.medical_consultation_name))
-                    .setText(therapist.getName());
+        try {
+            Therapist therapist = Repository.getInstance()
+                                            .getTherapistRepository()
+                                            .getTherapist(medicalConsultation);
+            if (medicalConsultation != null && therapist != null && medicalConsultation.getAppointment() != null) {
+                ((TextView) view.findViewById(R.id.medical_consultation_name))
+                        .setText(therapist.getName());
 
-            ((TextView) view.findViewById(R.id.medical_consultation_emphasis))
-                    .setText(Therapist.Emphasis.speech_therapy.toString(medicalConsultation.getEmphasis(),
-                                                                        getContext()));
+                ((TextView) view.findViewById(R.id.medical_consultation_emphasis))
+                        .setText(Therapist.Emphasis.speech_therapy.toString(medicalConsultation.getEmphasis(),
+                                                                            getContext()));
 
-            ((TextView) view.findViewById(R.id.medical_consultation_date))
-                    .setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment()
-                                                                                     .getStartDate()));
+                ((TextView) view.findViewById(R.id.medical_consultation_date))
+                        .setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment()
+                                                                                         .getStartDate()));
 
-            new DownloadImageTask((ImageView) view.findViewById(R.id.medical_consultation_photo))
-                    .execute(therapist.getPhotoURL());
+                new DownloadImageTask((ImageView) view.findViewById(R.id.medical_consultation_photo))
+                        .execute(therapist.getPhotoURL());
+            }
+        } catch (Exception ex) {
+            Toast.makeText(getContext(),
+                           ex.getMessage(),
+                           Toast.LENGTH_SHORT)
+                 .show();
         }
+
         return view;
     }
 }

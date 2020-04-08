@@ -4,15 +4,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
-import com.example.astromedics.helpers.DownloadImageTask;
 import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
@@ -43,9 +42,16 @@ public class BookAppointmentDetails extends AppCompatActivity {
 
     private void obtainObjects() {
         medicalConsultation = (MedicalConsultation) getIntent().getSerializableExtra(MEDICAL_CONSULTATION);
-        therapist = Repository.getInstance()
-                              .getTherapistRepository()
-                              .getTherapist(medicalConsultation);
+        try {
+            therapist = Repository.getInstance()
+                                  .getTherapistRepository()
+                                  .getTherapist(medicalConsultation);
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),
+                           ex.getMessage(),
+                           Toast.LENGTH_SHORT)
+                 .show();
+        }
     }
 
     private void inflateViews() {
@@ -61,7 +67,9 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private void setViewsValues() {
         emphasisTextView.setText(Therapist.Emphasis.toString(medicalConsultation.getEmphasis(),
                                                              getApplicationContext()));
-        therapistTextView.setText(therapist.getName());
+        if (therapist != null) {
+            therapistTextView.setText(therapist.getName());
+        }
         locationTextView.setText(medicalConsultation.getLocalization()
                                                     .getName());
         dateTextView.setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment()

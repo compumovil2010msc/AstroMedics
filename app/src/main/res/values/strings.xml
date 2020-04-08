@@ -50,6 +50,10 @@
     <string name="educational_formation_graduated_yes">Si</string>
     <string name="educational_formation_graduated_no">No</string>
     <string name="therapist_available_appointment_info">Citas Disponibles</string>
+    <string name="therapist_available_appointment_confirm_dialog_info">Confirmacion de cita</string>
+    <string name="therapist_available_appointment_confirm_dialog_yes">Agendar</string>
+    <string name="therapist_available_appointment_confirm_dialog_no">Cancelar</string>
+    <string name="therapist_available_appointment_confirm_dialog_message">¿Esta seguro que desea agendar la cita con el terapeuta [THERAPIST] para el [DAY] a las [TIME]?</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

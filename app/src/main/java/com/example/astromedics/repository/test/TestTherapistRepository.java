@@ -13,7 +13,7 @@ import java.util.List;
 
 public class TestTherapistRepository implements TherapistRepository {
     @Override
-    public Therapist getTherapist(String email) {
+    public Therapist getTherapist(String email) throws Exception {
         for (Person person : RepositorySimulator.getInstance()
                                                 .getPersons()) {
             if (person.getEmail()
@@ -25,7 +25,7 @@ public class TestTherapistRepository implements TherapistRepository {
     }
 
     @Override
-    public Therapist getTherapist(MedicalConsultation medicalConsultation) {
+    public Therapist getTherapist(MedicalConsultation medicalConsultation) throws Exception {
         for (Person person : RepositorySimulator.getInstance()
                                                 .getPersons()) {
             if (person instanceof Therapist) {
@@ -41,7 +41,7 @@ public class TestTherapistRepository implements TherapistRepository {
     }
 
     @Override
-    public List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate) {
+    public List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate) throws Exception {
         List<Therapist> returnable = new ArrayList<>();
 
         for (Person person : RepositorySimulator.getInstance()

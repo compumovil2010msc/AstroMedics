@@ -16,8 +16,10 @@ import java.util.Date;
 import java.util.List;
 
 public class RepositorySimulator {
+    public int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0;
+
     private static RepositorySimulator instance;
-    private List<Person> persons;
+    public List<Person> persons;
 
     public static RepositorySimulator getInstance() {
         if (instance == null) {
@@ -26,6 +28,10 @@ public class RepositorySimulator {
         }
 
         return instance;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     public List<Person> getPersons() {
@@ -39,7 +45,7 @@ public class RepositorySimulator {
         Pacient pacient1 = getPacient1();
         Pacient pacient2 = getPacient2();
 
-        MedicalConsultation medicalConsultation1 = new MedicalConsultation(1,
+        MedicalConsultation medicalConsultation1 = new MedicalConsultation(medicalConsultationId++,
                                                                            null,
                                                                            null,
                                                                            new Localization(4.629,
@@ -54,7 +60,7 @@ public class RepositorySimulator {
                                                       .get(0));
         pacient1.addMedicalHistory(medicalConsultation1);
 
-        MedicalConsultation medicalConsultation2 = new MedicalConsultation(2,
+        MedicalConsultation medicalConsultation2 = new MedicalConsultation(medicalConsultationId++,
                                                                            null,
                                                                            null,
                                                                            new Localization(4.629,
@@ -79,7 +85,7 @@ public class RepositorySimulator {
         List<Therapist.Emphasis> emphasis = new ArrayList<>();
         emphasis.add(Therapist.Emphasis.speech_therapy);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
-        educationalFormation.add(new EducationalFormation(1,
+        educationalFormation.add(new EducationalFormation(educationalFormationId++,
                                                           "Fonoaudiologo",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -89,7 +95,7 @@ public class RepositorySimulator {
                                                                                                  12,
                                                                                                  1),
                                                           true));
-        educationalFormation.add(new EducationalFormation(2,
+        educationalFormation.add(new EducationalFormation(educationalFormationId++,
                                                           "Fisioterapeuta",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -100,7 +106,7 @@ public class RepositorySimulator {
                                                                                                  1),
                                                           true));
         List<Appointment> appointments = new ArrayList<>();
-        appointments.add(new Appointment(1,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 05,
                                                                                 10,
@@ -112,7 +118,7 @@ public class RepositorySimulator {
                                                                                 16,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(2,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 10,
@@ -146,7 +152,7 @@ public class RepositorySimulator {
         emphasis.add(Therapist.Emphasis.speech_therapy);
         emphasis.add(Therapist.Emphasis.psychology);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
-        educationalFormation.add(new EducationalFormation(3,
+        educationalFormation.add(new EducationalFormation(educationalFormationId++,
                                                           "Fonoaudiologo",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -156,7 +162,7 @@ public class RepositorySimulator {
                                                                                                  12,
                                                                                                  1),
                                                           true));
-        educationalFormation.add(new EducationalFormation(4,
+        educationalFormation.add(new EducationalFormation(educationalFormationId++,
                                                           "Fisioterapeuta",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -167,7 +173,7 @@ public class RepositorySimulator {
                                                                                                  1),
                                                           true));
         List<Appointment> appointments = new ArrayList<>();
-        appointments.add(new Appointment(3,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 03,
                                                                                 10,
@@ -179,7 +185,7 @@ public class RepositorySimulator {
                                                                                 12,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(4,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 10,
@@ -191,7 +197,7 @@ public class RepositorySimulator {
                                                                                 14,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(5,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 10,
@@ -203,7 +209,7 @@ public class RepositorySimulator {
                                                                                 16,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(6,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 11,
@@ -215,7 +221,7 @@ public class RepositorySimulator {
                                                                                 18,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(7,
+        appointments.add(new Appointment(appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 12,
@@ -246,16 +252,16 @@ public class RepositorySimulator {
 
     private Pacient getPacient1() {
         List<EvaluationQuestion> evaluationQuestions = new ArrayList<>();
-        evaluationQuestions.add(new EvaluationQuestion(1,
+        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
                                                        "¿Pregunta 1?",
                                                        "Respuesta 1"));
-        evaluationQuestions.add(new EvaluationQuestion(2,
+        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
                                                        "¿Pregunta 2?",
                                                        "Respuesta 2"));
-        evaluationQuestions.add(new EvaluationQuestion(3,
+        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
                                                        "¿Pregunta 3?",
                                                        "Respuesta 4"));
-        MedicalRecord medicalRecord = new MedicalRecord(1,
+        MedicalRecord medicalRecord = new MedicalRecord(medicalRecordId++,
                                                         "AB+",
                                                         65,
                                                         1.65,
@@ -277,16 +283,16 @@ public class RepositorySimulator {
 
     private Pacient getPacient2() {
         List<EvaluationQuestion> evaluationQuestions = new ArrayList<>();
-        evaluationQuestions.add(new EvaluationQuestion(3,
+        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
                                                        "¿Pregunta 1?",
                                                        "Respuesta 1"));
-        evaluationQuestions.add(new EvaluationQuestion(4,
+        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
                                                        "¿Pregunta 2?",
                                                        "Respuesta 2"));
-        evaluationQuestions.add(new EvaluationQuestion(5,
+        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
                                                        "¿Pregunta 3?",
                                                        "Respuesta 4"));
-        MedicalRecord medicalRecord = new MedicalRecord(2,
+        MedicalRecord medicalRecord = new MedicalRecord(medicalRecordId++,
                                                         "AB+",
                                                         65,
                                                         1.65,

@@ -5,7 +5,7 @@ import com.example.astromedics.repository.interfaces.PersonRepository;
 
 public class TestPersonRepository implements PersonRepository {
     @Override
-    public Person login(String email, String password) {
+    public Person login(String email, String password) throws Exception {
         for (Person person : RepositorySimulator.getInstance()
                                                 .getPersons()) {
             if (person.getEmail()

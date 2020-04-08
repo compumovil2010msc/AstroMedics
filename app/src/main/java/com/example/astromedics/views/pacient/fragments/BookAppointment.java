@@ -88,16 +88,21 @@ public class BookAppointment extends Fragment {
     void getMedicalConsultations() {
         medicalConsultations = new ArrayList<>();
 
-        for (MedicalConsultation medicalConsultation : Repository.getInstance()
-                                                                 .getPacientRepository()
-                                                                 .getPacient(Session.getInstance()
-                                                                                    .getEmail())
-                                                                 .getMedicalHistory()) {
-            if (medicalConsultation.getAppointment()
-                                   .getEndDate()
-                                   .after(new Date())) {
-                medicalConsultations.add(medicalConsultation);
+        try {
+            for (MedicalConsultation medicalConsultation : Repository.getInstance()
+                                                                     .getPacientRepository()
+                                                                     .getPacient(Session.getInstance()
+                                                                                        .getEmail())
+                                                                     .getMedicalHistory()) {
+                if (medicalConsultation.getAppointment()
+                                       .getEndDate()
+                                       .after(new Date())) {
+                    medicalConsultations.add(medicalConsultation);
+                }
             }
+        } catch (Exception ex) {
+            medicalConsultations = new ArrayList<>();
         }
+
     }
 }
