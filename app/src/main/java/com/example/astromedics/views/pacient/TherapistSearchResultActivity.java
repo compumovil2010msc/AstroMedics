@@ -73,7 +73,17 @@ public class TherapistSearchResultActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(view.getContext(),
-                                           TherapistDetailsActivity.class);
+                                           TherapistAvailableAppointmentsActivity.class);
+                intent.putExtra(TherapistAvailableAppointmentsActivity.THERAPIST,
+                                therapists.get(position));
+                intent.putExtra(TherapistAvailableAppointmentsActivity.LOCATION,
+                                localization);
+                intent.putExtra(TherapistAvailableAppointmentsActivity.EMPHASIS,
+                                emphasis);
+                intent.putExtra(TherapistAvailableAppointmentsActivity.START_DATE,
+                                startDate);
+                intent.putExtra(TherapistAvailableAppointmentsActivity.END_DATE,
+                                endDate);
                 startActivity(intent);
             }
         });

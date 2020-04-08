@@ -143,6 +143,7 @@ public class RepositorySimulator {
 
     private Therapist getTestTherapist2() {
         List<Therapist.Emphasis> emphasis = new ArrayList<>();
+        emphasis.add(Therapist.Emphasis.speech_therapy);
         emphasis.add(Therapist.Emphasis.psychology);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
         educationalFormation.add(new EducationalFormation(3,

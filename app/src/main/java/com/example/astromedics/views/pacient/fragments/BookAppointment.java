@@ -68,7 +68,6 @@ public class BookAppointment extends Fragment {
 
         MedicalConsultationAdapter customAdapter = new MedicalConsultationAdapter(
                 view.getContext(),
-                R.layout.list_view_medical_consultation,
                 medicalConsultations
         );
 

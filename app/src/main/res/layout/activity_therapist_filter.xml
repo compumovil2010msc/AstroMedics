@@ -103,6 +103,7 @@
             android:id="@+id/therapist_filter_start_date"
             android:layout_weight="0.7"
             android:clickable="true"
+            android:hint="@string/therapist_filter_select_date"
             android:focusable="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
@@ -130,6 +131,7 @@
             android:id="@+id/therapist_filter_end_date"
             android:layout_weight="0.7"
             android:clickable="true"
+            android:hint="@string/therapist_filter_select_date"
             android:focusable="false"
             android:enabled="false"
             android:layout_width="0dp"

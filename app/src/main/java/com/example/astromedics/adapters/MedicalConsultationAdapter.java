@@ -14,32 +14,36 @@ import androidx.annotation.Nullable;
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.DownloadImageTask;
-import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation> {
-    private int resourceLayout;
 
-    public MedicalConsultationAdapter(Context context, int resource, List<MedicalConsultation> items) {
+    private Context mContext;
+    private List<MedicalConsultation> medicalConsultations = new ArrayList<>();
+
+    public MedicalConsultationAdapter(Context context, List<MedicalConsultation> items) {
         super(context,
-              resource,
+              0,
               items);
-        this.resourceLayout = resource;
+        mContext = context;
+        medicalConsultations = items;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         if (view == null) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-            view = layoutInflater.inflate(this.resourceLayout,
-                                          null);
+            view = LayoutInflater.from(mContext)
+                                 .inflate(R.layout.list_view_medical_consultation,
+                                          parent,
+                                          false);
         }
-        MedicalConsultation medicalConsultation = getItem(position);
+        MedicalConsultation medicalConsultation = medicalConsultations.get(position);
         Therapist therapist = Repository.getInstance()
                                         .getTherapistRepository()
                                         .getTherapist(medicalConsultation);
@@ -49,10 +53,12 @@ public class MedicalConsultationAdapter extends ArrayAdapter<MedicalConsultation
                     .setText(therapist.getName());
 
             ((TextView) view.findViewById(R.id.medical_consultation_emphasis))
-                    .setText(Therapist.Emphasis.speech_therapy.toString(medicalConsultation.getEmphasis(), getContext()));
+                    .setText(Therapist.Emphasis.speech_therapy.toString(medicalConsultation.getEmphasis(),
+                                                                        getContext()));
 
             ((TextView) view.findViewById(R.id.medical_consultation_date))
-                    .setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment().getStartDate()));
+                    .setText(new ApplicationDateFormat().toString(medicalConsultation.getAppointment()
+                                                                                     .getStartDate()));
 
             new DownloadImageTask((ImageView) view.findViewById(R.id.medical_consultation_photo))
                     .execute(therapist.getPhotoURL());

@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.pacient.BookAppointmentLocationDisplayActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -29,10 +28,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
 
+        <activity android:name=".views.pacient.BookAppointmentLocationDisplayActivity" />
         <activity
             android:name=".views.pacient.BookAppointmentDetails"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".views.pacient.TherapistDetailsActivity" />
+        <activity
+            android:name=".views.pacient.TherapistAvailableAppointmentsActivity"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".views.therapist.HomeTherapist"
             android:theme="@style/AppThemeWithActionBar" />

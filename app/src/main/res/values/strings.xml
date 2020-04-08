@@ -36,6 +36,19 @@
     <string name="emphasis_physiotherapy">Fisioterapia</string>
     <string name="emphasis_psychology">Psicología</string>
     <string name="therapist_filter_info">Busqueda de citas</string>
+    <string name="therapist_filter_select_date">Seleccione una fecha</string>
+    <string name="therapist_info_astromedics">Astromedics</string>
+    <string name="therapist_info_astromedics_colaborator">Colaborador en Astromedics</string>
+    <string name="therapist_info_calification">Calificación</string>
+    <string name="therapist_info_number_of_medical_consultations">Cantidad de consultas realizadas</string>
+    <string name="therapist_info_member_since">Miembro desde</string>
+    <string name="therapist_info_name">Terapeuta</string>
+    <string name="educational_formation_info">Formación Académica</string>
+    <string name="educational_formation_start_date">Fecha de ingreso</string>
+    <string name="educational_formation_end_date">Fecha de terminación</string>
+    <string name="educational_formation_graduated">Graduado</string>
+    <string name="educational_formation_graduated_yes">Si</string>
+    <string name="educational_formation_graduated_no">No</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>
