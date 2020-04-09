@@ -3,7 +3,6 @@ package com.example.astromedics.views.therapist;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +21,7 @@ import com.example.astromedics.model.Pacient;
 import com.example.astromedics.views.common.BookAppointmentDetails;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +61,7 @@ public class PacientDetails extends AppCompatActivity {
         bloodTypeTextView = findViewById(R.id.pacient_details_pacient_blood_type);
         heightTextView = findViewById(R.id.pacient_details_pacient_height);
         weightTextView = findViewById(R.id.pacient_details_weight);
+        medicalHistoryCardView = findViewById(R.id.pacient_details_medical_history);
         medicalConsultationRecyclerView = findViewById(R.id.pacient_details_medical_history_list);
     }
 
@@ -71,12 +72,11 @@ public class PacientDetails extends AppCompatActivity {
             for (MedicalConsultation medicalConsultation : pacient.getMedicalHistory()) {
                 if (medicalConsultation.getAppointment()
                                        .getEndDate()
-                                       .before(new Date())) {
-                    for (int i = 0; i < 10; i++) {
-                        medicalConsultations.add(medicalConsultation);
-                    }
+                                       .before(new Date()) && medicalConsultation.getEvolution() != null) {
+                    medicalConsultations.add(medicalConsultation);
                 }
             }
+            Collections.sort(medicalConsultations);
         } catch (Exception ex) {
             medicalConsultations = new ArrayList<>();
         }
@@ -91,10 +91,10 @@ public class PacientDetails extends AppCompatActivity {
             titleTextView.setText(getString(R.string.pacient_details_pacient));
             bloodTypeTextView.setText(pacient.getMedicalRecord()
                                              .getBloodType());
-            heightTextView.setText(String.valueOf(pacient.getMedicalRecord()
-                                                         .getHeight()));
-            weightTextView.setText(String.valueOf(pacient.getMedicalRecord()
-                                                         .getWeight()));
+            heightTextView.setText(pacient.getMedicalRecord()
+                                          .getHeight() + " " + getString(R.string.account_details_meters));
+            weightTextView.setText(pacient.getMedicalRecord()
+                                          .getWeight() + " " + getString(R.string.account_details_kylograms));
 
             new DownloadImageTask(photoImageView)
                     .execute(pacient.getPhotoURL());

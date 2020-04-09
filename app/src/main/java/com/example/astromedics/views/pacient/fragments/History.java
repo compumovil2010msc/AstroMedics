@@ -2,15 +2,14 @@ package com.example.astromedics.views.pacient.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.MedicalConsultationHistoryAdapter;
@@ -20,6 +19,7 @@ import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.BookAppointmentHistoryDetails;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -89,6 +89,7 @@ public class History extends Fragment {
                     medicalConsultations.add(medicalConsultation);
                 }
             }
+            Collections.sort(medicalConsultations);
         } catch (Exception ex) {
             medicalConsultations = new ArrayList<>();
         }

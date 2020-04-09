@@ -2,7 +2,7 @@ package com.example.astromedics.model;
 
 import java.io.Serializable;
 
-public class MedicalConsultation implements Serializable {
+public class MedicalConsultation implements Serializable, Comparable<MedicalConsultation>{
     private int medicalConsultationId;
     private Appointment appointment;
     private Evolution evolution;
@@ -75,5 +75,10 @@ public class MedicalConsultation implements Serializable {
 
     public void setEmphasis(Therapist.Emphasis emphasis) {
         this.emphasis = emphasis;
+    }
+
+    @Override
+    public int compareTo(MedicalConsultation medicalConsultation) {
+        return getAppointment().getStartDate().compareTo(medicalConsultation.getAppointment().getStartDate());
     }
 }

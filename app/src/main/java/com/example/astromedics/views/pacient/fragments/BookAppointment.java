@@ -21,6 +21,7 @@ import com.example.astromedics.views.pacient.BookAppointmentLocationSelectionAct
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class BookAppointment extends Fragment {
                 view.getContext(),
                 medicalConsultations
         );
-
+        Collections.sort(medicalConsultations);
         medicalConsultationListView.setAdapter(customAdapter);
 
         medicalConsultationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

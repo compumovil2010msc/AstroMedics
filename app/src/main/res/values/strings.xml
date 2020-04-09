@@ -81,6 +81,8 @@
     <string name="settings_account_details">Configuración de cuenta</string>
     <string name="settings_change_password">Cambiar contraseña</string>
     <string name="settings_log_off">Cerrar sesión</string>
+    <string name="account_details_kylograms">kilogramos</string>
+    <string name="account_details_meters">metros</string>
     <string name="account_details_name">Nombre completo</string>
     <string name="account_details_email">Correo electronico</string>
     <string name="account_details_phone_number">Telefono fijo</string>

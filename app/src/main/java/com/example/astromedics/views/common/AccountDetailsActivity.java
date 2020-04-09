@@ -63,12 +63,10 @@ public class AccountDetailsActivity extends AppCompatActivity {
                 pacientCardView.setVisibility(View.VISIBLE);
                 bloodTypeTextView.setText(((Pacient) person).getMedicalRecord()
                                                             .getBloodType());
-                heightTextView.setText(String.valueOf(((Pacient) person)
-                                                              .getMedicalRecord()
-                                                              .getHeight()));
-                weightTextView.setText(String.valueOf(((Pacient) person)
-                                                              .getMedicalRecord()
-                                                              .getWeight()));
+                heightTextView.setText(((Pacient) person).getMedicalRecord()
+                                                         .getHeight() + " " + getString(R.string.account_details_meters));
+                weightTextView.setText(((Pacient) person).getMedicalRecord()
+                                                         .getWeight() + " " + getString(R.string.account_details_kylograms));
             } else {
                 titleTextView.setText(getString(R.string.account_details_therapist));
                 therapistCardView.setVisibility(View.VISIBLE);
