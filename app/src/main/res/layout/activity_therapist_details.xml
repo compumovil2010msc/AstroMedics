@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".views.pacient.TherapistDetails">
+    tools:context=".views.common.TherapistDetails">
 
     <ScrollView
         android:id="@+id/therapist_details_scroll_view"

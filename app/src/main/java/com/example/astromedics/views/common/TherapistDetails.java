@@ -1,4 +1,4 @@
-package com.example.astromedics.views.pacient;
+package com.example.astromedics.views.common;
 
 import android.os.Bundle;
 import android.widget.ImageView;

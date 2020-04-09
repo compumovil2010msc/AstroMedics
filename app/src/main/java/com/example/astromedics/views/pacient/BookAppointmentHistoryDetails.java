@@ -15,6 +15,7 @@ import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
+import com.example.astromedics.views.common.TherapistDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookAppointmentHistoryDetails extends AppCompatActivity {

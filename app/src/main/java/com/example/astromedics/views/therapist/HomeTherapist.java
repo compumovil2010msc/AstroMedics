@@ -1,5 +1,6 @@
 package com.example.astromedics.views.therapist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.PageAdapter;
+import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.common.fragments.UserSettings;
 import com.example.astromedics.views.therapist.fragments.Reports;
 import com.example.astromedics.views.therapist.fragments.TherapistBookAppointment;
@@ -87,5 +89,12 @@ public class HomeTherapist extends AppCompatActivity {
         pageAdapter.addFragment(reportes);
         pageAdapter.addFragment(configuracion);
         viewPager.setAdapter(pageAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent setIntent = new Intent(getApplicationContext(),
+                                      MainActivity.class);
+        startActivity(setIntent);
     }
 }

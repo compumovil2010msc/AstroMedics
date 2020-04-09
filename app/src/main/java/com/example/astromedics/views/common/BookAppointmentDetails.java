@@ -19,7 +19,7 @@ import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.BookAppointmentLocationDisplayActivity;
-import com.example.astromedics.views.pacient.TherapistDetails;
+import com.example.astromedics.views.therapist.PacientDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookAppointmentDetails extends AppCompatActivity {
@@ -123,9 +123,9 @@ public class BookAppointmentDetails extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),
-                                           TherapistDetails.class);
-                intent.putExtra(TherapistDetails.THERAPIST,
-                                therapist);
+                                           PacientDetails.class);
+                intent.putExtra(PacientDetails.PACIENT,
+                                pacient);
                 startActivity(intent);
             }
         });

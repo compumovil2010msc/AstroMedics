@@ -11,6 +11,7 @@ import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
+import com.example.astromedics.views.common.TherapistDetails;
 
 public class ReportVisualizationActivity extends AppCompatActivity {
     private ReportVisualizationActivity instance = this;

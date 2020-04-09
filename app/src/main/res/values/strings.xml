@@ -102,6 +102,21 @@
     <string name="account_details_therapist_calification">Calificación</string>
     <string name="therapist_book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
     <string name="book_appointment_details_pacient_name">Paciente</string>
+    <string name="pacient_details_name">Nombre completo</string>
+    <string name="pacient_details_email">Correo electronico</string>
+    <string name="pacient_details_phone_number">Telefono fijo</string>
+    <string name="pacient_details_cell_number">Telefono celular</string>
+    <string name="pacient_details_address">Dirección</string>
+    <string name="pacient_details_member_since">Miembro desde</string>
+    <string name="pacient_details_info">Configuración</string>
+    <string name="pacient_details_title">Configuración de cuenta</string>
+    <string name="pacient_details_pacient">Paciente</string>
+    <string name="pacient_details_therapist">Terapeuta</string>
+    <string name="pacient_details_medical_record">Registro médico</string>
+    <string name="pacient_details_pacient_info">Información de paciente</string>
+    <string name="pacient_details_pacient_blood_type">Tipo de sangre</string>
+    <string name="pacient_details_pacient_height">Altura</string>
+    <string name="pacient_details_weight">Peso</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>
