@@ -26,6 +26,7 @@
     <string name="book_appointment_history_details_end_date">Hora de terminación</string>
     <string name="book_appointment_history_details_date">Fecha</string>
     <string name="book_appointment_history_details_therapist_name">Terapeuta</string>
+    <string name="book_appointment_history_fill_the_fields">Por favor ingrese un valor en el campo</string>
     <string name="book_appointment_location_display_info">Información de la ubicación</string>
     <string name="maps_current_location">Ubicación Actual</string>
     <string name="justification_undefined_permission">UNDEFINED JUSTIFICATION.</string>
@@ -72,6 +73,11 @@
     <string name="report_visualization_date_of_consultation">Fecha de la consulta</string>
     <string name="report_visualization_report_creation_date">Fecha de creación del reporte</string>
     <string name="report_visualization_content">Contenido</string>
+    <string name="change_password_info">Configuración</string>
+    <string name="change_password_title">Cambiar Contraseña</string>
+    <string name="change_password_current_password">Contraseña actual</string>
+    <string name="change_password_repeat_new_password">Repetir nueva contraseña</string>
+    <string name="change_password_new_password">Nueva contraseña</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.GenericListViewItem;
 import com.example.astromedics.views.MainActivity;
+import com.example.astromedics.views.common.ChangePasswordActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,10 +70,9 @@ public class UserSettings extends Fragment {
         auxiliar2.setOnClickListener(new GenericListViewItem.GenericOnClickListener() {
             @Override
             public void onClickPressed() {
-                Toast.makeText(getContext(),
-                               "Showing my password",
-                               Toast.LENGTH_SHORT)
-                     .show();
+                Intent setIntent = new Intent(getContext(),
+                                              ChangePasswordActivity.class);
+                startActivity(setIntent);
             }
         });
 
@@ -99,7 +99,8 @@ public class UserSettings extends Fragment {
         userSettingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                genericListViewItems.get(i).onClickPressed();
+                genericListViewItems.get(i)
+                                    .onClickPressed();
             }
         });
     }

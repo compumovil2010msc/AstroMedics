@@ -110,31 +110,39 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentlySaving && calificationEditText.getText()
-                                                           .toString() != null && calificationEditText.getText()
-                                                                                                      .toString() != "") {
-                    double calification = Double.parseDouble(calificationEditText.getText()
-                                                                                 .toString());
-                    calification = Double.parseDouble(String.format("%.2f",
-                                                                    calification));
-                    try {
-                        medicalConsultation = Repository.getInstance()
-                                                        .getPacientRepository()
-                                                        .setCalification(
-                                                                Repository.getInstance()
-                                                                          .getPacientRepository()
-                                                                          .getPacient(Session.getInstance()
-                                                                                             .getEmail()),
-                                                                medicalConsultation,
-                                                                calification);
-                        Intent intent = new Intent(getApplicationContext(),
-                                                   BookAppointmentHistoryDetails.class);
-                        intent.putExtra(BookAppointmentHistoryDetails.MEDICAL_CONSULTATION,
-                                        medicalConsultation);
-                        startActivity(intent);
-                    } catch (Exception ex) {
+                if (currentlySaving) {
+
+                    if (calificationEditText.getText() != null && !calificationEditText.getText()
+                                                                                       .toString()
+                                                                                       .equals("")) {
+                        double calification = Double.parseDouble(calificationEditText.getText()
+                                                                                     .toString());
+                        calification = Double.parseDouble(String.format("%.2f",
+                                                                        calification));
+                        try {
+                            medicalConsultation = Repository.getInstance()
+                                                            .getPacientRepository()
+                                                            .setCalification(
+                                                                    Repository.getInstance()
+                                                                              .getPacientRepository()
+                                                                              .getPacient(Session.getInstance()
+                                                                                                 .getEmail()),
+                                                                    medicalConsultation,
+                                                                    calification);
+                            Intent intent = new Intent(getApplicationContext(),
+                                                       BookAppointmentHistoryDetails.class);
+                            intent.putExtra(BookAppointmentHistoryDetails.MEDICAL_CONSULTATION,
+                                            medicalConsultation);
+                            startActivity(intent);
+                        } catch (Exception ex) {
+                            Toast.makeText(getApplicationContext(),
+                                           ex.getMessage(),
+                                           Toast.LENGTH_SHORT)
+                                 .show();
+                        }
+                    } else {
                         Toast.makeText(getApplicationContext(),
-                                       ex.getMessage(),
+                                       getString(R.string.book_appointment_history_fill_the_fields),
                                        Toast.LENGTH_SHORT)
                              .show();
                     }
