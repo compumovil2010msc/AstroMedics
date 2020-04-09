@@ -112,11 +112,12 @@
     <string name="pacient_details_title">Configuración de cuenta</string>
     <string name="pacient_details_pacient">Paciente</string>
     <string name="pacient_details_therapist">Terapeuta</string>
-    <string name="pacient_details_medical_record">Registro médico</string>
+    <string name="pacient_details_medical_record">Registro Médico</string>
     <string name="pacient_details_pacient_info">Información de paciente</string>
     <string name="pacient_details_pacient_blood_type">Tipo de sangre</string>
     <string name="pacient_details_pacient_height">Altura</string>
     <string name="pacient_details_weight">Peso</string>
+    <string name="pacient_details_medical_history_title">Historial Médico</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

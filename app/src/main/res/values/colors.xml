@@ -9,4 +9,5 @@
     <color name="colorAccent">#FF5252</color>
     <color name="colorAccentSecondary">#e53935</color>
     <color name="colorLight">#909090</color>
+    <color name="colorSuperLight">#E8E8E8</color>
 </resources>
