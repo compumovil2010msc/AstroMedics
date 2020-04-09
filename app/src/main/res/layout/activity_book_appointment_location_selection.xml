@@ -19,7 +19,7 @@
         android:enabled="false"
         android:visibility="invisible"
         android:backgroundTint="@color/colorPrimary"
-        android:src="@drawable/ic_check_black_24dp"
+        android:src="@drawable/ic_check_white_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
