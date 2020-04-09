@@ -60,7 +60,7 @@ public class TherapistAdapter extends ArrayAdapter<Therapist> {
             linearLayout.setVisibility(View.VISIBLE);
 
             int i = 0;
-            for (i = 1; i < calification; i++) {
+            for (i = 1; i <= calification; i++) {
                 linearLayout.addView(getStarImageView());
 
                 if (1 > calification - i && calification - i > 0.5) {

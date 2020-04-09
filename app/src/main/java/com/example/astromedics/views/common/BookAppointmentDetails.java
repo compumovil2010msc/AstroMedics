@@ -32,7 +32,7 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private MedicalConsultation medicalConsultation;
 
     private FloatingActionButton floatingActionButton;
-    TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView, pacientNameTextView, pacientNameTitle;
+    TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView, pacientNameTextView, pacientNameTitleTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,6 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private void obtainObjects() {
         medicalConsultation = (MedicalConsultation) getIntent().getSerializableExtra(MEDICAL_CONSULTATION);
         try {
-            pacient = Repository.getInstance()
-                                .getPacientRepository()
-                                .getPacient(medicalConsultation);
             therapist = Repository.getInstance()
                                   .getTherapistRepository()
                                   .getTherapist(medicalConsultation);
@@ -69,7 +66,7 @@ public class BookAppointmentDetails extends AppCompatActivity {
         dateTextView = findViewById(R.id.book_appointment_details_date);
         startDateTextView = findViewById(R.id.book_appointment_details_start_date);
         endDateTextView = findViewById(R.id.book_appointment_details_end_date);
-        pacientNameTitle = findViewById(R.id.book_appointment_details_pacient_name_title);
+        pacientNameTitleTextView = findViewById(R.id.book_appointment_details_pacient_name_title);
         pacientNameTextView = findViewById(R.id.book_appointment_details_pacient_name);
     }
 
@@ -95,8 +92,11 @@ public class BookAppointmentDetails extends AppCompatActivity {
                                                          .getEmail());
 
             if (currentPerson instanceof Therapist) {
+                pacient = Repository.getInstance()
+                                    .getPacientRepository()
+                                    .getPacient(medicalConsultation);
                 pacientNameTextView.setVisibility(View.VISIBLE);
-                pacientNameTitle.setVisibility(View.VISIBLE);
+                pacientNameTitleTextView.setVisibility(View.VISIBLE);
                 pacientNameTextView.setText(pacient.getName());
             }
         } catch (Exception ex) {
@@ -109,6 +109,17 @@ public class BookAppointmentDetails extends AppCompatActivity {
 
     private void setListeners() {
         therapistTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),
+                                           TherapistDetails.class);
+                intent.putExtra(TherapistDetails.THERAPIST,
+                                therapist);
+                startActivity(intent);
+            }
+        });
+
+        pacientNameTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),
