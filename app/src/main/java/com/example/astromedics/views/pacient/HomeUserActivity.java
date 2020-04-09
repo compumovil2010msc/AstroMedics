@@ -15,7 +15,7 @@ import com.example.astromedics.adapters.PageAdapter;
 import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.pacient.fragments.BookAppointment;
 import com.example.astromedics.views.pacient.fragments.History;
-import com.example.astromedics.views.fragments.Settings;
+import com.example.astromedics.views.common.fragments.UserSettings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeUserActivity extends AppCompatActivity {
@@ -83,7 +83,7 @@ public class HomeUserActivity extends AppCompatActivity {
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager());
         Fragment bookAppointment = new BookAppointment();
         Fragment history = new History();
-        Fragment settings = new Settings();
+        Fragment settings = new UserSettings();
         pageAdapter.addFragment(bookAppointment);
         pageAdapter.addFragment(history);
         pageAdapter.addFragment(settings);
