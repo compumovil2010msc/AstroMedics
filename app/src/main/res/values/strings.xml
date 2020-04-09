@@ -78,6 +78,28 @@
     <string name="change_password_current_password">Contraseña actual</string>
     <string name="change_password_repeat_new_password">Repetir nueva contraseña</string>
     <string name="change_password_new_password">Nueva contraseña</string>
+    <string name="settings_account_details">Configuración de cuenta</string>
+    <string name="settings_change_password">Cambiar contraseña</string>
+    <string name="settings_log_off">Cerrar sesión</string>
+    <string name="account_details_name">Nombre completo</string>
+    <string name="account_details_email">Correo electronico</string>
+    <string name="account_details_phone_number">Telefono fijo</string>
+    <string name="account_details_cell_number">Telefono celular</string>
+    <string name="account_details_address">Dirección</string>
+    <string name="account_details_member_since">Miembro desde</string>
+    <string name="account_details_info">Configuración</string>
+    <string name="account_details_title">Configuración de cuenta</string>
+    <string name="account_details_pacient">Paciente</string>
+    <string name="account_details_therapist">Terapeuta</string>
+    <string name="account_details_medical_record">Registro médico</string>
+    <string name="account_details_pacient_info">Información de paciente</string>
+    <string name="account_details_pacient_blood_type">Tipo de sangre</string>
+    <string name="account_details_pacient_height">Altura</string>
+    <string name="account_details_weight">Peso</string>
+    <string name="account_details_therapist_info">Información de terapeuta</string>
+    <string name="account_details_therapist_title">AstroMedics</string>
+    <string name="account_details_therapist_number_of_appointments">Numero de consultas realizadas</string>
+    <string name="account_details_therapist_calification">Calificación</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

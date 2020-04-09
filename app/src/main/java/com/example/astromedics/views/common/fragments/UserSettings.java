@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.GenericListViewItem;
 import com.example.astromedics.views.MainActivity;
+import com.example.astromedics.views.common.AccountDetailsActivity;
 import com.example.astromedics.views.common.ChangePasswordActivity;
 
 import java.util.ArrayList;
@@ -53,17 +54,16 @@ public class UserSettings extends Fragment {
     public void setInitialValues() {
         genericListViewItems = new ArrayList<>();
 
-        GenericListViewItem auxiliar = new GenericListViewItem("Cuenta");
-        GenericListViewItem auxiliar2 = new GenericListViewItem("Cambiar Contraseña");
-        GenericListViewItem auxiliar3 = new GenericListViewItem("Cerrar sesión");
+        GenericListViewItem auxiliar = new GenericListViewItem(getString(R.string.settings_account_details));
+        GenericListViewItem auxiliar2 = new GenericListViewItem(getString(R.string.settings_change_password));
+        GenericListViewItem auxiliar3 = new GenericListViewItem(getString(R.string.settings_log_off));
 
         auxiliar.setOnClickListener(new GenericListViewItem.GenericOnClickListener() {
             @Override
             public void onClickPressed() {
-                Toast.makeText(getContext(),
-                               "Showing my account details",
-                               Toast.LENGTH_SHORT)
-                     .show();
+                Intent setIntent = new Intent(getContext(),
+                                              AccountDetailsActivity.class);
+                startActivity(setIntent);
             }
         });
 

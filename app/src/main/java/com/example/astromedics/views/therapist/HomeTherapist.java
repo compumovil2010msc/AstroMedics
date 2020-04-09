@@ -11,8 +11,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.PageAdapter;
+import com.example.astromedics.views.common.fragments.UserSettings;
 import com.example.astromedics.views.fragments.Reports;
-import com.example.astromedics.views.fragments.Settings;
 import com.example.astromedics.views.fragments.TherapistBookAppointment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -82,7 +82,7 @@ public class HomeTherapist extends AppCompatActivity {
         PageAdapter pageAdapter = new PageAdapter(getSupportFragmentManager());
         Fragment agendarCita = new TherapistBookAppointment();
         Fragment reportes = new Reports();
-        Fragment configuracion = new Settings();
+        Fragment configuracion = new UserSettings();
         pageAdapter.addFragment(agendarCita);
         pageAdapter.addFragment(reportes);
         pageAdapter.addFragment(configuracion);

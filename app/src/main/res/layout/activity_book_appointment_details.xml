@@ -111,8 +111,6 @@
                         android:id="@+id/book_appointment_details_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:text=""
                         android:textColor="@color/colorLight" />
 
                     <TextView

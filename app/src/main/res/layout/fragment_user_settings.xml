@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.fragments.Settings">
+    tools:context=".views.common.fragments.UserSettings">
 
     <ListView
         android:id="@+id/user_settings_list_view"
