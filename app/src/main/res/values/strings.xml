@@ -100,6 +100,8 @@
     <string name="account_details_therapist_title">AstroMedics</string>
     <string name="account_details_therapist_number_of_appointments">Numero de consultas realizadas</string>
     <string name="account_details_therapist_calification">Calificación</string>
+    <string name="therapist_book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
+    <string name="book_appointment_details_pacient_name">Paciente</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

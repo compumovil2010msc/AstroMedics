@@ -1,4 +1,4 @@
-package com.example.astromedics.views.pacient;
+package com.example.astromedics.views.common;
 
 import android.Manifest;
 import android.content.Intent;
@@ -12,23 +12,27 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
-import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.MedicalConsultation;
+import com.example.astromedics.model.Pacient;
+import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
+import com.example.astromedics.views.pacient.BookAppointmentLocationDisplayActivity;
+import com.example.astromedics.views.pacient.TherapistDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookAppointmentDetails extends AppCompatActivity {
     private BookAppointmentDetails instance = this;
     public static String MEDICAL_CONSULTATION = "MedicalConsultation";
-    private PermissionHandler permissionHandler = new PermissionHandler(this);
     protected static final int MY_LOCATION_PERMISSION = 503;
 
+    private Pacient pacient;
     private Therapist therapist;
     private MedicalConsultation medicalConsultation;
 
     private FloatingActionButton floatingActionButton;
-    TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView;
+    TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView, pacientNameTextView, pacientNameTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private void obtainObjects() {
         medicalConsultation = (MedicalConsultation) getIntent().getSerializableExtra(MEDICAL_CONSULTATION);
         try {
+            pacient = Repository.getInstance()
+                                .getPacientRepository()
+                                .getPacient(medicalConsultation);
             therapist = Repository.getInstance()
                                   .getTherapistRepository()
                                   .getTherapist(medicalConsultation);
@@ -62,6 +69,8 @@ public class BookAppointmentDetails extends AppCompatActivity {
         dateTextView = findViewById(R.id.book_appointment_details_date);
         startDateTextView = findViewById(R.id.book_appointment_details_start_date);
         endDateTextView = findViewById(R.id.book_appointment_details_end_date);
+        pacientNameTitle = findViewById(R.id.book_appointment_details_pacient_name_title);
+        pacientNameTextView = findViewById(R.id.book_appointment_details_pacient_name);
     }
 
     private void setViewsValues() {
@@ -78,6 +87,24 @@ public class BookAppointmentDetails extends AppCompatActivity {
                                                                                                     .getStartDate()));
         endDateTextView.setText(new ApplicationDateFormat().getHoursAndMinutes(medicalConsultation.getAppointment()
                                                                                                   .getEndDate()));
+
+        try {
+            Person currentPerson = Repository.getInstance()
+                                             .getPersonRepository()
+                                             .get(Session.getInstance()
+                                                         .getEmail());
+
+            if (currentPerson instanceof Therapist) {
+                pacientNameTextView.setVisibility(View.VISIBLE);
+                pacientNameTitle.setVisibility(View.VISIBLE);
+                pacientNameTextView.setText(pacient.getName());
+            }
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),
+                           ex.getMessage(),
+                           Toast.LENGTH_SHORT)
+                 .show();
+        }
     }
 
     private void setListeners() {

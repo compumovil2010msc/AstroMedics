@@ -13,6 +13,22 @@ import java.util.List;
 public class TestPacientRepository implements PacientRepository {
 
     @Override
+    public Pacient getPacient(MedicalConsultation medicalConsultation) throws Exception {
+        for (Person person : RepositorySimulator.getInstance()
+                                                .getPersons()) {
+            if (person instanceof Pacient) {
+                for (MedicalConsultation currentMedicalConsultation : ((Pacient) person).getMedicalHistory()) {
+                    if (currentMedicalConsultation.getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
+                        return (Pacient) person;
+                    }
+                }
+            }
+        }
+
+        throw new Exception("No se encontró la persona solicitada");
+    }
+
+    @Override
     public Pacient getPacient(String email) throws Exception {
         for (Person person : RepositorySimulator.getInstance()
                                                 .getPersons()) {

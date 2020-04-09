@@ -9,9 +9,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.astromedics.R;
+import com.example.astromedics.model.Pacient;
+import com.example.astromedics.model.Person;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.HomeUserActivity;
+import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ChangePasswordActivity extends AppCompatActivity {
@@ -49,18 +52,27 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         && !newPassword.equals("")
                         && !repeatNewPassword.equals("")) {
                     try {
+                        Person person = Repository.getInstance()
+                                                  .getPersonRepository()
+                                                  .get(Session.getInstance()
+                                                              .getEmail());
+
                         Repository.getInstance()
                                   .getPersonRepository()
-                                  .changePassword(Repository.getInstance()
-                                                            .getPersonRepository()
-                                                            .get(Session.getInstance()
-                                                                        .getEmail()),
+                                  .changePassword(person,
                                                   currentPassword,
                                                   newPassword,
                                                   repeatNewPassword);
-                        Intent setIntent = new Intent(getApplicationContext(),
-                                                      HomeUserActivity.class);
-                        startActivity(setIntent);
+
+                        if (person instanceof Pacient) {
+                            Intent setIntent = new Intent(getApplicationContext(),
+                                                          HomeUserActivity.class);
+                            startActivity(setIntent);
+                        } else {
+                            Intent setIntent = new Intent(getApplicationContext(),
+                                                          HomeTherapist.class);
+                            startActivity(setIntent);
+                        }
                     } catch (Exception ex) {
                         Toast.makeText(getApplicationContext(),
                                        ex.getMessage(),

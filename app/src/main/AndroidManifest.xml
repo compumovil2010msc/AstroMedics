@@ -43,7 +43,7 @@
             android:name=".views.pacient.BookAppointmentLocationDisplayActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".views.pacient.BookAppointmentDetails"
+            android:name=".views.common.BookAppointmentDetails"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
             android:name=".views.pacient.TherapistAvailableAppointmentsActivity"

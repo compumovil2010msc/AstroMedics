@@ -1,4 +1,4 @@
-package com.example.astromedics.views.pacient.fragments;
+package com.example.astromedics.views.therapist.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,8 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.example.astromedics.R;
-import com.example.astromedics.adapters.MedicalConsultationAdapter;
+import com.example.astromedics.adapters.TherapistMedicalConsultationAdapter;
+import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
@@ -24,13 +25,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookAppointment extends Fragment {
+public class TherapistBookAppointment extends Fragment {
     private FloatingActionButton floatingActionButton;
     private List<MedicalConsultation> medicalConsultations;
     LinearLayout noAppointmentsLinearLayout;
     private ListView medicalConsultationListView;
 
-    public BookAppointment() {
+    public TherapistBookAppointment() {
 
     }
 
@@ -42,7 +43,7 @@ public class BookAppointment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_book_appointment,
+        final View view = inflater.inflate(R.layout.fragment_therapist_book_appointment,
                                            container,
                                            false);
         initViews(view);
@@ -52,9 +53,9 @@ public class BookAppointment extends Fragment {
     }
 
     private void initViews(View view) {
-        noAppointmentsLinearLayout = view.findViewById(R.id.book_appointment_no_appointments);
-        floatingActionButton = view.findViewById(R.id.book_appointment_add_appointment);
-        medicalConsultationListView = view.findViewById(R.id.book_appointment_appointments);
+        noAppointmentsLinearLayout = view.findViewById(R.id.therapist_book_appointment_no_appointments);
+        floatingActionButton = view.findViewById(R.id.therapist_book_appointment_add_appointment);
+        medicalConsultationListView = view.findViewById(R.id.therapist_book_appointment_appointments);
     }
 
     private void setListeners(final View view) {
@@ -67,7 +68,7 @@ public class BookAppointment extends Fragment {
             }
         });
 
-        MedicalConsultationAdapter customAdapter = new MedicalConsultationAdapter(
+        TherapistMedicalConsultationAdapter customAdapter = new TherapistMedicalConsultationAdapter(
                 view.getContext(),
                 medicalConsultations
         );
@@ -90,15 +91,14 @@ public class BookAppointment extends Fragment {
         medicalConsultations = new ArrayList<>();
 
         try {
-            for (MedicalConsultation medicalConsultation : Repository.getInstance()
-                                                                     .getPacientRepository()
-                                                                     .getPacient(Session.getInstance()
-                                                                                        .getEmail())
-                                                                     .getMedicalHistory()) {
-                if (medicalConsultation.getAppointment()
-                                       .getEndDate()
-                                       .after(new Date())) {
-                    medicalConsultations.add(medicalConsultation);
+            for (Appointment appointment : Repository.getInstance()
+                                                     .getTherapistRepository()
+                                                     .getTherapist(Session.getInstance()
+                                                                          .getEmail())
+                                                     .getAppointments()) {
+                if (appointment.getEndDate()
+                               .after(new Date()) && appointment.getMedicalConsultation() != null) {
+                    medicalConsultations.add(appointment.getMedicalConsultation());
                 }
             }
         } catch (Exception ex) {

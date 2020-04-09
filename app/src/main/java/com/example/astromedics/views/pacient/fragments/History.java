@@ -13,15 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.astromedics.R;
-import com.example.astromedics.adapters.MedicalConsultationAdapter;
 import com.example.astromedics.adapters.MedicalConsultationHistoryAdapter;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
-import com.example.astromedics.views.pacient.BookAppointmentDetails;
 import com.example.astromedics.views.pacient.BookAppointmentHistoryDetails;
-import com.example.astromedics.views.pacient.BookAppointmentLocationSelectionActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Date;
