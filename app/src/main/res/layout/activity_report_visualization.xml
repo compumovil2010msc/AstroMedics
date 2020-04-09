@@ -4,20 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.pacient.BookAppointmentHistoryDetails">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/book_appointment_history_details_action_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/colorPrimary"
-        android:clickable="true"
-        android:src="@drawable/ic_attachment_white_24dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    tools:context=".views.pacient.ReportVisualizationActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -53,14 +40,13 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/book_appointment_history_details_title"
+                        android:text="@string/report_visualization_info"
                         android:textColor="@color/colorLight" />
 
                     <TextView
-                        android:id="@+id/book_appointment_history_details_emphasis"
+                        android:id="@+id/report_visualization_emphasis"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
                         android:textColor="#000000"
                         android:textSize="32dp" />
 
@@ -68,15 +54,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="16dp"
-                        android:text="@string/book_appointment_history_details_therapist_name"
+                        android:text="@string/report_visualization_written_by"
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/book_appointment_history_details_therapist_name"
+                        android:id="@+id/report_visualization_written_by"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
-                        android:text=""
                         android:textAllCaps="true"
                         android:textColor="#0000FF" />
 
@@ -84,11 +69,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="16dp"
-                        android:text="@string/book_appointment_history_details_location"
+                        android:text="@string/report_visualization_date_of_consultation"
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/book_appointment_history_details_location_name"
+                        android:id="@+id/report_visualization_date_of_consultation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -98,37 +83,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="16dp"
-                        android:text="@string/book_appointment_history_details_date"
+                        android:text="@string/report_visualization_report_creation_date"
                         android:textColor="#000000" />
 
                     <TextView
-                        android:id="@+id/book_appointment_history_details_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorLight" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="16dp"
-                        android:text="@string/book_appointment_history_details_start_date"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:id="@+id/book_appointment_history_details_start_date"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorLight" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="16dp"
-                        android:text="@string/book_appointment_history_details_end_date"
-                        android:textColor="#000000" />
-
-                    <TextView
-                        android:id="@+id/book_appointment_history_details_end_date"
+                        android:id="@+id/report_visualization_report_creation_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
@@ -138,21 +97,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="16dp"
-                        android:text="@string/book_appointment_history_details_calification"
+                        android:text="@string/report_visualization_content"
                         android:textColor="#000000" />
 
-                    <EditText
-                        android:id="@+id/book_appointment_history_details_calification_editable"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:inputType="numberDecimal"/>
-
                     <TextView
-                        android:id="@+id/book_appointment_history_details_calification"
+                        android:id="@+id/report_visualization_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:text=""
                         android:textColor="@color/colorLight" />
                 </LinearLayout>
 

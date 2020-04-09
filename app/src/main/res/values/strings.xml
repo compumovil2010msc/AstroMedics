@@ -67,6 +67,11 @@
     <string name="history_calification">Calificación</string>
     <string name="medical_consultation_history_report_available">Reporte Disponible!</string>
     <string name="book_appointment_history_details_calification">Calificación</string>
+    <string name="report_visualization_info">Reporte de consulta</string>
+    <string name="report_visualization_written_by">Escrito por</string>
+    <string name="report_visualization_date_of_consultation">Fecha de la consulta</string>
+    <string name="report_visualization_report_creation_date">Fecha de creación del reporte</string>
+    <string name="report_visualization_content">Contenido</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

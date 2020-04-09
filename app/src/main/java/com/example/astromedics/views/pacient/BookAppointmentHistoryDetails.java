@@ -115,7 +115,8 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
                                                                                                       .toString() != "") {
                     double calification = Double.parseDouble(calificationEditText.getText()
                                                                                  .toString());
-                    calification = Double.parseDouble(String.format("%.2f",calification));
+                    calification = Double.parseDouble(String.format("%.2f",
+                                                                    calification));
                     try {
                         medicalConsultation = Repository.getInstance()
                                                         .getPacientRepository()
@@ -138,10 +139,13 @@ public class BookAppointmentHistoryDetails extends AppCompatActivity {
                              .show();
                     }
                 } else if (medicalConsultation.getReport() != null) {
-                    Toast.makeText(getApplicationContext(),
-                                   "Showing report!",
-                                   Toast.LENGTH_SHORT)
-                         .show();
+                    Intent intent = new Intent(getApplicationContext(),
+                                               ReportVisualizationActivity.class);
+                    intent.putExtra(ReportVisualizationActivity.MEDICAL_CONSULTATION,
+                                    medicalConsultation);
+                    intent.putExtra(ReportVisualizationActivity.THERAPIST,
+                                    therapist);
+                    startActivity(intent);
                 }
             }
         });
