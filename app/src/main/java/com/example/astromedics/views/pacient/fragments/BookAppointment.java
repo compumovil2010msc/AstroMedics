@@ -72,7 +72,6 @@ public class BookAppointment extends Fragment {
                 view.getContext(),
                 medicalConsultations
         );
-        Collections.sort(medicalConsultations);
         medicalConsultationListView.setAdapter(customAdapter);
 
         medicalConsultationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,6 +101,8 @@ public class BookAppointment extends Fragment {
                     medicalConsultations.add(medicalConsultation);
                 }
             }
+
+            Collections.sort(medicalConsultations);
         } catch (Exception ex) {
             medicalConsultations = new ArrayList<>();
         }

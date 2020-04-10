@@ -16,11 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.therapist.CreateAppointmentActivity"></activity>
-        <activity android:name=".views.therapist.EvolutionVisualizationActivity" />
-        <activity android:name=".views.therapist.PacientDetails" />
-        <activity android:name=".views.common.AccountDetailsActivity" />
-        <activity android:name=".views.common.ChangePasswordActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,6 +28,21 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
 
+        <activity
+            android:name=".views.therapist.CreateAppointmentActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".views.therapist.EvolutionVisualizationActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".views.therapist.PacientDetails"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".views.common.AccountDetailsActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity
+            android:name=".views.common.ChangePasswordActivity"
+            android:theme="@style/AppThemeWithActionBar" />
         <activity
             android:name=".views.pacient.ReportVisualizationActivity"
             android:theme="@style/AppThemeWithActionBar" />

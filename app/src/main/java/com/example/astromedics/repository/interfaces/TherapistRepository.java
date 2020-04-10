@@ -12,4 +12,5 @@ public interface TherapistRepository {
     Therapist getTherapist(String email) throws Exception;
     Therapist getTherapist(MedicalConsultation medicalConsultation) throws Exception;
     List<Therapist> finAvailableTherapists(Therapist.Emphasis emphasis, Date startDate, Date endDate) throws Exception;
+    void createAppointment(Therapist therapist, Date startDate, Date endDate) throws Exception;
 }

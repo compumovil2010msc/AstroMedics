@@ -19,6 +19,7 @@ import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.common.BookAppointmentDetails;
 import com.example.astromedics.views.pacient.BookAppointmentLocationSelectionActivity;
+import com.example.astromedics.views.therapist.CreateAppointmentActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class TherapistBookAppointment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(view.getContext(),
-                                           BookAppointmentLocationSelectionActivity.class);
+                                           CreateAppointmentActivity.class);
                 startActivity(intent);
             }
         });

@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class RepositorySimulator {
-    public int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0, evolutionId = 0;
+    public static int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0, evolutionId = 0;
 
     private static RepositorySimulator instance;
     public List<Person> persons;

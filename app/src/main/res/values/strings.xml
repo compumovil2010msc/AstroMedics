@@ -125,13 +125,12 @@
     <string name="evolution_visualization_date_of_consultation">Fecha de la consulta</string>
     <string name="evolution_visualization_report_creation_date">Fecha de creación del reporte</string>
     <string name="evolution_visualization_content">Contenido</string>
-    <string-array name="weekDays">
-        <item>Lunes</item>
-        <item>Martes</item>
-        <item>Miercoles</item>
-        <item>Jueves</item>
-        <item>Viernes</item>
-        <item>Sabado</item>
-        <item>Domingo</item>
-    </string-array>
+    <string name="create_appointment_title">Creación de Cita Disponible</string>
+    <string name="create_appointment_date">Fecha</string>
+    <string name="create_appointment_select_an_hour">Seleccione una hora</string>
+    <string name="create_appointment_end_time">Hora de terminación</string>
+    <string name="create_appointment_start_time">Hora de inicio</string>
+    <string name="create_appointment_accept_time">Aceptar</string>
+    <string name="create_appointmente_invalid_date">Por favor seleccione una fecha</string>
+    <string name="create_appointmente_invalid_time">El tiempo permitido para una cita es de 1 a 3 horas</string>
 </resources>

@@ -13,6 +13,10 @@ public class ApplicationDateFormat {
         return new Date();
     }
 
+    public Date createDate(int hour, int minute){
+        return createDate(2000, 1, 1, hour, minute);
+    }
+
     public Date createDate(int year, int month, int date) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR,

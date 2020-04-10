@@ -53,7 +53,8 @@ public class TestTherapistRepository implements TherapistRepository {
                 for (Appointment appointment : ((Therapist) person).getAppointments()) {
                     if (appointment.getMedicalConsultation() == null && new DateComparator().between(appointment.getStartDate(),
                                                                                                      startDate,
-                                                                                                     endDate)) {
+                                                                                                     endDate) && appointment.getStartDate()
+                                                                                                                            .after(new Date())) {
                         returnable.add((Therapist) person);
                         break;
                     }
@@ -62,5 +63,34 @@ public class TestTherapistRepository implements TherapistRepository {
         }
 
         return returnable;
+    }
+
+    @Override
+    public void createAppointment(Therapist therapist, Date startDate, Date endDate) throws Exception {
+        RepositorySimulator repository = RepositorySimulator.getInstance();
+        MedicalConsultation returnable = null;
+        List<Person> persons = repository.getPersons();
+
+        if (startDate.before(new Date())) {
+            throw new Exception("La fecha seleccionada debe ser superior a la fecha actual");
+        }
+
+        if (startDate.after(endDate)) {
+            throw new Exception("Las fechas ingresadas no son validas");
+        }
+
+        for (Person person : persons) {
+            if (person.getEmail()
+                      .equals(therapist.getEmail()) && person instanceof Therapist) {
+                List<Appointment> appointments = ((Therapist) person).getAppointments();
+                appointments.add(new Appointment(RepositorySimulator.appointmentId++,
+                                                 startDate,
+                                                 endDate,
+                                                 null));
+                ((Therapist) person).setAppointments(appointments);
+            }
+        }
+
+        repository.setPersons(persons);
     }
 }
