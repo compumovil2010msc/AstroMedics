@@ -133,4 +133,7 @@
     <string name="create_appointment_accept_time">Aceptar</string>
     <string name="create_appointmente_invalid_date">Por favor seleccione una fecha</string>
     <string name="create_appointmente_invalid_time">El tiempo permitido para una cita es de 1 a 3 horas</string>
+    <string name="reports_no_medical_consultations">Todavia no has realizado ninguna consulta</string>
+    <string name="medical_consultation_therapist_history_report_available">REPORTE PENDIENTE</string>
+    <string name="medical_consultation_therapist_history_evolution_available">EVOLUCIÓN PENDIENTE</string>
 </resources>
