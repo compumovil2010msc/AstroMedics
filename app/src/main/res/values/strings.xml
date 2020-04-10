@@ -120,6 +120,11 @@
     <string name="pacient_details_pacient_height">Altura</string>
     <string name="pacient_details_weight">Peso</string>
     <string name="pacient_details_medical_history_title">Historial Médico</string>
+    <string name="evolution_visualization_info">Evolución de consulta</string>
+    <string name="evolution_visualization_written_by">Escrito por</string>
+    <string name="evolution_visualization_date_of_consultation">Fecha de la consulta</string>
+    <string name="evolution_visualization_report_creation_date">Fecha de creación del reporte</string>
+    <string name="evolution_visualization_content">Contenido</string>
     <string-array name="weekDays">
         <item>Lunes</item>
         <item>Martes</item>

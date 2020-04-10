@@ -18,7 +18,8 @@ import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.DownloadImageTask;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Pacient;
-import com.example.astromedics.views.common.BookAppointmentDetails;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -108,11 +109,24 @@ public class PacientDetails extends AppCompatActivity {
             customAdapter.setOnItemClickListener(new MedicalConsultationReportAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    Intent intent = new Intent(getApplicationContext(),
-                                               BookAppointmentDetails.class);
-                    intent.putExtra(BookAppointmentDetails.MEDICAL_CONSULTATION,
-                                    medicalConsultations.get(position));
-                    startActivity(intent);
+                    try {
+
+                        Intent intent = new Intent(getApplicationContext(),
+                                                   EvolutionVisualizationActivity.class);
+                        Therapist therapist = Repository.getInstance()
+                                                        .getTherapistRepository()
+                                                        .getTherapist(medicalConsultations.get(position));
+                        intent.putExtra(EvolutionVisualizationActivity.THERAPIST,
+                                        therapist);
+                        intent.putExtra(EvolutionVisualizationActivity.MEDICAL_CONSULTATION,
+                                        medicalConsultations.get(position));
+                        startActivity(intent);
+                    } catch (Exception ex) {
+                        Toast.makeText(getApplicationContext(),
+                                       ex.getMessage(),
+                                       Toast.LENGTH_SHORT)
+                             .show();
+                    }
                 }
             });
             medicalConsultationRecyclerView.setHasFixedSize(true);

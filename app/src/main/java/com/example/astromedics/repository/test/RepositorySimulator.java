@@ -4,6 +4,7 @@ import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.EducationalFormation;
 import com.example.astromedics.model.EvaluationQuestion;
+import com.example.astromedics.model.Evolution;
 import com.example.astromedics.model.Localization;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.MedicalRecord;
@@ -17,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class RepositorySimulator {
-    public int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0;
+    public int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0, evolutionId = 0;
 
     private static RepositorySimulator instance;
     public List<Person> persons;
@@ -79,6 +80,11 @@ public class RepositorySimulator {
                                                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis turpis non tellus scelerisque congue nec sed felis. Morbi orci ipsum, consequat sit amet dignissim ultricies, lacinia id ante. Nulla lorem sem, auctor fringilla nibh sed, egestas semper enim. Praesent aliquet pretium ex vitae fermentum. Sed malesuada scelerisque varius. Suspendisse semper felis sem, at convallis nisl feugiat non. Cras a erat id turpis faucibus finibus at ac massa. Praesent ultrices augue id fermentum pretium. Nullam dignissim, dui eget sagittis malesuada, dui erat cursus nisl, vel sollicitudin tortor ligula pretium arcu. In ultrices ultrices justo sit amet semper. Donec iaculis ex et lacus ullamcorper efficitur.\n" +
                                                           "\n" +
                                                           "Aliquam cursus nulla eget ante auctor, vel dignissim felis venenatis. Donec congue, dolor eu ornare consectetur, orci arcu consectetur orci, ac imperdiet nisl urna at felis. Duis vestibulum risus sed pretium vehicula. Donec tortor mauris, accumsan ornare pulvinar quis, aliquet ac justo. Ut libero felis, congue vitae porttitor et, ultrices eu turpis. Donec quis ornare ipsum. Nulla facilisi. Phasellus varius condimentum sapien nec tristique. Nullam consectetur enim sed leo cursus imperdiet. Mauris lectus ante, semper eget lacus vitae, tempor placerat eros. Aliquam rhoncus ex ut elit pharetra molestie. Nulla et semper eros, non tristique diam. Cras tincidunt laoreet mi, non elementum nibh interdum non."));
+        medicalConsultation2.setEvolution(new Evolution(evolutionId++,
+                                                        new Date(),
+                                                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis turpis non tellus scelerisque congue nec sed felis. Morbi orci ipsum, consequat sit amet dignissim ultricies, lacinia id ante. Nulla lorem sem, auctor fringilla nibh sed, egestas semper enim. Praesent aliquet pretium ex vitae fermentum. Sed malesuada scelerisque varius. Suspendisse semper felis sem, at convallis nisl feugiat non. Cras a erat id turpis faucibus finibus at ac massa. Praesent ultrices augue id fermentum pretium. Nullam dignissim, dui eget sagittis malesuada, dui erat cursus nisl, vel sollicitudin tortor ligula pretium arcu. In ultrices ultrices justo sit amet semper. Donec iaculis ex et lacus ullamcorper efficitur.\n" +
+                                                                "\n" +
+                                                                "Aliquam cursus nulla eget ante auctor, vel dignissim felis venenatis. Donec congue, dolor eu ornare consectetur, orci arcu consectetur orci, ac imperdiet nisl urna at felis. Duis vestibulum risus sed pretium vehicula. Donec tortor mauris, accumsan ornare pulvinar quis, aliquet ac justo. Ut libero felis, congue vitae porttitor et, ultrices eu turpis. Donec quis ornare ipsum. Nulla facilisi. Phasellus varius condimentum sapien nec tristique. Nullam consectetur enim sed leo cursus imperdiet. Mauris lectus ante, semper eget lacus vitae, tempor placerat eros. Aliquam rhoncus ex ut elit pharetra molestie. Nulla et semper eros, non tristique diam. Cras tincidunt laoreet mi, non elementum nibh interdum non."));
         pacient1.addMedicalHistory(medicalConsultation2);
 
         persons.add(therapist1);
