@@ -19,13 +19,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         iniciarSesion=findViewById(R.id.button_iniciar_sesion);
+        registro=findViewById(R.id.button_registrarse);
 
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(view.getContext(),Login.class);
+                startActivity(intent);
+            }
+        });
+        registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),CreateAccount.class);
                 startActivity(intent);
             }
         });

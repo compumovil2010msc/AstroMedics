@@ -10,13 +10,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AgendaDetalle"></activity>
+        <activity android:name=".views.CreateAccount"></activity>
+        <activity android:name=".views.AgendaDetalle" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -30,7 +32,8 @@
             android:value="@string/api_key" />
 
         <activity android:name=".views.TherapistDetailsActivity" />
-        <activity android:name=".views.HomeTherapist"
+        <activity
+            android:name=".views.HomeTherapist"
             android:theme="@style/AppThemeWithActionBar" />
         <activity
             android:name=".views.TherapistSearchResultActivity"
@@ -45,7 +48,8 @@
             android:name=".views.HomeUser"
             android:theme="@style/AppThemeWithActionBar" />
         <activity android:name=".views.Login" />
-        <activity android:name=".views.MainActivity">
+        <activity android:name=".views.MainActivity" />
+        <activity android:name=".SplashActivity" android:theme="@style/splashScreen" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
