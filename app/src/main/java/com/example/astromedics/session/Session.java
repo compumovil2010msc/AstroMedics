@@ -1,6 +1,9 @@
 package com.example.astromedics.session;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Session {
+    private FirebaseAuth mAuth;
     private static Session instance;
     private String email;
 
@@ -10,15 +13,13 @@ public class Session {
     public static Session getInstance() {
         if (instance == null) {
             instance = new Session();
+            instance.mAuth = FirebaseAuth.getInstance();
         }
         return instance;
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        return mAuth.getCurrentUser()
+                    .getEmail();
     }
 }

@@ -3,11 +3,16 @@ package com.example.astromedics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.astromedics.model.Person;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
 import com.example.astromedics.util.SharedPreferencesUtils;
+import com.example.astromedics.views.Login;
 import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
@@ -42,24 +47,25 @@ public class SplashActivity extends AppCompatActivity {
     private void verifyData(String email) {
         if (!SharedPreferencesUtils.hasPreference("userLoggedIn",
                                                   this)) {
-            Call<Person> call = App.get()
-                                   .getUserService()
-                                   .getUser(email);
-            call.enqueue(new Callback<Person>() {
-                @Override
-                public void onResponse(Call<Person> call, Response<Person> response) {
-                    if (response.body() != null) {
-                        redirect(response.body()
-                                         .isDoctor());
-                    }
+            try {
+                Person person = Repository.getInstance()
+                                          .getPersonRepository()
+                                          .get(Session.getInstance().getEmail());
+                if (person instanceof Therapist) {
+                    Intent intent = new Intent(getApplicationContext(),
+                                               HomeTherapist.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(),
+                                               HomeUserActivity.class);
+                    startActivity(intent);
                 }
-
-                @Override
-                public void onFailure(Call<Person> call, Throwable t) {
-                    Log.e("SPLASH_ACT",
-                          "error getting user: " + t.getMessage());
-                }
-            });
+            } catch (Exception ex) {
+                Toast.makeText(SplashActivity.this,
+                               "Error en autenticacion",
+                               Toast.LENGTH_SHORT)
+                     .show();
+            }
         } else {
             Person pInShared = SharedPreferencesUtils.getSharedPref("userLoggedIn",
                                                                     Person.class,

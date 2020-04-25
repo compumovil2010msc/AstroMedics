@@ -9,8 +9,7 @@ public class Pacient extends Person implements Serializable {
     private List<MedicalConsultation> medicalHistory;
 
     public Pacient(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
-                   String password, Date admissionDate, MedicalRecord medicalRecord,
-                   List<MedicalConsultation> medicalHistory) {
+                   Date admissionDate, MedicalRecord medicalRecord, List<MedicalConsultation> medicalHistory) {
         super(identificationNumber,
               name,
               photoURL,
@@ -39,7 +38,7 @@ public class Pacient extends Person implements Serializable {
         this.medicalHistory = medicalHistory;
     }
 
-    public void addMedicalHistory(MedicalConsultation medicalConsultation){
+    public void addMedicalHistory(MedicalConsultation medicalConsultation) {
         this.medicalHistory.add(medicalConsultation);
     }
 }

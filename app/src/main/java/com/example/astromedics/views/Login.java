@@ -16,6 +16,9 @@ import androidx.fragment.app.DialogFragment;
 import com.example.astromedics.App;
 import com.example.astromedics.R;
 import com.example.astromedics.model.Person;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
 import com.example.astromedics.util.SharedPreferencesUtils;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
@@ -167,31 +170,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
                                                  if (task.isSuccessful()) {
                                                      Log.i(LOG_TAG,
                                                            "Credentials homologated");
-                                                     Call<Person> call = App.get()
-                                                                            .getUserService()
-                                                                            .getUser(mAuth.getCurrentUser()
-                                                                                          .getEmail());
-                                                     call.enqueue(new Callback<Person>() {
-                                                         @Override
-                                                         public void onResponse(Call<Person> call, Response<Person> response) {
-                                                             personToCreateGoolge = response.body();
-                                                             if (personToCreateGoolge == null) {
-                                                                 personToCreateGoolge = new Person(mAuth.getCurrentUser()
-                                                                                                        .getEmail(),
-                                                                                                   mAuth.getCurrentUser()
-                                                                                                        .getDisplayName());
-                                                                 showDialogDoctorAndCreateUser();
-                                                             } else {
-                                                                 redirectAndPersistLocal(personToCreateGoolge);
-                                                             }
-                                                         }
-
-                                                         @Override
-                                                         public void onFailure(Call<Person> call, Throwable t) {
-                                                             Log.e(LOG_TAG,
-                                                                   "Error fetching user: " + t.getMessage());
-                                                         }
-                                                     });
+                                                     getUserFromDbAndRedirect(mAuth.getCurrentUser()
+                                                                                      .getEmail());
                                                  } else {
                                                      Log.i(LOG_TAG,
                                                            "Fail Homologatig creds");
@@ -239,27 +219,25 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
     }
 
     private void getUserFromDbAndRedirect(String email) {
-        Call<Person> call = App.get()
-                               .getUserService()
-                               .getUser(email);
-        call.enqueue(new Callback<Person>() {
-            @Override
-            public void onResponse(Call<Person> call, Response<Person> response) {
-                if (response.body() != null) {
-                    Log.i(LOG_TAG,
-                          "User found: " + response.body()
-                                                   .toString());
-                    Person p = response.body();
-                    redirectAndPersistLocal(p);
-                }
+        try {
+            Person person = Repository.getInstance()
+                                      .getPersonRepository()
+                                      .get(Session.getInstance().getEmail());
+            if (person instanceof Therapist) {
+                Intent intent = new Intent(getApplicationContext(),
+                                           HomeTherapist.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(getApplicationContext(),
+                                           HomeUserActivity.class);
+                startActivity(intent);
             }
-
-            @Override
-            public void onFailure(Call<Person> call, Throwable t) {
-                Log.e(LOG_TAG,
-                      "error getting user: " + t.getMessage());
-            }
-        });
+        } catch (Exception ex) {
+            Toast.makeText(Login.this,
+                           "Error en autenticacion",
+                           Toast.LENGTH_SHORT)
+                 .show();
+        }
     }
 
     private void redirectAndPersistLocal(Person personFromDataBase) {

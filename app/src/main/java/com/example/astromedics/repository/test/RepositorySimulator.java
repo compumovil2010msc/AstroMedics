@@ -18,6 +18,15 @@ import java.util.Date;
 import java.util.List;
 
 public class RepositorySimulator {
+    /*
+    Credentials on firebase:
+
+    pjaime@test.com -> test1234
+    ccobaleda@test.com -> test1234
+    jcardenas@test.com -> test1234
+    rodriguez@test.com -> test1234
+     */
+
     public static int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0, evolutionId = 0;
 
     private static RepositorySimulator instance;
@@ -150,8 +159,7 @@ public class RepositorySimulator {
                                             4101365,
                                             3003619443L,
                                             "Carrera 71D # 55-54",
-                                            "terapeuta",
-                                            "terapeuta",
+                                            "ccobaleda@test.com",
                                             new Date(),
                                             35000,
                                             emphasis,
@@ -253,8 +261,7 @@ public class RepositorySimulator {
                                             4101365,
                                             3003619443L,
                                             "Carrera 71D # 55-54",
-                                            "pjaime@gmail.com",
-                                            "test1",
+                                            "pjaime@test.com",
                                             new Date(),
                                             40000,
                                             emphasis,
@@ -287,8 +294,7 @@ public class RepositorySimulator {
                                       3457698,
                                       3003746587L,
                                       "Carrera 1 # 2-3",
-                                      "paciente",
-                                      "paciente",
+                                      "jcardenas@test.com",
                                       new Date(),
                                       medicalRecord,
                                       medicalHistory);
@@ -318,8 +324,7 @@ public class RepositorySimulator {
                                       4658293,
                                       3004529384L,
                                       "Carrera 2 # 4-5",
-                                      "test@test.com",
-                                      "test1",
+                                      "rodriguez@test.com",
                                       new Date(),
                                       medicalRecord,
                                       medicalHistory);

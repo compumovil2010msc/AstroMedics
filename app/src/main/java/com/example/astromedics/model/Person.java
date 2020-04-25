@@ -3,9 +3,10 @@ package com.example.astromedics.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Person {
+public class Person implements Serializable {
 
     @SerializedName("email")
     @Expose

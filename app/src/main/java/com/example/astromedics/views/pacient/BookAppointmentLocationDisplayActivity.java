@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.astromedics.R;
@@ -53,6 +54,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     private LocationRequest locationRequest;
     private TextView locationNameTevtView;
     private boolean indicationsEnabled = false;
+    protected static final int MY_LOCATION_PERMISSION = 503;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,10 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
         if (permissionHandler.checkIfPermissionsGrantedInclusive(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
             showIndicationsButton.setEnabled(true);
             showIndicationsButton.setVisibility(View.VISIBLE);
+        } else {
+            ActivityCompat.requestPermissions(this,
+                                              new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                              MY_LOCATION_PERMISSION);
         }
     }
 
@@ -282,5 +288,16 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
         selectedLocation = new LatLng(localization.getLatitude(),
                                       localization.getLongitude());
         refreshMap();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_LOCATION_PERMISSION:
+                if (permissionHandler.checkIfPermissionsGrantedInclusive(new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
+                    initViews();
+                }
+                break;
+        }
     }
 }
