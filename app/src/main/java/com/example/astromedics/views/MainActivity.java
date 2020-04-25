@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
