@@ -267,8 +267,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
 
     private void redirectAndPersistLocal(Person personFromDataBase) {
         SharedPreferencesUtils.persistPref("userLoggedIn",
-                                           personFromDataBase,
-                                           this);
+                                           personFromDataBase);
         if (personFromDataBase.isDoctor()) {
             Intent intent = new Intent(this,
                                        HomeTherapist.class);

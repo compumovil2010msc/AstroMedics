@@ -59,8 +59,7 @@ public class SplashActivity extends AppCompatActivity {
             redirect(pInShared.isDoctor());
         }
     */
-        if (!SharedPreferencesUtils.hasPreference("userLoggedIn",
-                                                  this)) {
+        if (!SharedPreferencesUtils.hasSharedPreferenceKey("userLoggedIn")) {
             try {
                 Person person = Repository.getInstance()
                                           .getPersonRepository()
@@ -82,8 +81,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         } else {
             Person pInShared = SharedPreferencesUtils.getSharedPref("userLoggedIn",
-                                                                    Person.class,
-                                                                    this);
+                                                                    Person.class);
             Log.i("SPLASH_ACT",
                   "Splash user in shared preferences: " + pInShared == null ? "null" : pInShared.toString());
             redirect(pInShared.isDoctor());
