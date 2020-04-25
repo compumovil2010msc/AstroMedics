@@ -21,8 +21,6 @@ import com.example.astromedics.App;
 import com.example.astromedics.R;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.util.SharedPreferencesUtils;
-import com.example.astromedics.views.pacient.HomeUserActivity;
-import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -217,10 +215,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
     private void redirectAndPersistLocal(Person personFromDataBase) {
         SharedPreferencesUtils.persistPref("userLoggedIn",personFromDataBase,this);
         if(personFromDataBase.isDoctor()){
-            Intent intent=new Intent(this, HomeTherapist.class);
+            Intent intent=new Intent(this,HomeTherapist.class);
             startActivity(intent);
         }else{
-            Intent intent=new Intent(this, HomeUserActivity.class);
+            Intent intent=new Intent(this,HomeUser.class);
             startActivity(intent);
         }
     }
