@@ -18,12 +18,12 @@ public class Person {
     @Expose
     private boolean isDoctor;
 
-    private int identificationNumber;
-    private String photoURL;
-    private long houseNumber;
-    private long phoneNumber;
-    private String address;
-    private Date admissionDate;
+    protected int identificationNumber;
+    protected String photoURL;
+    protected long houseNumber;
+    protected long phoneNumber;
+    protected String address;
+    protected Date admissionDate;
 
     public Person(String email, String name, boolean isDoctor) {
         this.email = email;
@@ -37,6 +37,9 @@ public class Person {
     }
 
     public Person(){
+    }
+
+    public Person(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email, String password, Date admissionDate) {
     }
 
     public String getEmail() {
@@ -61,6 +64,54 @@ public class Person {
 
     public void setDoctor(boolean doctor) {
         isDoctor = doctor;
+    }
+
+    public int getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(int identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public long getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(long houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public void setAdmissionDate(Date admissionDate) {
+        this.admissionDate = admissionDate;
     }
 
     @Override

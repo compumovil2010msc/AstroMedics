@@ -19,6 +19,8 @@ import com.example.astromedics.App;
 import com.example.astromedics.R;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.util.SharedPreferencesUtils;
+import com.example.astromedics.views.pacient.HomeUserActivity;
+import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -104,10 +106,10 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
 
     private void redirect(boolean doctor) {
         if(doctor){
-            Intent intent=new Intent(this,HomeTherapist.class);
+            Intent intent=new Intent(this, HomeTherapist.class);
             startActivity(intent);
         }else{
-            Intent intent=new Intent(this,HomeUser.class);
+            Intent intent=new Intent(this, HomeUserActivity.class);
             startActivity(intent);
         }
     }

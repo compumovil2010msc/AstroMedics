@@ -31,9 +31,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/api_key" />
 
-        <activity android:name=".views.TherapistDetailsActivity" />
         <activity
-            android:name=".views.HomeTherapist"
+            android:name=".views.therapist.HomeTherapist"/>
         <activity
             android:name=".views.therapist.CreateAppointmentActivity"
             android:theme="@style/AppThemeWithActionBar" />
@@ -67,10 +66,7 @@
         <activity
             android:name=".views.pacient.TherapistAvailableAppointmentsActivity"
             android:theme="@style/AppTheme" />
-        <activity
-            android:name=".views.therapist.HomeTherapist"
->>>>>>> feature/carlos
-            android:theme="@style/AppThemeWithActionBar" />
+
         <activity
             android:name=".views.pacient.TherapistSearchResultActivity"
             android:theme="@style/AppThemeWithActionBar" />
@@ -83,7 +79,6 @@
         <activity
             android:name=".views.pacient.HomeUserActivity"
             android:theme="@style/AppThemeWithActionBar" />
-<<<<<<< HEAD
         <activity android:name=".views.Login" />
         <activity android:name=".views.MainActivity" />
         <activity android:name=".SplashActivity" android:theme="@style/splashScreen" android:noHistory="true">
