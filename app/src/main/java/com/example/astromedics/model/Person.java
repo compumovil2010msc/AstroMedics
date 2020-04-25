@@ -2,6 +2,7 @@ package com.example.astromedics.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.Date;
 
 public class Person {
 
@@ -16,6 +17,13 @@ public class Person {
     @SerializedName("isDoctor")
     @Expose
     private boolean isDoctor;
+
+    private int identificationNumber;
+    private String photoURL;
+    private long houseNumber;
+    private long phoneNumber;
+    private String address;
+    private Date admissionDate;
 
     public Person(String email, String name, boolean isDoctor) {
         this.email = email;

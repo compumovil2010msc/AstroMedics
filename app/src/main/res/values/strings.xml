@@ -10,25 +10,130 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_book_appointment_location">Map</string>
-    <string name="api_key">AIzaSyAOybeBU1UWfnwWG3NcWoOvtRcqE66bKo4</string>
-
-    <string-array name="therapyTypes">
-        <item>Fonoaudiologia</item>
-        <item>Psicologia</item>
-        <item>Fisioterapia</item>
-    </string-array>
-    <string-array name="orderingOptions">
-        <item>Fecha de Ingreso</item>
-        <item>Numero de Consultas</item>
-        <item>Valoracion</item>
-    </string-array>
-    <string-array name="weekDays">
-        <item>Lunes</item>
-        <item>Martes</item>
-        <item>Miercoles</item>
-        <item>Jueves</item>
-        <item>Viernes</item>
-        <item>Sabado</item>
-        <item>Domingo</item>
-    </string-array>
+    <string name="api_key">AIzaSyAuXsBxXLVamw2JagQ94THuS-FjMXkL_lg</string>
+    <string name="activity_main_login">INICIAR SESIÓN</string>
+    <string name="activity_main_register">REGISTRARSE</string>
+    <string name="activity_login_failed">No se pudo realizar la autenticación</string>
+    <string name="book_appointment_details_title">Información de la consulta</string>
+    <string name="book_appointment_details_location">Ubicación</string>
+    <string name="book_appointment_details_start_date">Hora de inicio</string>
+    <string name="book_appointment_details_end_date">Hora de terminación</string>
+    <string name="book_appointment_details_date">Fecha</string>
+    <string name="book_appointment_details_therapist_name">Terapeuta</string>
+    <string name="book_appointment_history_details_title">Información de la consulta</string>
+    <string name="book_appointment_history_details_location">Ubicación</string>
+    <string name="book_appointment_history_details_start_date">Hora de inicio</string>
+    <string name="book_appointment_history_details_end_date">Hora de terminación</string>
+    <string name="book_appointment_history_details_date">Fecha</string>
+    <string name="book_appointment_history_details_therapist_name">Terapeuta</string>
+    <string name="book_appointment_history_fill_the_fields">Por favor ingrese un valor en el campo</string>
+    <string name="book_appointment_location_display_info">Información de la ubicación</string>
+    <string name="maps_current_location">Ubicación Actual</string>
+    <string name="justification_undefined_permission">UNDEFINED JUSTIFICATION.</string>
+    <string name="justification_location_permission">Es necesario otorgar permisos sobre de ubicacion para algunas funciones de la aplicación.</string>
+    <string name="therapist_filter_location">Ubicacion</string>
+    <string name="therapist_filter_emphasis">Tipo de Cita</string>
+    <string name="therapist_filter_end_date">Fecha final</string>
+    <string name="therapist_filter_start_date">Fecha inicial</string>
+    <string name="therapist_filter_fill_all_fields">Es necesario llenar todos los campos para realizar la busqueda</string>
+    <string name="therapist_adapter_currency">COP</string>
+    <string name="therapist_adapter_no_califications">El terapeuta aun no ha recibido calificaciones</string>
+    <string name="therapist_adapter_number_of_medical_consultations">consulta(s)</string>
+    <string name="emphasis_speech_therapy">Fonoaudiología</string>
+    <string name="emphasis_physiotherapy">Fisioterapia</string>
+    <string name="emphasis_psychology">Psicología</string>
+    <string name="therapist_filter_info">Busqueda de citas</string>
+    <string name="therapist_filter_select_date">Seleccione una fecha</string>
+    <string name="therapist_info_astromedics">Astromedics</string>
+    <string name="therapist_info_astromedics_colaborator">Colaborador en Astromedics</string>
+    <string name="therapist_info_calification">Calificación</string>
+    <string name="therapist_info_number_of_medical_consultations">Cantidad de consultas realizadas</string>
+    <string name="therapist_info_member_since">Miembro desde</string>
+    <string name="therapist_info_name">Terapeuta</string>
+    <string name="educational_formation_info">Formación Académica</string>
+    <string name="educational_formation_start_date">Fecha de ingreso</string>
+    <string name="educational_formation_end_date">Fecha de terminación</string>
+    <string name="educational_formation_graduated">Graduado</string>
+    <string name="educational_formation_graduated_yes">Si</string>
+    <string name="educational_formation_graduated_no">No</string>
+    <string name="therapist_available_appointment_info">Citas Disponibles</string>
+    <string name="therapist_available_appointment_confirm_dialog_info">Confirmacion de cita</string>
+    <string name="therapist_available_appointment_confirm_dialog_yes">Agendar</string>
+    <string name="therapist_available_appointment_confirm_dialog_no">Cancelar</string>
+    <string name="therapist_available_appointment_confirm_dialog_message">¿Esta seguro que desea agendar la cita con el terapeuta [THERAPIST] para el [DAY] a las [TIME]?</string>
+    <string name="book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
+    <string name="therapist_search_result_no_therapists">No se encontraron terapeutas disponibles</string>
+    <string name="history_no_history">Todavia no tienes consultas historicas</string>
+    <string name="history_no_calification">CALIFICACIÓN PENDIENTE</string>
+    <string name="history_calification">Calificación</string>
+    <string name="medical_consultation_history_report_available">Reporte Disponible!</string>
+    <string name="book_appointment_history_details_calification">Calificación</string>
+    <string name="report_visualization_info">Reporte de consulta</string>
+    <string name="report_visualization_written_by">Escrito por</string>
+    <string name="report_visualization_date_of_consultation">Fecha de la consulta</string>
+    <string name="report_visualization_report_creation_date">Fecha de creación del reporte</string>
+    <string name="report_visualization_content">Contenido</string>
+    <string name="change_password_info">Configuración</string>
+    <string name="change_password_title">Cambiar Contraseña</string>
+    <string name="change_password_current_password">Contraseña actual</string>
+    <string name="change_password_repeat_new_password">Repetir nueva contraseña</string>
+    <string name="change_password_new_password">Nueva contraseña</string>
+    <string name="settings_account_details">Configuración de cuenta</string>
+    <string name="settings_change_password">Cambiar contraseña</string>
+    <string name="settings_log_off">Cerrar sesión</string>
+    <string name="account_details_kylograms">kilogramos</string>
+    <string name="account_details_meters">metros</string>
+    <string name="account_details_name">Nombre completo</string>
+    <string name="account_details_email">Correo electronico</string>
+    <string name="account_details_phone_number">Telefono fijo</string>
+    <string name="account_details_cell_number">Telefono celular</string>
+    <string name="account_details_address">Dirección</string>
+    <string name="account_details_member_since">Miembro desde</string>
+    <string name="account_details_info">Configuración</string>
+    <string name="account_details_title">Configuración de cuenta</string>
+    <string name="account_details_pacient">Paciente</string>
+    <string name="account_details_therapist">Terapeuta</string>
+    <string name="account_details_medical_record">Registro médico</string>
+    <string name="account_details_pacient_info">Información de paciente</string>
+    <string name="account_details_pacient_blood_type">Tipo de sangre</string>
+    <string name="account_details_pacient_height">Altura</string>
+    <string name="account_details_weight">Peso</string>
+    <string name="account_details_therapist_info">Información de terapeuta</string>
+    <string name="account_details_therapist_title">AstroMedics</string>
+    <string name="account_details_therapist_number_of_appointments">Numero de consultas realizadas</string>
+    <string name="account_details_therapist_calification">Calificación</string>
+    <string name="therapist_book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
+    <string name="book_appointment_details_pacient_name">Paciente</string>
+    <string name="pacient_details_name">Nombre completo</string>
+    <string name="pacient_details_email">Correo electronico</string>
+    <string name="pacient_details_phone_number">Telefono fijo</string>
+    <string name="pacient_details_cell_number">Telefono celular</string>
+    <string name="pacient_details_address">Dirección</string>
+    <string name="pacient_details_member_since">Miembro desde</string>
+    <string name="pacient_details_info">Configuración</string>
+    <string name="pacient_details_title">Configuración de cuenta</string>
+    <string name="pacient_details_pacient">Paciente</string>
+    <string name="pacient_details_therapist">Terapeuta</string>
+    <string name="pacient_details_medical_record">Registro Médico</string>
+    <string name="pacient_details_pacient_info">Información de paciente</string>
+    <string name="pacient_details_pacient_blood_type">Tipo de sangre</string>
+    <string name="pacient_details_pacient_height">Altura</string>
+    <string name="pacient_details_weight">Peso</string>
+    <string name="pacient_details_medical_history_title">Historial Médico</string>
+    <string name="evolution_visualization_info">Evolución de consulta</string>
+    <string name="evolution_visualization_written_by">Escrito por</string>
+    <string name="evolution_visualization_date_of_consultation">Fecha de la consulta</string>
+    <string name="evolution_visualization_report_creation_date">Fecha de creación del reporte</string>
+    <string name="evolution_visualization_content">Contenido</string>
+    <string name="create_appointment_title">Creación de Cita Disponible</string>
+    <string name="create_appointment_date">Fecha</string>
+    <string name="create_appointment_select_an_hour">Seleccione una hora</string>
+    <string name="create_appointment_end_time">Hora de terminación</string>
+    <string name="create_appointment_start_time">Hora de inicio</string>
+    <string name="create_appointment_accept_time">Aceptar</string>
+    <string name="create_appointmente_invalid_date">Por favor seleccione una fecha</string>
+    <string name="create_appointmente_invalid_time">El tiempo permitido para una cita es de 1 a 3 horas</string>
+    <string name="reports_no_medical_consultations">Todavia no has realizado ninguna consulta</string>
+    <string name="medical_consultation_therapist_history_report_available">REPORTE PENDIENTE</string>
+    <string name="medical_consultation_therapist_history_evolution_available">EVOLUCIÓN PENDIENTE</string>
 </resources>

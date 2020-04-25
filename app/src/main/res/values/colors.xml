@@ -11,4 +11,6 @@
     <color name="colorGoogle">#F4B400</color>
     <color name="colorEmail">#5E35B1</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorLight">#909090</color>
+    <color name="colorSuperLight">#E8E8E8</color>
 </resources>

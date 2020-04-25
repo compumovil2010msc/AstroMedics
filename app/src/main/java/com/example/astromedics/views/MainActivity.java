@@ -1,13 +1,14 @@
 package com.example.astromedics.views;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.astromedics.R;
+import com.example.astromedics.views.general.Login;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(),CreateAccount.class);
-                startActivity(intent);
-            }
-        });
 
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
     }
 }
