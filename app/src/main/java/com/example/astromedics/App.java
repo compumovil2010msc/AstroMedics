@@ -7,6 +7,7 @@ import com.example.astromedics.services.UserService;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class App extends Application {
@@ -27,15 +28,14 @@ public class App extends Application {
         super.onCreate();
         INSTANCE=this;
         Log.i(TAG,"Running on create..............................");
-        HeaderInterceptor headerInterceptor=new HeaderInterceptor();
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(headerInterceptor).build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(BASE_URL)
                 // for serialization
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
         this.userService=retrofit.create(UserService.class);

@@ -1,10 +1,9 @@
 package com.example.astromedics.util;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.example.astromedics.model.Person;
+import com.example.astromedics.App;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -18,11 +17,15 @@ public class SharedPreferencesUtils {
 
     private static ObjectMapper mapper=new ObjectMapper();
 
-    public static synchronized <T> T getSharedPref(String key, Class<T> clazz, Context context) {
-        SharedPreferences preferences=context.getSharedPreferences("shared",context.MODE_PRIVATE);
-        if(hasPreference(key,context)){
+    public static synchronized <T> T getSharedPref(String key, Class<T> clazz) {
+        SharedPreferences preferences=App.get().getSharedPreferences("shared",App.get().MODE_PRIVATE);
+        if(hasSharedPreferenceKey(key)){
             try {
-                return mapper.readValue(preferences.getString(key,null),clazz);
+                if(clazz==String.class){
+                    return (T) preferences.getString(key,null);
+                }else{
+                    return mapper.readValue(preferences.getString(key,null),clazz);
+                }
             }catch (JsonProcessingException e){
                 throw new RuntimeException(e);
             }
@@ -31,9 +34,9 @@ public class SharedPreferencesUtils {
         }
     }
 
-    public static synchronized <T> List<T> getSharedPrefList(String key, Class<T[]> clazz, Context context) {
-        SharedPreferences preferences=context.getSharedPreferences("shared",context.MODE_PRIVATE);
-        if(hasPreference(key,context)){
+    public static synchronized <T> List<T> getSharedPrefList(String key, Class<T[]> clazz) {
+        SharedPreferences preferences=App.get().getSharedPreferences("shared",App.get().MODE_PRIVATE);
+        if(hasSharedPreferenceKey(key)){
             try {
                 return Arrays.asList(mapper.readValue(preferences.getString(key,null),clazz));
             }catch (JsonProcessingException e){
@@ -44,12 +47,18 @@ public class SharedPreferencesUtils {
         }
     }
 
-    public static synchronized <T> void persistPref(@NonNull String key, @NonNull T object, Context context){
-        SharedPreferences preferences=context.getSharedPreferences("shared",context.MODE_PRIVATE);
+    public static synchronized <T> void persistPref(@NonNull String key, @NonNull T object){
+        SharedPreferences preferences=App.get().getSharedPreferences("shared",App.get().MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = preferences.edit();
         try {
-            String objInString = mapper.writeValueAsString(object);
-            prefsEditor.putString(key,objInString);
+            String objInString;
+            if(object instanceof String){
+                objInString=object.toString();
+                prefsEditor.putString(key,object.toString());
+            }else{
+                 objInString= mapper.writeValueAsString(object);
+                prefsEditor.putString(key,objInString);
+            }
             prefsEditor.commit();
             Log.i("SharedPreferencesUtils","Saved: "+objInString);
         }catch (JsonProcessingException e){
@@ -57,13 +66,13 @@ public class SharedPreferencesUtils {
         }
     }
 
-    public static synchronized  boolean hasPreference(String key, Context context){
-        SharedPreferences preferences=context.getSharedPreferences("shared",context.MODE_PRIVATE);
+    public static synchronized  boolean hasSharedPreferenceKey(String key){
+        SharedPreferences preferences=App.get().getSharedPreferences("shared",App.get().MODE_PRIVATE);
         return preferences.contains(key);
     }
 
-    public static synchronized boolean removeKey(String key, Context context){
-        SharedPreferences preferences=context.getSharedPreferences("shared",context.MODE_PRIVATE);
+    public static synchronized boolean removeKey(String key){
+        SharedPreferences preferences=App.get().getSharedPreferences("shared",App.get().MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = preferences.edit();
         try{
             prefsEditor.remove(key);

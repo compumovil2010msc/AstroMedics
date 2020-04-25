@@ -4,9 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +13,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.astromedics.App;
 import com.example.astromedics.R;
 import com.example.astromedics.model.Person;
+import com.example.astromedics.services.UserService;
 import com.example.astromedics.util.SharedPreferencesUtils;
+import com.example.astromedics.util.TokenService;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -48,11 +48,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
     private FirebaseAuth mAuth;
     private Button loginWithFirebase;
     private Button loginWithGoogle;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mAuth=FirebaseAuth.getInstance();
+        this.userService=App.get().getUserService();
         setContentView(R.layout.activity_login);
         this.gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -140,22 +142,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Log.i(LOG_TAG,"Credentials homologated");
-                            Call<Person> call= App.get().getUserService().getUser(mAuth.getCurrentUser().getEmail());
-                            call.enqueue(new Callback<Person>() {
-                                @Override
-                                public void onResponse(Call<Person> call, Response<Person> response) {
-                                    personToCreateGoolge=response.body();
-                                    if(personToCreateGoolge==null){
-                                        personToCreateGoolge=new Person(mAuth.getCurrentUser().getEmail(),mAuth.getCurrentUser().getDisplayName());
-                                        showDialogDoctorAndCreateUser();
-                                    }else{
-                                        redirectAndPersistLocal(personToCreateGoolge);
-                                    }
+                            Login.this.userService.getUser(mAuth.getCurrentUser().getEmail()).subscribe(person -> {
+                                if(personToCreateGoolge==null){
+                                    personToCreateGoolge=new Person(mAuth.getCurrentUser().getEmail(),mAuth.getCurrentUser().getDisplayName());
+                                    showDialogDoctorAndCreateUser();
+                                }else{
+                                    redirectAndPersistLocal(personToCreateGoolge);
                                 }
-                                @Override
-                                public void onFailure(Call<Person> call, Throwable t) {
-                                    Log.e(LOG_TAG,"Error fetching user: "+t.getMessage());
-                                }
+                            },err->{
+                                Log.e(LOG_TAG,"Error fetching user: "+err.getMessage());
                             });
                         }else{
                             Log.i(LOG_TAG,"Fail Homologatig creds");
@@ -182,40 +177,37 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
     }
 
     private void insertUser() {
-        Call<Void>call=App.get().getUserService().saveUser(personToCreateGoolge);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+        TokenService.getTokenObservable().subscribe(token->{
+            SharedPreferencesUtils.persistPref("token",token);
+            this.userService.saveUser(personToCreateGoolge,token).subscribe(res->{
                 Log.i(LOG_TAG,"Insert successfull");
                 redirectAndPersistLocal(personToCreateGoolge);
-            }
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.i(LOG_TAG,"Insert failure");
-            }
+            },err->{
+                Log.e(LOG_TAG,"Insert Failure "+err.getMessage());
+            });
+        },err->{
+            Log.e(LOG_TAG,"Error getting token "+err.getMessage());
         });
     }
 
     private void getUserFromDbAndRedirect(String email) {
-        Call<Person> call= App.get().getUserService().getUser(email);
-        call.enqueue(new Callback<Person>() {
-            @Override
-            public void onResponse(Call<Person> call, Response<Person> response) {
-                if(response.body()!=null){
-                    Log.i(LOG_TAG,"User found: "+response.body().toString());
-                    Person p =response.body();
-                    redirectAndPersistLocal(p);
-                }
+
+        this.userService.getUser(email)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe(person -> {
+            if (person != null) {
+                Log.i(LOG_TAG,"User found: "+person.toString());
+                redirectAndPersistLocal(person);
             }
-            @Override
-            public void onFailure(Call<Person> call, Throwable t) {
-                Log.e(LOG_TAG, "error getting user: "+t.getMessage());
-            }
+        },error ->{
+            Log.e(LOG_TAG, "error getting user: "+error.getMessage());
         });
     }
 
     private void redirectAndPersistLocal(Person personFromDataBase) {
-        SharedPreferencesUtils.persistPref("userLoggedIn",personFromDataBase,this);
+        SharedPreferencesUtils.persistPref("userLoggedIn",personFromDataBase);
         if(personFromDataBase.isDoctor()){
             Intent intent=new Intent(this, HomeTherapist.class);
             startActivity(intent);

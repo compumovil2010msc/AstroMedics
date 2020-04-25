@@ -2,17 +2,20 @@ package com.example.astromedics.services;
 
 import com.example.astromedics.model.Person;
 
-import retrofit2.Call;
+import io.reactivex.Single;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface UserService {
 
     @GET("{email_id}")
-    Call<Person>getUser(@Path(value = "email_id", encoded = true) String url);
+    Single<Person> getUser(@Path(value = "email_id", encoded = true) String url);
 
     @POST("app/user/createUser")
-    Call<Void> saveUser(@Body Person person);
+    Single<Response<ResponseBody>> saveUser(@Body Person person, @Header("authtoken") String token);
 }

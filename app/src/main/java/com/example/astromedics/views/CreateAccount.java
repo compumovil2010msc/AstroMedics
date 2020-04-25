@@ -2,9 +2,8 @@ package com.example.astromedics.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +17,9 @@ import android.widget.Toast;
 import com.example.astromedics.App;
 import com.example.astromedics.R;
 import com.example.astromedics.model.Person;
+import com.example.astromedics.services.UserService;
 import com.example.astromedics.util.SharedPreferencesUtils;
+import com.example.astromedics.util.TokenService;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,12 +36,13 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
     private EditText name;
     private Button buttonCorreoPass;
     private CheckBox checkBoxAsMedico;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
-
+        this.userService=App.get().getUserService();
         this.mAuth=FirebaseAuth.getInstance();
         this.name=findViewById(R.id.name_register);
         this.buttonCorreoPass=findViewById(R.id.register_email_pass);
@@ -81,20 +83,7 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                         if(task.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Registro exitoso!", Toast.LENGTH_LONG).show();
                             Person p =new Person(email,name,checkBoxAsMedico.isChecked());
-                            Call<Void> call= App.get().getUserService().saveUser(p);
-                            call.enqueue(new Callback<Void>() {
-                                @Override
-                                public void onResponse(Call<Void> call, Response<Void> response) {
-                                    Log.i("CREATE_USER","Insert successfull");
-                                    SharedPreferencesUtils.persistPref("userLoggedIn",p,CreateAccount.this);
-                                    redirect(p.isDoctor());
-                                }
-                                @Override
-                                public void onFailure(Call<Void> call, Throwable t) {
-                                    Log.i("CREATE_USER","Insert failure");
-                                    throw new RuntimeException("Couldn't insert object in database");
-                                }
-                            });
+                            createPersonBackend(p);
                         }else{
                             Toast.makeText(getApplicationContext(), "El registro ha fallado", Toast.LENGTH_LONG).show();
                         }
@@ -102,6 +91,24 @@ public class CreateAccount extends AppCompatActivity implements View.OnClickList
                 }
         );
 
+    }
+
+    private void createPersonBackend(Person p){
+        TokenService.getTokenObservable().subscribe(token->{
+            Log.i("CREATE_USER","Token received: "+token);
+            SharedPreferencesUtils.persistPref("token",token);
+            this.userService.saveUser(p,token)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .subscribe(res->{
+                Log.i("CREATE_USER","Insert successfull");
+                SharedPreferencesUtils.persistPref("userLoggedIn",p);
+                redirect(p.isDoctor());
+            },err->{
+                Log.i("CREATE_USER","Insert failure: "+err.getMessage());
+            });
+        });
     }
 
     private void redirect(boolean doctor) {

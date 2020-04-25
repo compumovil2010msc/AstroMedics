@@ -30,6 +30,9 @@ android {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+    implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
+    implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: '2.8.1'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.0.rc1'
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
