@@ -25,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         iniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), Login.class);
+                Intent intent = new Intent(view.getContext(),
+                                           Login.class);
                 startActivity(intent);
             }
         });
@@ -33,9 +34,15 @@ public class MainActivity extends AppCompatActivity {
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateAccount.class);
+                Intent intent = new Intent(view.getContext(),
+                                           CreateAccount.class);
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        this.finishAffinity();
     }
 }

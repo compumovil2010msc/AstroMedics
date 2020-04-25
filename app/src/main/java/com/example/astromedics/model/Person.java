@@ -2,9 +2,11 @@ package com.example.astromedics.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 import java.util.Date;
 
-public class Person {
+public class Person implements Serializable {
 
     @SerializedName("email")
     @Expose
@@ -18,17 +20,29 @@ public class Person {
     @Expose
     private boolean isDoctor;
 
-    protected int identificationNumber;
-    protected String photoURL;
-    protected long houseNumber;
-    protected long phoneNumber;
-    protected String address;
-    protected Date admissionDate;
+    private int identificationNumber;
+    private String photoURL;
+    private long houseNumber;
+    private long phoneNumber;
+    private String address;
+    private Date admissionDate;
+
+    public Person(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
+                  Date admissionDate) {
+        this.email = email;
+        this.name = name;
+        this.identificationNumber = identificationNumber;
+        this.photoURL = photoURL;
+        this.houseNumber = houseNumber;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.admissionDate = admissionDate;
+    }
 
     public Person(String email, String name, boolean isDoctor) {
         this.email = email;
         this.name = name;
-        this.isDoctor=isDoctor;
+        this.isDoctor = isDoctor;
     }
 
     public Person(String email, String name) {
@@ -36,10 +50,7 @@ public class Person {
         this.name = name;
     }
 
-    public Person(){
-    }
-
-    public Person(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email, String password, Date admissionDate) {
+    public Person() {
     }
 
     public String getEmail() {

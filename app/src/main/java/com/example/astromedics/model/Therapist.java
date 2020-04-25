@@ -67,7 +67,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     public Therapist(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
-                     String password, Date admissionDate, int medicalConsultationPrice, List<Emphasis> emphasis,
+                     Date admissionDate, int medicalConsultationPrice, List<Emphasis> emphasis,
                      List<EducationalFormation> educationalFormation, List<Appointment> appointments) {
         super(identificationNumber,
               name,
@@ -76,7 +76,6 @@ public class Therapist extends Person implements Serializable {
               phoneNumber,
               address,
               email,
-              password,
               admissionDate);
         this.medicalConsultationPrice = medicalConsultationPrice;
         this.emphasis = emphasis;
@@ -153,7 +152,9 @@ public class Therapist extends Person implements Serializable {
 
         for (Appointment appointment : getAppointments()) {
             if (appointment.getMedicalConsultation() == null
-                    && new DateComparator().between(appointment.getStartDate(), startDate, endDate)
+                    && new DateComparator().between(appointment.getStartDate(),
+                                                    startDate,
+                                                    endDate)
                     && Collections.binarySearch(returnable,
                                                 appointment.getStartDate(),
                                                 dateComparator) < 0 && appointment.getStartDate()

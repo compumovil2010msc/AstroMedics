@@ -1,6 +1,5 @@
 package com.example.astromedics.views.common;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
@@ -25,7 +23,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class BookAppointmentDetails extends AppCompatActivity {
     private BookAppointmentDetails instance = this;
     public static String MEDICAL_CONSULTATION = "MedicalConsultation";
-    protected static final int MY_LOCATION_PERMISSION = 503;
 
     private Pacient pacient;
     private Therapist therapist;
@@ -133,24 +130,12 @@ public class BookAppointmentDetails extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityCompat.requestPermissions(instance,
-                                                  new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                                  MY_LOCATION_PERMISSION);
-            }
-        });
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_LOCATION_PERMISSION:
                 Intent intent = new Intent(getApplicationContext(),
                                            BookAppointmentLocationDisplayActivity.class);
                 intent.putExtra(BookAppointmentLocationDisplayActivity.LOCATION,
                                 medicalConsultation.getLocalization());
                 startActivity(intent);
-                break;
-        }
+            }
+        });
     }
 }

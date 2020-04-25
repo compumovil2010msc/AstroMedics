@@ -3,16 +3,23 @@ package com.example.astromedics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.astromedics.model.Person;
 import com.example.astromedics.services.UserService;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
+
 import com.example.astromedics.util.SharedPreferencesUtils;
+import com.example.astromedics.views.Login;
+import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
-import com.example.astromedics.views.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
-import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,8 +43,9 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void verifyData(String email){
-        if(!SharedPreferencesUtils.hasSharedPreferenceKey("userLoggedIn")){
+    private void verifyData(String email) {
+    /*
+	if(!SharedPreferencesUtils.hasSharedPreferenceKey("userLoggedIn")){
             this.userService.getUser(email).subscribe(person -> {
                 if(person!=null){
                     redirect(person.isDoctor());
@@ -50,14 +58,46 @@ public class SplashActivity extends AppCompatActivity {
             Log.i("SPLASH_ACT","Splash user in shared preferences: "+pInShared==null?"null":pInShared.toString());
             redirect(pInShared.isDoctor());
         }
+    */
+        if (!SharedPreferencesUtils.hasPreference("userLoggedIn",
+                                                  this)) {
+            try {
+                Person person = Repository.getInstance()
+                                          .getPersonRepository()
+                                          .get(Session.getInstance().getEmail());
+                if (person instanceof Therapist) {
+                    Intent intent = new Intent(getApplicationContext(),
+                                               HomeTherapist.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getApplicationContext(),
+                                               HomeUserActivity.class);
+                    startActivity(intent);
+                }
+            } catch (Exception ex) {
+                Toast.makeText(SplashActivity.this,
+                               "Error en autenticacion",
+                               Toast.LENGTH_SHORT)
+                     .show();
+            }
+        } else {
+            Person pInShared = SharedPreferencesUtils.getSharedPref("userLoggedIn",
+                                                                    Person.class,
+                                                                    this);
+            Log.i("SPLASH_ACT",
+                  "Splash user in shared preferences: " + pInShared == null ? "null" : pInShared.toString());
+            redirect(pInShared.isDoctor());
+        }
     }
 
     private void redirect(boolean doctor) {
-        if(doctor){
-            Intent intent=new Intent(this, HomeTherapist.class);
+        if (doctor) {
+            Intent intent = new Intent(this,
+                                       HomeTherapist.class);
             startActivity(intent);
-        }else{
-            Intent intent=new Intent(this, HomeUserActivity.class);
+        } else {
+            Intent intent = new Intent(this,
+                                       HomeUserActivity.class);
             startActivity(intent);
         }
     }
