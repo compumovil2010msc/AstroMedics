@@ -76,7 +76,6 @@ public class Therapist extends Person implements Serializable {
               phoneNumber,
               address,
               email,
-              password,
               admissionDate);
         this.medicalConsultationPrice = medicalConsultationPrice;
         this.emphasis = emphasis;

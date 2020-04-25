@@ -18,7 +18,6 @@ public class Pacient extends Person implements Serializable {
               phoneNumber,
               address,
               email,
-              password,
               admissionDate);
         this.medicalRecord = medicalRecord;
         this.medicalHistory = medicalHistory;

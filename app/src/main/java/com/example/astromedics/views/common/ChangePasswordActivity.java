@@ -57,12 +57,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                                   .get(Session.getInstance()
                                                               .getEmail());
 
-                        Repository.getInstance()
+                        /*Repository.getInstance()
                                   .getPersonRepository()
                                   .changePassword(person,
                                                   currentPassword,
                                                   newPassword,
-                                                  repeatNewPassword);
+                                                  repeatNewPassword);*/
 
                         if (person instanceof Pacient) {
                             Intent setIntent = new Intent(getApplicationContext(),

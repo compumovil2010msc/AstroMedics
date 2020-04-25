@@ -318,7 +318,7 @@ public class RepositorySimulator {
                                       4658293,
                                       3004529384L,
                                       "Carrera 2 # 4-5",
-                                      "srodriguez@gmail.com",
+                                      "test@test.com",
                                       "test1",
                                       new Date(),
                                       medicalRecord,

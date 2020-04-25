@@ -2,6 +2,7 @@ package com.example.astromedics.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Person {
@@ -25,10 +26,22 @@ public class Person {
     private String address;
     private Date admissionDate;
 
+    public Person(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
+                  Date admissionDate) {
+        this.email = email;
+        this.name = name;
+        this.identificationNumber = identificationNumber;
+        this.photoURL = photoURL;
+        this.houseNumber = houseNumber;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.admissionDate = admissionDate;
+    }
+
     public Person(String email, String name, boolean isDoctor) {
         this.email = email;
         this.name = name;
-        this.isDoctor=isDoctor;
+        this.isDoctor = isDoctor;
     }
 
     public Person(String email, String name) {
@@ -36,7 +49,7 @@ public class Person {
         this.name = name;
     }
 
-    public Person(){
+    public Person() {
     }
 
     public String getEmail() {
@@ -61,6 +74,54 @@ public class Person {
 
     public void setDoctor(boolean doctor) {
         isDoctor = doctor;
+    }
+
+    public int getIdentificationNumber() {
+        return identificationNumber;
+    }
+
+    public void setIdentificationNumber(int identificationNumber) {
+        this.identificationNumber = identificationNumber;
+    }
+
+    public String getPhotoURL() {
+        return photoURL;
+    }
+
+    public void setPhotoURL(String photoURL) {
+        this.photoURL = photoURL;
+    }
+
+    public long getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(long houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Date getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public void setAdmissionDate(Date admissionDate) {
+        this.admissionDate = admissionDate;
     }
 
     @Override
