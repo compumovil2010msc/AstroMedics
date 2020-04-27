@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_take_photo"
+        android:title="Tomar foto"
+        />
+    <item
+        android:id="@+id/menu_use_photo_gallery"
+        android:title="Usar galeria de imagenes"
+        />
+</menu>
