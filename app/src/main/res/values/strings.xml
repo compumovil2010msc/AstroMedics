@@ -136,4 +136,8 @@
     <string name="reports_no_medical_consultations">Todavia no has realizado ninguna consulta</string>
     <string name="medical_consultation_therapist_history_report_available">REPORTE PENDIENTE</string>
     <string name="medical_consultation_therapist_history_evolution_available">EVOLUCIÓN PENDIENTE</string>
+    <string name="please_enable_gps">Por favor encienda el GPS</string>
+    <string name="gps_network_not_enabled">Es necesario habilitar la localización</string>
+    <string name="open_location_settings">Abrir configuracion</string>
+    <string name="cancel_open_location_settings">Cancelar</string>
 </resources>

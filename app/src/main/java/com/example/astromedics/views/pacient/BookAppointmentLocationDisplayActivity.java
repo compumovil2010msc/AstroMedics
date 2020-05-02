@@ -1,11 +1,19 @@
 package com.example.astromedics.views.pacient;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -118,6 +126,29 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
         fusedLocationProviderClient.requestLocationUpdates(locationRequest,
                                                            locationCallback,
                                                            null);
+        LocationManager lm = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        try {
+            if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                new AlertDialog.Builder(this)
+                        .setTitle(R.string.please_enable_gps)
+                        .setMessage(R.string.gps_network_not_enabled)
+                        .setPositiveButton(R.string.open_location_settings,
+                                           new DialogInterface.OnClickListener() {
+                                               @Override
+                                               public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                                   Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                                   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                   getApplicationContext().startActivity(intent);
+                                               }
+                                           })
+                        .setNegativeButton(R.string.cancel_open_location_settings,
+                                           null)
+                        .show();
+            }
+        } catch (Exception ex) {
+            Log.e("", ex.getMessage());
+        }
+
     }
 
     private LocationRequest createLocationRequest() {
