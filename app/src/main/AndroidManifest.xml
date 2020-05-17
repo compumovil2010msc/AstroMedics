@@ -17,7 +17,8 @@
         android:roundIcon="@drawable/planet"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.therapist.ReportDetails"></activity>
+        <activity android:name=".views.therapist.ReportCreationActivity"></activity>
+        <activity android:name=".views.therapist.ReportDetails" />
         <activity android:name=".views.CreateAccount" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

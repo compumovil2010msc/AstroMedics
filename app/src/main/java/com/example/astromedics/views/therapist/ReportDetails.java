@@ -31,6 +31,8 @@ public class ReportDetails extends AppCompatActivity {
     TextView pacientNameTextView, emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView, calificationTextView,
             evolutionCreationDate, evolutionContent, evolutionEmphasis, reportCreationDate, reportContent, reportEmphasis;
     CardView evolutionCardView, reportCardView;
+    private String creationType;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,6 +103,21 @@ public class ReportDetails extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),
+                                           ReportCreationActivity.class);
+                intent.putExtra(ReportCreationActivity.MEDICAL_CONSULTATION,
+                                medicalConsultation);
+                intent.putExtra(ReportCreationActivity.THERAPIST,
+                                therapist);
+                intent.putExtra(ReportCreationActivity.TYPE,
+                                creationType);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setViewsValues() {
@@ -125,7 +142,7 @@ public class ReportDetails extends AppCompatActivity {
         if (medicalConsultation.getCalification() > 0) {
             calificationTextView.setText(String.valueOf(medicalConsultation.getCalification()));
         } else {
-            calificationTextView.setText("NO SE HA ASIGNADO CALIFICACIÓN");
+            calificationTextView.setText(getString(R.string.report_details_no_calification));
         }
 
         if (medicalConsultation.getEvolution() != null) {
@@ -147,13 +164,21 @@ public class ReportDetails extends AppCompatActivity {
             reportEmphasis.setText(Therapist.Emphasis.toString(medicalConsultation.getEmphasis(),
                                                                getApplicationContext()));
         }
+
+        if(medicalConsultation.getEvolution() == null){
+            floatingActionButton.setVisibility(View.VISIBLE);
+            this.creationType = ReportCreationActivity.TYPE_EVOLUTION;
+        } else if (medicalConsultation.getReport() == null){
+            floatingActionButton.setVisibility(View.VISIBLE);
+            this.creationType = ReportCreationActivity.TYPE_REPORT;
+        }
     }
 
 
     @Override
     public void onBackPressed() {
         Intent setIntent = new Intent(getApplicationContext(),
-                                      HomeUserActivity.class);
+                                      HomeTherapist.class);
         startActivity(setIntent);
     }
 }

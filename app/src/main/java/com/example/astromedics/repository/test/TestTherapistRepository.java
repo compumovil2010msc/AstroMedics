@@ -2,8 +2,10 @@ package com.example.astromedics.repository.test;
 
 import com.example.astromedics.helpers.DateComparator;
 import com.example.astromedics.model.Appointment;
+import com.example.astromedics.model.Evolution;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Person;
+import com.example.astromedics.model.Report;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.interfaces.TherapistRepository;
 
@@ -92,5 +94,71 @@ public class TestTherapistRepository implements TherapistRepository {
         }
 
         repository.setPersons(persons);
+    }
+
+    @Override
+    public MedicalConsultation setEvolution(Therapist therapist, MedicalConsultation medicalConsultation, String evolutionContent) throws Exception {
+        RepositorySimulator repository = RepositorySimulator.getInstance();
+        MedicalConsultation returnable = null;
+        List<Person> persons = repository.getPersons();
+
+        for (Person person : persons) {
+            if (person.getEmail()
+                      .equals(therapist.getEmail()) && person instanceof Therapist) {
+                for (Appointment currentAppointment : ((Therapist) person).getAppointments()) {
+                    if (currentAppointment != null && currentAppointment.getMedicalConsultation() != null && currentAppointment.getMedicalConsultation()
+                                                                                                                               .getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
+                        if (currentAppointment.getMedicalConsultation()
+                                              .getEvolution() != null) {
+                            throw new Exception("La consulta medica ya tiene evolución");
+                        } else {
+                            Evolution evolution = new Evolution(RepositorySimulator.evolutionId++,
+                                                                new Date(),
+                                                                evolutionContent);
+                            currentAppointment.getMedicalConsultation()
+                                              .setEvolution(evolution);
+                            returnable = currentAppointment.getMedicalConsultation();
+                        }
+                    }
+                }
+            }
+        }
+
+        repository.setPersons(persons);
+
+        return returnable;
+    }
+
+    @Override
+    public MedicalConsultation setReport(Therapist therapist, MedicalConsultation medicalConsultation, String reportContent) throws Exception {
+        RepositorySimulator repository = RepositorySimulator.getInstance();
+        MedicalConsultation returnable = null;
+        List<Person> persons = repository.getPersons();
+
+        for (Person person : persons) {
+            if (person.getEmail()
+                      .equals(therapist.getEmail()) && person instanceof Therapist) {
+                for (Appointment currentAppointment : ((Therapist) person).getAppointments()) {
+                    if (currentAppointment != null && currentAppointment.getMedicalConsultation() != null && currentAppointment.getMedicalConsultation()
+                                                                                                                               .getMedicalConsultationId() == medicalConsultation.getMedicalConsultationId()) {
+                        if (currentAppointment.getMedicalConsultation()
+                                              .getReport() != null) {
+                            throw new Exception("La consulta medica ya tiene reporte");
+                        } else {
+                            Report report = new Report(RepositorySimulator.reportId++,
+                                                       new Date(),
+                                                       reportContent);
+                            currentAppointment.getMedicalConsultation()
+                                              .setReport(report);
+                            returnable = currentAppointment.getMedicalConsultation();
+                        }
+                    }
+                }
+            }
+        }
+
+        repository.setPersons(persons);
+
+        return returnable;
     }
 }

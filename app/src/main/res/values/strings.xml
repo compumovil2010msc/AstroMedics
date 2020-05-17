@@ -33,6 +33,7 @@
     <string name="report_details_start_date">Hora de inicio</string>
     <string name="report_details_end_date">Hora de terminación</string>
     <string name="report_details_date">Fecha</string>
+    <string name="report_details_no_calification">NO SE HA ASIGNADO CALIFICACIÓN</string>
     <string name="book_appointment_history_fill_the_fields">Por favor ingrese un valor en el campo</string>
     <string name="book_appointment_location_display_info">Información de la ubicación</string>
     <string name="maps_current_location">Ubicación Actual</string>
@@ -147,5 +148,9 @@
     <string name="please_enable_gps">Por favor encienda el GPS</string>
     <string name="gps_network_not_enabled">Es necesario habilitar la localización</string>
     <string name="open_location_settings">Abrir configuracion</string>
+    <string name="report_creation_content">Contenido</string>
+    <string name="report_creation_written_by">Escrito Por</string>
+    <string name="report_creation_info_evolution">Creación de Evolución</string>
+    <string name="report_creation_info_report">Creacion de Reporte</string>
     <string name="cancel_open_location_settings">Cancelar</string>
 </resources>
