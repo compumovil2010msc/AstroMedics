@@ -10,7 +10,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_book_appointment_location">Map</string>
-    <string name="api_key">AIzaSyAuXsBxXLVamw2JagQ94THuS-FjMXkL_lg</string>
+    <string name="api_key">AIzaSyAIsUlAcf2Coh5XS2J7UiEBs3hqq-8UJGM</string>
     <string name="activity_main_login">INICIAR SESIÓN</string>
     <string name="activity_main_register">REGISTRARSE</string>
     <string name="activity_login_failed">No se pudo realizar la autenticación</string>
@@ -77,7 +77,7 @@
     <string name="medical_consultation_history_report_available">Reporte Disponible!</string>
     <string name="report_details_calification">Calificación</string>
     <string name="book_appointment_history_details_calification">Calificación</string>
-    <string name="report_visualization_info">Reporte de consulta</string>
+    <string name="report_visualization_info">Reporte</string>
     <string name="report_visualization_written_by">Escrito por</string>
     <string name="report_visualization_date_of_consultation">Fecha de la consulta</string>
     <string name="report_visualization_report_creation_date">Fecha de creación del reporte</string>
@@ -129,7 +129,7 @@
     <string name="pacient_details_pacient_height">Altura</string>
     <string name="pacient_details_weight">Peso</string>
     <string name="pacient_details_medical_history_title">Historial Médico</string>
-    <string name="evolution_visualization_info">Evolución de consulta</string>
+    <string name="evolution_visualization_info">Evolución</string>
     <string name="evolution_visualization_written_by">Escrito por</string>
     <string name="evolution_visualization_date_of_consultation">Fecha de la consulta</string>
     <string name="evolution_visualization_report_creation_date">Fecha de creación de la evolución</string>

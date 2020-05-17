@@ -167,6 +167,7 @@ public class ReportDetails extends AppCompatActivity {
 
         if(medicalConsultation.getEvolution() == null){
             floatingActionButton.setVisibility(View.VISIBLE);
+            floatingActionButton.setImageDrawable(getDrawable(R.drawable.ic_assignment_ind_black_24dp));
             this.creationType = ReportCreationActivity.TYPE_EVOLUTION;
         } else if (medicalConsultation.getReport() == null){
             floatingActionButton.setVisibility(View.VISIBLE);
