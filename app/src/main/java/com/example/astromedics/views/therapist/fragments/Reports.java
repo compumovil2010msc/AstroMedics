@@ -19,6 +19,7 @@ import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.BookAppointmentHistoryDetails;
+import com.example.astromedics.views.therapist.ReportDetails;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,8 +69,8 @@ public class Reports extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(),
-                                           BookAppointmentHistoryDetails.class);
-                intent.putExtra(BookAppointmentHistoryDetails.MEDICAL_CONSULTATION,
+                                           ReportDetails.class);
+                intent.putExtra(ReportDetails.MEDICAL_CONSULTATION,
                                 medicalConsultations.get(position));
                 startActivity(intent);
             }

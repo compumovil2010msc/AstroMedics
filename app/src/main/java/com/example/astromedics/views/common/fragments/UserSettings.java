@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.GenericListViewItem;
+import com.example.astromedics.session.Session;
 import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.common.AccountDetailsActivity;
 import com.example.astromedics.views.common.ChangePasswordActivity;
@@ -79,6 +80,7 @@ public class UserSettings extends Fragment {
         auxiliar3.setOnClickListener(new GenericListViewItem.GenericOnClickListener() {
             @Override
             public void onClickPressed() {
+                Session.getInstance().logOut();
                 Intent setIntent = new Intent(getContext(),
                                               MainActivity.class);
                 startActivity(setIntent);

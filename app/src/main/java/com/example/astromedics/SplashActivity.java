@@ -59,32 +59,24 @@ public class SplashActivity extends AppCompatActivity {
             redirect(pInShared.isDoctor());
         }
     */
-        if (!SharedPreferencesUtils.hasSharedPreferenceKey("userLoggedIn")) {
-            try {
-                Person person = Repository.getInstance()
-                                          .getPersonRepository()
-                                          .get(Session.getInstance().getEmail());
-                if (person instanceof Therapist) {
-                    Intent intent = new Intent(getApplicationContext(),
-                                               HomeTherapist.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(getApplicationContext(),
-                                               HomeUserActivity.class);
-                    startActivity(intent);
-                }
-            } catch (Exception ex) {
-                Toast.makeText(SplashActivity.this,
-                               "Error en autenticacion",
-                               Toast.LENGTH_SHORT)
-                     .show();
+        try {
+            Person person = Repository.getInstance()
+                                      .getPersonRepository()
+                                      .get(Session.getInstance().getEmail());
+            if (person instanceof Therapist) {
+                Intent intent = new Intent(getApplicationContext(),
+                                           HomeTherapist.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(getApplicationContext(),
+                                           HomeUserActivity.class);
+                startActivity(intent);
             }
-        } else {
-            Person pInShared = SharedPreferencesUtils.getSharedPref("userLoggedIn",
-                                                                    Person.class);
-            Log.i("SPLASH_ACT",
-                  "Splash user in shared preferences: " + pInShared == null ? "null" : pInShared.toString());
-            redirect(pInShared.isDoctor());
+        } catch (Exception ex) {
+            Toast.makeText(SplashActivity.this,
+                           "Error en autenticacion",
+                           Toast.LENGTH_SHORT)
+                 .show();
         }
     }
 

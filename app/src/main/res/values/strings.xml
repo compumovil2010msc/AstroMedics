@@ -26,6 +26,13 @@
     <string name="book_appointment_history_details_end_date">Hora de terminación</string>
     <string name="book_appointment_history_details_date">Fecha</string>
     <string name="book_appointment_history_details_therapist_name">Terapeuta</string>
+    <string name="report_details_therapist_name">Terapeuta</string>
+    <string name="report_details_pacient_name">Paciente</string>
+    <string name="report_details_title">Información de la consulta</string>
+    <string name="report_details_location">Ubicación</string>
+    <string name="report_details_start_date">Hora de inicio</string>
+    <string name="report_details_end_date">Hora de terminación</string>
+    <string name="report_details_date">Fecha</string>
     <string name="book_appointment_history_fill_the_fields">Por favor ingrese un valor en el campo</string>
     <string name="book_appointment_location_display_info">Información de la ubicación</string>
     <string name="maps_current_location">Ubicación Actual</string>
@@ -67,6 +74,7 @@
     <string name="history_no_calification">CALIFICACIÓN PENDIENTE</string>
     <string name="history_calification">Calificación</string>
     <string name="medical_consultation_history_report_available">Reporte Disponible!</string>
+    <string name="report_details_calification">Calificación</string>
     <string name="book_appointment_history_details_calification">Calificación</string>
     <string name="report_visualization_info">Reporte de consulta</string>
     <string name="report_visualization_written_by">Escrito por</string>
@@ -123,7 +131,7 @@
     <string name="evolution_visualization_info">Evolución de consulta</string>
     <string name="evolution_visualization_written_by">Escrito por</string>
     <string name="evolution_visualization_date_of_consultation">Fecha de la consulta</string>
-    <string name="evolution_visualization_report_creation_date">Fecha de creación del reporte</string>
+    <string name="evolution_visualization_report_creation_date">Fecha de creación de la evolución</string>
     <string name="evolution_visualization_content">Contenido</string>
     <string name="create_appointment_title">Creación de Cita Disponible</string>
     <string name="create_appointment_date">Fecha</string>

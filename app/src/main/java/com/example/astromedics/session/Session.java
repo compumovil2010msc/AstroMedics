@@ -22,4 +22,8 @@ public class Session {
         return mAuth.getCurrentUser()
                     .getEmail();
     }
+
+    public void logOut(){
+        mAuth.signOut();
+    }
 }
