@@ -100,6 +100,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="CLOUDINARY_URL"
+            android:value="cloudinary://966388891942941:3hXJ-3wkGN-y2NepDELcaM84k4Q@charlie2634" />
     </application>
 
 </manifest>

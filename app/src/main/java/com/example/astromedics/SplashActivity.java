@@ -7,22 +7,16 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cloudinary.android.MediaManager;
 import com.example.astromedics.model.Person;
-import com.example.astromedics.services.UserService;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
+import com.example.astromedics.services.UserService;
 import com.example.astromedics.session.Session;
-
-import com.example.astromedics.util.SharedPreferencesUtils;
-import com.example.astromedics.views.Login;
 import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.firebase.auth.FirebaseAuth;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -32,13 +26,19 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mAuth=FirebaseAuth.getInstance();
-        this.userService=App.get().getUserService();
-        Intent intentMain=new Intent(this, MainActivity.class);
-        Log.i("SPLASH_ACT",this.mAuth.getCurrentUser()==null?"NOT USER LOGGED":"USER LOOGED: "+this.mAuth.getCurrentUser().getEmail());
-        if(this.mAuth.getCurrentUser()!=null){
-            verifyData(this.mAuth.getCurrentUser().getEmail());
-        }else{
+        this.mAuth = FirebaseAuth.getInstance();
+        MediaManager.init(getApplicationContext());
+        this.userService = App.get()
+                              .getUserService();
+        Intent intentMain = new Intent(this,
+                                       MainActivity.class);
+        Log.i("SPLASH_ACT",
+              this.mAuth.getCurrentUser() == null ? "NOT USER LOGGED" : "USER LOOGED: " + this.mAuth.getCurrentUser()
+                                                                                                    .getEmail());
+        if (this.mAuth.getCurrentUser() != null) {
+            verifyData(this.mAuth.getCurrentUser()
+                                 .getEmail());
+        } else {
             startActivity(intentMain);
         }
     }
@@ -62,7 +62,8 @@ public class SplashActivity extends AppCompatActivity {
         try {
             Person person = Repository.getInstance()
                                       .getPersonRepository()
-                                      .get(Session.getInstance().getEmail());
+                                      .get(Session.getInstance()
+                                                  .getEmail());
             if (person instanceof Therapist) {
                 Intent intent = new Intent(getApplicationContext(),
                                            HomeTherapist.class);

@@ -30,6 +30,7 @@ android {
 
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.cloudinary', name: 'cloudinary-android', version: '1.24.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
     implementation group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: '2.8.1'
