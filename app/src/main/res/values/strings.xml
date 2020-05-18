@@ -153,4 +153,6 @@
     <string name="report_creation_info_evolution">Creación de Evolución</string>
     <string name="report_creation_info_report">Creacion de Reporte</string>
     <string name="cancel_open_location_settings">Cancelar</string>
+    <string name="activity_account_type_pacient_button">Registrarme como paciente</string>
+    <string name="activity_account_type_therapist_button">Registrarme como medico</string>
 </resources>
