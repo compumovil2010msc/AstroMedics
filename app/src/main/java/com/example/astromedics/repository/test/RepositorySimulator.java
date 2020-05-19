@@ -1,6 +1,10 @@
 package com.example.astromedics.repository.test;
 
+import android.util.Log;
+
 import com.example.astromedics.helpers.ApplicationDateFormat;
+import com.example.astromedics.helpers.FileHandler;
+import com.example.astromedics.helpers.JsonHandler;
 import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.EducationalFormation;
 import com.example.astromedics.model.EvaluationQuestion;
@@ -12,8 +16,10 @@ import com.example.astromedics.model.Pacient;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Report;
 import com.example.astromedics.model.Therapist;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,9 +34,9 @@ public class RepositorySimulator {
      */
 
     public static int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0, evolutionId = 0;
-
+    public static String filePath = "repository.json";
     private static RepositorySimulator instance;
-    public List<Person> persons;
+    private List<Person> persons;
 
     public static RepositorySimulator getInstance() {
         if (instance == null) {
@@ -43,14 +49,41 @@ public class RepositorySimulator {
 
     public void setPersons(List<Person> persons) {
         this.persons = persons;
+        saveCurrentUsers(persons);
     }
 
     public List<Person> getPersons() {
-        return persons;
+        return getPersonsFromStorage();
+    }
+
+    private ArrayList<Person> getPersonsFromStorage() {
+        ArrayList<Person> returnable = new ArrayList<>();
+        try {
+            returnable = new ArrayList<>(Arrays.asList(new ObjectMapper().readValue(FileHandler.getInstance(null)
+                                                                                               .readFile(filePath),
+                                                                                    Person[].class)));
+        } catch (Exception ex) {
+            Log.e("Error",
+                  "No se pudo obtener usuarios");
+        }
+        return returnable == null ? new ArrayList<Person>() : returnable;
+    }
+
+    private void saveCurrentUsers(List<Person> persons) {
+        if (FileHandler.getInstance(null)
+                       .writeFile(filePath,
+                                  JsonHandler.toJson(persons))) {
+            Log.i("Info",
+                  "Se obtuvieron los usuarios satisfactoriamente");
+        }
     }
 
     private void init() {
-        persons = new ArrayList<>();
+        if(RepositorySimulator.getInstance().getPersons().size() > 0){
+            return;
+        }
+
+        List<Person> initialPersons = new ArrayList<>();
         Therapist therapist1 = getTestTherapist1();
         Therapist therapist2 = getTestTherapist2();
         Pacient pacient1 = getPacient1();
@@ -98,10 +131,12 @@ public class RepositorySimulator {
 
         pacient1.addMedicalHistory(medicalConsultation2);
 
-        persons.add(therapist1);
-        persons.add(therapist2);
-        persons.add(pacient1);
-        persons.add(pacient2);
+        initialPersons.add(therapist1);
+        initialPersons.add(therapist2);
+        initialPersons.add(pacient1);
+        initialPersons.add(pacient2);
+
+        this.setPersons(initialPersons);
     }
 
     private Therapist getTestTherapist1() {

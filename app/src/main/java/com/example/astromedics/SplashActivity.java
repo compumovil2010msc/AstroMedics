@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cloudinary.android.MediaManager;
+import com.example.astromedics.helpers.FileHandler;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
@@ -28,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.mAuth = FirebaseAuth.getInstance();
         MediaManager.init(getApplicationContext());
+        FileHandler.getInstance(getApplicationContext());
         this.userService = App.get()
                               .getUserService();
         Intent intentMain = new Intent(this,

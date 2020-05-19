@@ -1,9 +1,12 @@
 package com.example.astromedics.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 public class MedicalConsultation implements Serializable, Comparable<MedicalConsultation>{
     private int medicalConsultationId;
+    @JsonIgnore
     private Appointment appointment;
     private Evolution evolution;
     private Report report;
