@@ -79,17 +79,9 @@ public class RepositorySimulator {
                         for (Appointment appointment : therapist.getAppointments()) {
                             if (medicalConsultation.getAppointmentId() == appointment.getAppointmentId()) {
                                 medicalConsultation.setAppointment(appointment);
+                                appointment.setMedicalConsultation(medicalConsultation);
                             }
                         }
-                    }
-                }
-            }
-
-            for (Therapist therapist : therapists) {
-                for (Appointment appointment : therapist.getAppointments()) {
-                    if (appointment.getMedicalConsultation() != null) {
-                        appointment.getMedicalConsultation()
-                                   .setAppointment(appointment);
                     }
                 }
             }
