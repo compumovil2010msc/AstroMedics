@@ -52,6 +52,7 @@
             android:layout_below="@id/login_password"
             android:layout_centerHorizontal="true"
             android:backgroundTint="@color/colorPrimary"
+            android:textColor="#FFFFFF"
             android:text="@string/activity_account_type_pacient_button"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -61,6 +62,7 @@
             android:layout_below="@id/login_password"
             android:layout_centerHorizontal="true"
             android:backgroundTint="@color/colorPrimary"
+            android:textColor="#FFFFFF"
             android:text="@string/activity_account_type_therapist_button"/>
     </LinearLayout>
 

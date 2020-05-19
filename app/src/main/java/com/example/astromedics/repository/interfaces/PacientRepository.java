@@ -7,6 +7,7 @@ import com.example.astromedics.model.Pacient;
 import com.example.astromedics.model.Therapist;
 
 public interface PacientRepository {
+    Pacient createPacient(Pacient pacient) throws  Exception;
     Pacient getPacient(MedicalConsultation medicalConsultation) throws Exception;
     Pacient getPacient(String email) throws Exception;
 

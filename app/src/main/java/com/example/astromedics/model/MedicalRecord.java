@@ -10,6 +10,14 @@ public class MedicalRecord implements Serializable {
     private double height;
     private List<EvaluationQuestion> evaluationQuestions;
 
+    public MedicalRecord(String bloodType, double weight, double height,
+                         List<EvaluationQuestion> evaluationQuestions) {
+        this.bloodType = bloodType;
+        this.weight = weight;
+        this.height = height;
+        this.evaluationQuestions = evaluationQuestions;
+    }
+
     public MedicalRecord(int medicalRecordId, String bloodType, double weight, double height,
                          List<EvaluationQuestion> evaluationQuestions) {
         this.medicalRecordId = medicalRecordId;

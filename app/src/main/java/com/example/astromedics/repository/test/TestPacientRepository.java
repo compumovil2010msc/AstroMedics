@@ -3,14 +3,35 @@ package com.example.astromedics.repository.test;
 import com.example.astromedics.model.Appointment;
 import com.example.astromedics.model.Localization;
 import com.example.astromedics.model.MedicalConsultation;
+import com.example.astromedics.model.MedicalRecord;
 import com.example.astromedics.model.Pacient;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Therapist;
+import com.example.astromedics.repository.Repository;
 import com.example.astromedics.repository.interfaces.PacientRepository;
 
 import java.util.List;
 
 public class TestPacientRepository implements PacientRepository {
+
+    @Override
+    public Pacient createPacient(Pacient pacient) throws Exception {
+        for (Person person : RepositorySimulator.getInstance()
+                                                .getPersons()) {
+            if(person.getEmail() == pacient.getEmail()){
+                throw new Exception("El paciente ya se encuentra registrado");
+            }
+        }
+
+        MedicalRecord currentMedicalRecord = pacient.getMedicalRecord();
+        currentMedicalRecord.setMedicalRecordId(RepositorySimulator.medicalRecordId++);
+        pacient.setMedicalRecord(currentMedicalRecord);
+
+        List<Person> persons =  RepositorySimulator.getInstance().getPersons();
+        persons.add(pacient);
+        RepositorySimulator.getInstance().setPersons(persons);
+        return pacient;
+    }
 
     @Override
     public Pacient getPacient(MedicalConsultation medicalConsultation) throws Exception {

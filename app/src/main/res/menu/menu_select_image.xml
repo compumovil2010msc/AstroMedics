@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/menu_take_photo"
-        android:title="Tomar foto"
+        android:title="@string/menu_take_photo"
         />
     <item
         android:id="@+id/menu_use_photo_gallery"
-        android:title="Usar galeria de imagenes"
+        android:title="@string/menu_use_photo_gallery"
         />
 </menu>

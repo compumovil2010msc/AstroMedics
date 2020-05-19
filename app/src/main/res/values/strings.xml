@@ -155,4 +155,33 @@
     <string name="cancel_open_location_settings">Cancelar</string>
     <string name="activity_account_type_pacient_button">Registrarme como paciente</string>
     <string name="activity_account_type_therapist_button">Registrarme como medico</string>
+    <string name="activity_create_pacient_info_1">Registro de Paciente</string>
+    <string name="activity_create_pacient_user_info">Usuario</string>
+    <string name="activity_create_pacient_email">Correo Electronico</string>
+    <string name="activity_create_pacient_password_1">Contraseña</string>
+    <string name="activity_create_pacient_password_2">Repetir Contraseña</string>
+    <string name="activity_create_pacient_info_2">Información Básica</string>
+    <string name="activity_create_pacient_personal_data">Datos Personales</string>
+    <string name="activity_create_pacient_full_name">Nombre Completo</string>
+    <string name="activity_create_pacient_identification_number">Número de Identificación</string>
+    <string name="activity_create_pacient_phone_number">Teléfono Fijo</string>
+    <string name="activity_create_pacient_cell_number">Número Celular</string>
+    <string name="activity_create_pacient_address">Direccíon</string>
+    <string name="activity_create_pacient_info_3">Información Adicional</string>
+    <string name="activity_create_pacient_medical_record">Registro Médico</string>
+    <string name="activity_create_pacient_blood_type">Tipo de Sangre</string>
+    <string name="activity_create_pacient_height">Estatura (Metros)</string>
+    <string name="activity_create_pacient_weight">Peso (Kilogramos)</string>
+    <string name="menu_take_photo">Tomar Foto</string>
+    <string name="menu_use_photo_gallery">Usar Galeria</string>
+    <string-array name="blood_types_1">
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+    </string-array>
+    <string-array name="blood_types_2">
+        <item>+</item>
+        <item>-</item>
+    </string-array>
 </resources>
