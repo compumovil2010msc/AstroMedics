@@ -24,7 +24,7 @@ public class TestPacientRepository implements PacientRepository {
         }
 
         MedicalRecord currentMedicalRecord = pacient.getMedicalRecord();
-        currentMedicalRecord.setMedicalRecordId(RepositorySimulator.medicalRecordId++);
+        currentMedicalRecord.setMedicalRecordId(RepositorySimulator.idHelper.medicalRecordId++);
         pacient.setMedicalRecord(currentMedicalRecord);
 
         List<Person> persons =  RepositorySimulator.getInstance().getPersons();
@@ -67,7 +67,7 @@ public class TestPacientRepository implements PacientRepository {
                                                          Appointment appointment) throws Exception {
         RepositorySimulator repository = RepositorySimulator.getInstance();
         boolean settedPacient = false, settedTherapist = false;
-        MedicalConsultation medicalConsultation = new MedicalConsultation(repository.medicalConsultationId++,
+        MedicalConsultation medicalConsultation = new MedicalConsultation(repository.idHelper.medicalConsultationId++,
                                                                           null,
                                                                           null,
                                                                           localization,
@@ -90,6 +90,7 @@ public class TestPacientRepository implements PacientRepository {
                         settedTherapist = true;
                         currentAppointment.setMedicalConsultation(medicalConsultation);
                         medicalConsultation.setAppointment(appointment);
+                        medicalConsultation.setAppointmentId(appointment.getAppointmentId());
                     }
                 }
             }

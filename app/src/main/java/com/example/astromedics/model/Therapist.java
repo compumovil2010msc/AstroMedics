@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.DateComparator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -66,6 +67,10 @@ public class Therapist extends Person implements Serializable {
         }
     }
 
+    public Therapist(){
+
+    }
+
     public Therapist(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
                      Date admissionDate, int medicalConsultationPrice, List<Emphasis> emphasis,
                      List<EducationalFormation> educationalFormation, List<Appointment> appointments) {
@@ -115,6 +120,7 @@ public class Therapist extends Person implements Serializable {
         this.appointments = appointments;
     }
 
+    @JsonIgnore
     public int getNumberOfCompletedMedicalConsultations() {
         int returnable = 0;
 
@@ -129,6 +135,7 @@ public class Therapist extends Person implements Serializable {
         return returnable;
     }
 
+    @JsonIgnore
     public double getAverageCalification() {
         int numberOfAppointments = 0;
         double sumOfCalifications = 0;
@@ -146,6 +153,7 @@ public class Therapist extends Person implements Serializable {
         return numberOfAppointments > 0 ? sumOfCalifications / numberOfAppointments : 0;
     }
 
+    @JsonIgnore
     public List<Date> getAvailableDays(Date startDate, Date endDate) {
         List<Date> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();
@@ -168,6 +176,7 @@ public class Therapist extends Person implements Serializable {
         return returnable;
     }
 
+    @JsonIgnore
     public List<Date> getAvailableDays() {
         List<Date> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();
@@ -186,6 +195,7 @@ public class Therapist extends Person implements Serializable {
         return returnable;
     }
 
+    @JsonIgnore
     public List<Appointment> getAvailableAppointmentsByDate(Date date) {
         List<Appointment> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();

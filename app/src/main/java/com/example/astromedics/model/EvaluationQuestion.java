@@ -7,6 +7,10 @@ public class EvaluationQuestion implements Serializable {
     private String question;
     private String answer;
 
+    public EvaluationQuestion(){
+
+    }
+
     public EvaluationQuestion(int evaluationQuestionId, String question, String answer) {
         this.evaluationQuestionId = evaluationQuestionId;
         this.question = question;

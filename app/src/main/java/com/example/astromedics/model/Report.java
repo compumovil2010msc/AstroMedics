@@ -8,6 +8,10 @@ public class Report implements Serializable {
     private Date creationDate;
     private String content;
 
+    public Report(){
+
+    }
+
     public Report(int reportId, Date creationDate, String content) {
         this.reportId = reportId;
         this.creationDate = creationDate;

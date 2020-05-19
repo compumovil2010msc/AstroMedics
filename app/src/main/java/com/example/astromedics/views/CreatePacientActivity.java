@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.cloudinary.android.callback.ErrorInfo;
 import com.example.astromedics.R;
@@ -42,6 +43,7 @@ import java.util.regex.Pattern;
 
 public class CreatePacientActivity extends AppCompatActivity {
 
+    ConstraintLayout loader;
     ImageView profileImage;
     EditText emailEditText, password1EditText, password2EditText, fullNameEditText, identificationEditText, phoneNumberEditText, cellNumberEditText,
             addressEditText, heightEditText, weightEditText;
@@ -78,6 +80,7 @@ public class CreatePacientActivity extends AppCompatActivity {
         heightEditText = findViewById(R.id.activity_create_pacient_height);
         weightEditText = findViewById(R.id.activity_create_pacient_weight);
         registerButton = findViewById(R.id.activity_create_pacient_floating_action_button);
+        loader = findViewById(R.id.activity_create_pacient_loader);
     }
 
     public void addListeners() {
@@ -93,6 +96,7 @@ public class CreatePacientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    showLoader();
                     if (hasText(emailEditText) &&
                             hasText(password1EditText) &&
                             hasText(password2EditText) &&
@@ -104,17 +108,29 @@ public class CreatePacientActivity extends AppCompatActivity {
                             hasText(emailEditText) &&
                             hasText(heightEditText) &&
                             hasText(weightEditText) &&
-                            hasImage(profileImage)) {
+                            hasImage(profileImage) &&
+                            Integer.parseInt(identificationEditText.getText()
+                                                                   .toString()) != 0 &&
+                            Long.parseLong(phoneNumberEditText.getText()
+                                                              .toString()) != 0 &&
+                            Long.parseLong(cellNumberEditText.getText()
+                                                             .toString()) != 0 &&
+                            Double.parseDouble(heightEditText.getText()
+                                                             .toString()) != 0 &&
+                            Double.parseDouble(weightEditText.getText()
+                                                             .toString()) != 0) {
                         if (!password1EditText.getText()
                                               .toString()
                                               .equals(password2EditText.getText()
                                                                        .toString())) {
+                            hideLoader();
                             Toast.makeText(getApplicationContext(),
                                            "Las contraseñas deben ser iguales",
                                            Toast.LENGTH_SHORT)
                                  .show();
                         } else if (!isValidEmail(emailEditText.getText()
                                                               .toString())) {
+                            hideLoader();
                             Toast.makeText(getApplicationContext(),
                                            "Por favor ingrese un correo electronico valido",
                                            Toast.LENGTH_SHORT)
@@ -123,12 +139,14 @@ public class CreatePacientActivity extends AppCompatActivity {
                             createUser();
                         }
                     } else {
+                        hideLoader();
                         Toast.makeText(getApplicationContext(),
                                        "Por favor rellene todos los campos",
                                        Toast.LENGTH_SHORT)
                              .show();
                     }
                 } catch (Exception ex) {
+                    hideLoader();
                     Toast.makeText(getApplicationContext(),
                                    ex.getMessage(),
                                    Toast.LENGTH_SHORT)
@@ -152,12 +170,14 @@ public class CreatePacientActivity extends AppCompatActivity {
                                         try {
                                             createPacient();
                                         } catch (Exception ex) {
+                                            hideLoader();
                                             Toast.makeText(getApplicationContext(),
                                                            ex.getMessage(),
                                                            Toast.LENGTH_LONG)
                                                  .show();
                                         }
                                     } else {
+                                        hideLoader();
                                         Toast.makeText(getApplicationContext(),
                                                        "El registro ha fallado",
                                                        Toast.LENGTH_LONG)
@@ -173,6 +193,8 @@ public class CreatePacientActivity extends AppCompatActivity {
                                           @Override
                                           public void onURLObtained(String url) {
                                               try {
+                                                  url = url.replace("http",
+                                                                    "https");
                                                   Pacient pacient = new Pacient(Integer.valueOf(identificationEditText.getText()
                                                                                                                       .toString()),
                                                                                 fullNameEditText.getText()
@@ -207,6 +229,7 @@ public class CreatePacientActivity extends AppCompatActivity {
                                                       startActivity(intent);
                                                   }
                                               } catch (Exception ex) {
+                                                  hideLoader();
                                                   Toast.makeText(getApplicationContext(),
                                                                  ex.getMessage(),
                                                                  Toast.LENGTH_LONG)
@@ -216,12 +239,23 @@ public class CreatePacientActivity extends AppCompatActivity {
 
                                           @Override
                                           public void onError(ErrorInfo error) {
+                                              hideLoader();
                                               Toast.makeText(getApplicationContext(),
                                                              error.getDescription(),
                                                              Toast.LENGTH_SHORT)
                                                    .show();
                                           }
                                       });
+    }
+
+    private void showLoader() {
+        loader.setVisibility(View.VISIBLE);
+        registerButton.setClickable(false);
+    }
+
+    private void hideLoader() {
+        loader.setVisibility(View.GONE);
+        registerButton.setClickable(true);
     }
 
     private boolean hasText(EditText editText) {

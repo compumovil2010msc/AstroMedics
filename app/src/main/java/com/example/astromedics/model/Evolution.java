@@ -8,6 +8,10 @@ public class Evolution implements Serializable {
     private Date creationDate;
     private String content;
 
+    public Evolution(){
+
+    }
+
     public Evolution(int evolutionId, Date creationDate, String content) {
         this.evolutionId = evolutionId;
         this.creationDate = creationDate;

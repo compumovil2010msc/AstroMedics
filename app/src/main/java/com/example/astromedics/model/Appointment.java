@@ -1,7 +1,5 @@
 package com.example.astromedics.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,6 +8,10 @@ public class Appointment implements Serializable {
     private Date startDate;
     private Date endDate;
     private MedicalConsultation medicalConsultation;
+
+    public Appointment(){
+
+    }
 
     public Appointment(int appointmentId, Date startDate, Date endDate, MedicalConsultation medicalConsultation) {
         AppointmentId = appointmentId;

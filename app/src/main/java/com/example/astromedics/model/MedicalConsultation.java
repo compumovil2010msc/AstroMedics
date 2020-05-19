@@ -4,15 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 
-public class MedicalConsultation implements Serializable, Comparable<MedicalConsultation>{
+public class MedicalConsultation implements Serializable, Comparable<MedicalConsultation> {
     private int medicalConsultationId;
     @JsonIgnore
     private Appointment appointment;
+    private int appointmentId;
     private Evolution evolution;
     private Report report;
     private Localization localization;
     private double calification;
     private Therapist.Emphasis emphasis;
+
+    public MedicalConsultation(){
+
+    }
 
     public MedicalConsultation(int medicalConsultationId, Evolution evolution, Report report,
                                Localization localization, double calification, Therapist.Emphasis emphasis) {
@@ -38,6 +43,14 @@ public class MedicalConsultation implements Serializable, Comparable<MedicalCons
 
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public void setAppointmentId(int appointmentId) {
+        this.appointmentId = appointmentId;
     }
 
     public Evolution getEvolution() {
@@ -82,6 +95,8 @@ public class MedicalConsultation implements Serializable, Comparable<MedicalCons
 
     @Override
     public int compareTo(MedicalConsultation medicalConsultation) {
-        return getAppointment().getStartDate().compareTo(medicalConsultation.getAppointment().getStartDate());
+        return getAppointment().getStartDate()
+                               .compareTo(medicalConsultation.getAppointment()
+                                                             .getStartDate());
     }
 }

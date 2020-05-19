@@ -8,6 +8,10 @@ public class Pacient extends Person implements Serializable {
     private MedicalRecord medicalRecord;
     private List<MedicalConsultation> medicalHistory;
 
+    public Pacient(){
+
+    }
+
     public Pacient(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
                    Date admissionDate, MedicalRecord medicalRecord, List<MedicalConsultation> medicalHistory) {
         super(identificationNumber,

@@ -85,7 +85,7 @@ public class TestTherapistRepository implements TherapistRepository {
             if (person.getEmail()
                       .equals(therapist.getEmail()) && person instanceof Therapist) {
                 List<Appointment> appointments = ((Therapist) person).getAppointments();
-                appointments.add(new Appointment(RepositorySimulator.appointmentId++,
+                appointments.add(new Appointment(RepositorySimulator.idHelper.appointmentId++,
                                                  startDate,
                                                  endDate,
                                                  null));
@@ -112,7 +112,7 @@ public class TestTherapistRepository implements TherapistRepository {
                                               .getEvolution() != null) {
                             throw new Exception("La consulta medica ya tiene evolución");
                         } else {
-                            Evolution evolution = new Evolution(RepositorySimulator.evolutionId++,
+                            Evolution evolution = new Evolution(RepositorySimulator.idHelper.evolutionId++,
                                                                 new Date(),
                                                                 evolutionContent);
                             currentAppointment.getMedicalConsultation()
@@ -145,7 +145,7 @@ public class TestTherapistRepository implements TherapistRepository {
                                               .getReport() != null) {
                             throw new Exception("La consulta medica ya tiene reporte");
                         } else {
-                            Report report = new Report(RepositorySimulator.reportId++,
+                            Report report = new Report(RepositorySimulator.idHelper.reportId++,
                                                        new Date(),
                                                        reportContent);
                             currentAppointment.getMedicalConsultation()

@@ -3,6 +3,7 @@ package com.example.astromedics.helpers;
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -28,8 +29,11 @@ public class FileHandler {
 
     public boolean writeFile(String fileName, String json) {
         try {
-            FileOutputStream fileOutputStream = context.openFileOutput(fileName,
-                                                                       context.MODE_PRIVATE);
+            File file = new File(fileName);
+            file.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            /*FileOutputStream fileOutputStream = context.openFileOutput(fileName,
+                                                                       context.MODE_PRIVATE);*/
             if (json != null) {
                 fileOutputStream.write(json.getBytes());
             }
@@ -42,8 +46,10 @@ public class FileHandler {
 
     public String readFile(String fileName) {
         try {
-            FileInputStream fis = context.openFileInput(fileName);
-            InputStreamReader inputStreamReader = new InputStreamReader(fis);
+            File file = new File(fileName);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            /*ileInputStream fileInputStream = context.openFileInput(fileName);*/
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             StringBuilder stringBuilder = new StringBuilder();
             String line;

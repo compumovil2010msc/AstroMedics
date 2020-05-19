@@ -10,6 +10,10 @@ public class MedicalRecord implements Serializable {
     private double height;
     private List<EvaluationQuestion> evaluationQuestions;
 
+    public MedicalRecord(){
+
+    }
+
     public MedicalRecord(String bloodType, double weight, double height,
                          List<EvaluationQuestion> evaluationQuestions) {
         this.bloodType = bloodType;

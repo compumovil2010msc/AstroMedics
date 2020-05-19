@@ -27,6 +27,10 @@ public class Person implements Serializable {
     private String address;
     private Date admissionDate;
 
+    public Person(){
+
+    }
+
     public Person(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
                   Date admissionDate) {
         this.email = email;
@@ -48,9 +52,6 @@ public class Person implements Serializable {
     public Person(String email, String name) {
         this.email = email;
         this.name = name;
-    }
-
-    public Person() {
     }
 
     public String getEmail() {

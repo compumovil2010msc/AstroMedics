@@ -11,6 +11,10 @@ public class EducationalFormation implements Serializable {
     private Date enDate;
     private boolean graduated;
 
+    public EducationalFormation(){
+
+    }
+
     public EducationalFormation(int educationalFormationId, String title, String institution, Date startDate, Date enDate, boolean graduated) {
         EducationalFormationId = educationalFormationId;
         this.title = title;

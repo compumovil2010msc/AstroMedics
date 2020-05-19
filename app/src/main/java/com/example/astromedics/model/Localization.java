@@ -7,6 +7,10 @@ public class Localization implements Serializable {
     private double longitude;
     private String name;
 
+    public Localization(){
+
+    }
+
     public Localization(double latitude, double longitude, String name) {
         this.latitude = latitude;
         this.longitude = longitude;

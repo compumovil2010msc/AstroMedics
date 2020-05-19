@@ -32,9 +32,9 @@ public class RepositorySimulator {
     jcardenas@test.com -> test1234
     rodriguez@test.com -> test1234
      */
+    public static IdHelper idHelper;
 
-    public static int medicalConsultationId = 0, educationalFormationId = 0, appointmentId = 0, evaluationQuestionId = 0, medicalRecordId = 0, reportId = 0, evolutionId = 0;
-    public static String filePath = "repository.json";
+    public static String pacientFilePath = "/sdcard/repositoryPacient.json", therapistFilePath = "/sdcard/repositoryTherapist.json", idFilePath = "/sdcard/repositoryId.json";
     private static RepositorySimulator instance;
     private List<Person> persons;
 
@@ -53,15 +53,49 @@ public class RepositorySimulator {
     }
 
     public List<Person> getPersons() {
-        return getPersonsFromStorage();
+        if (this.persons == null || this.persons.size() == 0) {
+            this.persons = getPersonsFromStorage();
+        }
+
+        return this.persons;
     }
 
     private ArrayList<Person> getPersonsFromStorage() {
         ArrayList<Person> returnable = new ArrayList<>();
         try {
-            returnable = new ArrayList<>(Arrays.asList(new ObjectMapper().readValue(FileHandler.getInstance(null)
-                                                                                               .readFile(filePath),
-                                                                                    Person[].class)));
+            ArrayList<Pacient> pacients = new ArrayList<>(Arrays.asList(new ObjectMapper().readValue(FileHandler.getInstance(null)
+                                                                                                                .readFile(pacientFilePath),
+                                                                                                     Pacient[].class)));
+            ArrayList<Therapist> therapists = new ArrayList<>(Arrays.asList(new ObjectMapper().readValue(FileHandler.getInstance(null)
+                                                                                                                    .readFile(therapistFilePath),
+                                                                                                         Therapist[].class)));
+            IdHelper currentIdHelper = new ObjectMapper().readValue(FileHandler.getInstance(null)
+                                                                               .readFile(idFilePath),
+                                                                    IdHelper.class);
+            idHelper = currentIdHelper;
+            for (Pacient pacient : pacients) {
+                for (MedicalConsultation medicalConsultation : pacient.getMedicalHistory()) {
+                    for (Therapist therapist : therapists) {
+                        for (Appointment appointment : therapist.getAppointments()) {
+                            if (medicalConsultation.getAppointmentId() == appointment.getAppointmentId()) {
+                                medicalConsultation.setAppointment(appointment);
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (Therapist therapist : therapists) {
+                for (Appointment appointment : therapist.getAppointments()) {
+                    if (appointment.getMedicalConsultation() != null) {
+                        appointment.getMedicalConsultation()
+                                   .setAppointment(appointment);
+                    }
+                }
+            }
+
+            returnable.addAll(pacients);
+            returnable.addAll(therapists);
         } catch (Exception ex) {
             Log.e("Error",
                   "No se pudo obtener usuarios");
@@ -70,26 +104,48 @@ public class RepositorySimulator {
     }
 
     private void saveCurrentUsers(List<Person> persons) {
+        ArrayList<Person> pacients = new ArrayList<Person>(persons);
+        pacients.removeIf(s -> !(s instanceof Pacient));
+        ArrayList<Person> therapists = new ArrayList<Person>(persons);
+        therapists.removeIf(s -> !(s instanceof Therapist));
+
         if (FileHandler.getInstance(null)
-                       .writeFile(filePath,
-                                  JsonHandler.toJson(persons))) {
+                       .writeFile(pacientFilePath,
+                                  JsonHandler.toJson(pacients))) {
             Log.i("Info",
-                  "Se obtuvieron los usuarios satisfactoriamente");
+                  "Se guardaron los pacientes");
+        }
+
+        if (FileHandler.getInstance(null)
+                       .writeFile(therapistFilePath,
+                                  JsonHandler.toJson(therapists))) {
+            Log.i("Info",
+                  "Se guardaron los terapeutas");
+        }
+
+        if (FileHandler.getInstance(null)
+                       .writeFile(idFilePath,
+                                  JsonHandler.toJson(idHelper))) {
+            Log.i("Info",
+                  "Se guardaron los ids");
         }
     }
 
     private void init() {
-        if(RepositorySimulator.getInstance().getPersons().size() > 0){
+        if (RepositorySimulator.getInstance()
+                               .getPersons()
+                               .size() > 0) {
             return;
         }
 
+        idHelper = new IdHelper();
         List<Person> initialPersons = new ArrayList<>();
         Therapist therapist1 = getTestTherapist1();
         Therapist therapist2 = getTestTherapist2();
         Pacient pacient1 = getPacient1();
         Pacient pacient2 = getPacient2();
 
-        MedicalConsultation medicalConsultation1 = new MedicalConsultation(medicalConsultationId++,
+        MedicalConsultation medicalConsultation1 = new MedicalConsultation(idHelper.medicalConsultationId++,
                                                                            null,
                                                                            null,
                                                                            new Localization(4.629,
@@ -102,9 +158,12 @@ public class RepositorySimulator {
                   .setMedicalConsultation(medicalConsultation1);
         medicalConsultation1.setAppointment(therapist1.getAppointments()
                                                       .get(0));
+        medicalConsultation1.setAppointmentId(therapist1.getAppointments()
+                                                        .get(0)
+                                                        .getAppointmentId());
         pacient1.addMedicalHistory(medicalConsultation1);
 
-        MedicalConsultation medicalConsultation2 = new MedicalConsultation(medicalConsultationId++,
+        MedicalConsultation medicalConsultation2 = new MedicalConsultation(idHelper.medicalConsultationId++,
                                                                            null,
                                                                            null,
                                                                            new Localization(4.629,
@@ -117,13 +176,16 @@ public class RepositorySimulator {
                   .setMedicalConsultation(medicalConsultation2);
         medicalConsultation2.setAppointment(therapist2.getAppointments()
                                                       .get(0));
+        medicalConsultation2.setAppointmentId(therapist2.getAppointments()
+                                                        .get(0)
+                                                        .getAppointmentId());
 
-        medicalConsultation2.setReport(new Report(reportId++,
+        medicalConsultation2.setReport(new Report(idHelper.reportId++,
                                                   new Date(),
                                                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis turpis non tellus scelerisque congue nec sed felis. Morbi orci ipsum, consequat sit amet dignissim ultricies, lacinia id ante. Nulla lorem sem, auctor fringilla nibh sed, egestas semper enim. Praesent aliquet pretium ex vitae fermentum. Sed malesuada scelerisque varius. Suspendisse semper felis sem, at convallis nisl feugiat non. Cras a erat id turpis faucibus finibus at ac massa. Praesent ultrices augue id fermentum pretium. Nullam dignissim, dui eget sagittis malesuada, dui erat cursus nisl, vel sollicitudin tortor ligula pretium arcu. In ultrices ultrices justo sit amet semper. Donec iaculis ex et lacus ullamcorper efficitur.\n" +
                                                           "\n" +
                                                           "Aliquam cursus nulla eget ante auctor, vel dignissim felis venenatis. Donec congue, dolor eu ornare consectetur, orci arcu consectetur orci, ac imperdiet nisl urna at felis. Duis vestibulum risus sed pretium vehicula. Donec tortor mauris, accumsan ornare pulvinar quis, aliquet ac justo. Ut libero felis, congue vitae porttitor et, ultrices eu turpis. Donec quis ornare ipsum. Nulla facilisi. Phasellus varius condimentum sapien nec tristique. Nullam consectetur enim sed leo cursus imperdiet. Mauris lectus ante, semper eget lacus vitae, tempor placerat eros. Aliquam rhoncus ex ut elit pharetra molestie. Nulla et semper eros, non tristique diam. Cras tincidunt laoreet mi, non elementum nibh interdum non."));
-        medicalConsultation2.setEvolution(new Evolution(evolutionId++,
+        medicalConsultation2.setEvolution(new Evolution(idHelper.evolutionId++,
                                                         new Date(),
                                                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis turpis non tellus scelerisque congue nec sed felis. Morbi orci ipsum, consequat sit amet dignissim ultricies, lacinia id ante. Nulla lorem sem, auctor fringilla nibh sed, egestas semper enim. Praesent aliquet pretium ex vitae fermentum. Sed malesuada scelerisque varius. Suspendisse semper felis sem, at convallis nisl feugiat non. Cras a erat id turpis faucibus finibus at ac massa. Praesent ultrices augue id fermentum pretium. Nullam dignissim, dui eget sagittis malesuada, dui erat cursus nisl, vel sollicitudin tortor ligula pretium arcu. In ultrices ultrices justo sit amet semper. Donec iaculis ex et lacus ullamcorper efficitur.\n" +
                                                                 "\n" +
@@ -143,7 +205,7 @@ public class RepositorySimulator {
         List<Therapist.Emphasis> emphasis = new ArrayList<>();
         emphasis.add(Therapist.Emphasis.speech_therapy);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
-        educationalFormation.add(new EducationalFormation(educationalFormationId++,
+        educationalFormation.add(new EducationalFormation(idHelper.educationalFormationId++,
                                                           "Fonoaudiologo",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -153,7 +215,7 @@ public class RepositorySimulator {
                                                                                                  12,
                                                                                                  1),
                                                           true));
-        educationalFormation.add(new EducationalFormation(educationalFormationId++,
+        educationalFormation.add(new EducationalFormation(idHelper.educationalFormationId++,
                                                           "Fisioterapeuta",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -164,7 +226,7 @@ public class RepositorySimulator {
                                                                                                  1),
                                                           true));
         List<Appointment> appointments = new ArrayList<>();
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 05,
                                                                                 10,
@@ -176,7 +238,7 @@ public class RepositorySimulator {
                                                                                 16,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 10,
@@ -209,7 +271,7 @@ public class RepositorySimulator {
         emphasis.add(Therapist.Emphasis.speech_therapy);
         emphasis.add(Therapist.Emphasis.psychology);
         List<EducationalFormation> educationalFormation = new ArrayList<>();
-        educationalFormation.add(new EducationalFormation(educationalFormationId++,
+        educationalFormation.add(new EducationalFormation(idHelper.educationalFormationId++,
                                                           "Fonoaudiologo",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -219,7 +281,7 @@ public class RepositorySimulator {
                                                                                                  12,
                                                                                                  1),
                                                           true));
-        educationalFormation.add(new EducationalFormation(educationalFormationId++,
+        educationalFormation.add(new EducationalFormation(idHelper.educationalFormationId++,
                                                           "Fisioterapeuta",
                                                           "Pontificia Universidad Javeriana",
                                                           new ApplicationDateFormat().createDate(2014,
@@ -230,7 +292,7 @@ public class RepositorySimulator {
                                                                                                  1),
                                                           true));
         List<Appointment> appointments = new ArrayList<>();
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 03,
                                                                                 10,
@@ -242,7 +304,7 @@ public class RepositorySimulator {
                                                                                 12,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 10,
@@ -254,7 +316,7 @@ public class RepositorySimulator {
                                                                                 14,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 10,
@@ -266,7 +328,7 @@ public class RepositorySimulator {
                                                                                 16,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 11,
@@ -278,7 +340,7 @@ public class RepositorySimulator {
                                                                                 18,
                                                                                 0),
                                          null));
-        appointments.add(new Appointment(appointmentId++,
+        appointments.add(new Appointment(idHelper.appointmentId++,
                                          new ApplicationDateFormat().createDate(2020,
                                                                                 04,
                                                                                 12,
@@ -308,16 +370,16 @@ public class RepositorySimulator {
 
     private Pacient getPacient1() {
         List<EvaluationQuestion> evaluationQuestions = new ArrayList<>();
-        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
+        evaluationQuestions.add(new EvaluationQuestion(idHelper.evaluationQuestionId++,
                                                        "¿Pregunta 1?",
                                                        "Respuesta 1"));
-        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
+        evaluationQuestions.add(new EvaluationQuestion(idHelper.evaluationQuestionId++,
                                                        "¿Pregunta 2?",
                                                        "Respuesta 2"));
-        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
+        evaluationQuestions.add(new EvaluationQuestion(idHelper.evaluationQuestionId++,
                                                        "¿Pregunta 3?",
                                                        "Respuesta 4"));
-        MedicalRecord medicalRecord = new MedicalRecord(medicalRecordId++,
+        MedicalRecord medicalRecord = new MedicalRecord(idHelper.medicalRecordId++,
                                                         "AB+",
                                                         65,
                                                         1.65,
@@ -338,16 +400,16 @@ public class RepositorySimulator {
 
     private Pacient getPacient2() {
         List<EvaluationQuestion> evaluationQuestions = new ArrayList<>();
-        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
+        evaluationQuestions.add(new EvaluationQuestion(idHelper.evaluationQuestionId++,
                                                        "¿Pregunta 1?",
                                                        "Respuesta 1"));
-        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
+        evaluationQuestions.add(new EvaluationQuestion(idHelper.evaluationQuestionId++,
                                                        "¿Pregunta 2?",
                                                        "Respuesta 2"));
-        evaluationQuestions.add(new EvaluationQuestion(evaluationQuestionId++,
+        evaluationQuestions.add(new EvaluationQuestion(idHelper.evaluationQuestionId++,
                                                        "¿Pregunta 3?",
                                                        "Respuesta 4"));
-        MedicalRecord medicalRecord = new MedicalRecord(medicalRecordId++,
+        MedicalRecord medicalRecord = new MedicalRecord(idHelper.medicalRecordId++,
                                                         "AB+",
                                                         65,
                                                         1.65,
@@ -364,5 +426,75 @@ public class RepositorySimulator {
                                       medicalRecord,
                                       medicalHistory);
         return pacient;
+    }
+
+    public static class IdHelper {
+        public int medicalConsultationId, educationalFormationId, appointmentId, evaluationQuestionId, medicalRecordId, reportId, evolutionId;
+
+        public IdHelper() {
+            this.medicalConsultationId = 0;
+            this.educationalFormationId = 0;
+            this.appointmentId = 0;
+            this.evaluationQuestionId = 0;
+            this.medicalRecordId = 0;
+            this.reportId = 0;
+            this.evolutionId = 0;
+        }
+
+        public int getMedicalConsultationId() {
+            return medicalConsultationId;
+        }
+
+        public void setMedicalConsultationId(int medicalConsultationId) {
+            this.medicalConsultationId = medicalConsultationId;
+        }
+
+        public int getEducationalFormationId() {
+            return educationalFormationId;
+        }
+
+        public void setEducationalFormationId(int educationalFormationId) {
+            this.educationalFormationId = educationalFormationId;
+        }
+
+        public int getAppointmentId() {
+            return appointmentId;
+        }
+
+        public void setAppointmentId(int appointmentId) {
+            this.appointmentId = appointmentId;
+        }
+
+        public int getEvaluationQuestionId() {
+            return evaluationQuestionId;
+        }
+
+        public void setEvaluationQuestionId(int evaluationQuestionId) {
+            this.evaluationQuestionId = evaluationQuestionId;
+        }
+
+        public int getMedicalRecordId() {
+            return medicalRecordId;
+        }
+
+        public void setMedicalRecordId(int medicalRecordId) {
+            this.medicalRecordId = medicalRecordId;
+        }
+
+        public int getReportId() {
+            return reportId;
+        }
+
+        public void setReportId(int reportId) {
+            this.reportId = reportId;
+        }
+
+        public int getEvolutionId() {
+            return evolutionId;
+        }
+
+        public void setEvolutionId(int evolutionId) {
+            this.evolutionId = evolutionId;
+        }
     }
 }
