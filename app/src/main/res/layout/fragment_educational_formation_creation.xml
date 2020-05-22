@@ -37,9 +37,9 @@
                     android:textColor="@color/colorLight" />
 
                 <TextView
-                    android:id="@+id/educational_formation_creation_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/educational_formation_creation_title"
                     android:textColor="#000000"
                     android:textSize="32dp" />
 
@@ -54,7 +54,6 @@
                     android:id="@+id/educational_formation_creation_institution"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:textColor="@color/colorLight" />
 
                 <TextView
@@ -68,7 +67,6 @@
                     android:id="@+id/educational_formation_creation_title_obtained"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:textColor="@color/colorLight" />
 
                 <TextView
@@ -82,7 +80,8 @@
                     android:id="@+id/educational_formation_creation_start_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:textColor="@color/colorLight" />
 
                 <TextView
@@ -96,7 +95,9 @@
                     android:id="@+id/educational_formation_creation_end_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
+                    android:clickable="true"
+                    android:enabled="false"
+                    android:focusable="false"
                     android:textColor="@color/colorLight" />
 
 

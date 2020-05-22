@@ -7,27 +7,28 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.astromedics.R;
+import com.example.astromedics.helpers.ApplicationDateFormat;
+import com.example.astromedics.model.EducationalFormation;
 import com.google.android.material.checkbox.MaterialCheckBox;
+
+import java.util.Date;
 
 public class EducationalFormationCreation extends Fragment {
 
     private int index;
-    private String title;
     private IEducationalFormationButtonListener educationalFormationButtonListener;
-    private TextView titleTextView;
     private EditText insitutionEditText, titleObtainedEditText, startDateEditText, endDateEditText;
+    private Date initialDate, endDate;
     ImageButton newButton, closeButton;
     private MaterialCheckBox isGraduatedCheckBox;
 
-    public EducationalFormationCreation(int index, IEducationalFormationButtonListener educationalFormationButtonListener, String title) {
+    public EducationalFormationCreation(int index, IEducationalFormationButtonListener educationalFormationButtonListener) {
         this.index = index;
         this.educationalFormationButtonListener = educationalFormationButtonListener;
-        this.title = title;
     }
 
     @Override
@@ -47,8 +48,30 @@ public class EducationalFormationCreation extends Fragment {
         return view;
     }
 
+    public EducationalFormation getEducationalFormation() throws Exception {
+        if (insitutionEditText.getText()
+                              .toString()
+                              .equals("") ||
+                titleObtainedEditText.getText()
+                                     .toString()
+                                     .equals("") ||
+                initialDate == null ||
+                (endDate == null && !isGraduatedCheckBox.isChecked())) {
+            throw new Exception("Por favor verifique la información académica");
+        }
+
+
+        return new EducationalFormation(0,
+                                        insitutionEditText.getText()
+                                                          .toString(),
+                                        titleObtainedEditText.getText()
+                                                             .toString(),
+                                        initialDate,
+                                        endDate,
+                                        !isGraduatedCheckBox.isChecked());
+    }
+
     private void inflateViews(View view) {
-        titleTextView = view.findViewById(R.id.educational_formation_creation_title);
         insitutionEditText = view.findViewById(R.id.educational_formation_creation_institution);
         titleObtainedEditText = view.findViewById(R.id.educational_formation_creation_title_obtained);
         startDateEditText = view.findViewById(R.id.educational_formation_creation_start_date);
@@ -59,7 +82,6 @@ public class EducationalFormationCreation extends Fragment {
     }
 
     private void addInitialValues() {
-        titleTextView.setText(title);
         closeButton.setVisibility(index == 1 ? View.GONE : View.VISIBLE);
     }
 
@@ -79,8 +101,37 @@ public class EducationalFormationCreation extends Fragment {
         isGraduatedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                endDate = null;
                 endDateEditText.setText("");
-                endDateEditText.setEnabled(!isGraduatedCheckBox.isChecked());
+                endDateEditText.setEnabled(!isGraduatedCheckBox.isChecked() && initialDate != null);
+            }
+        });
+        startDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                educationalFormationButtonListener.onInitialCalendarSolitude(new OnCalendarSelectionListener() {
+                    @Override
+                    public void onCalendarSelection(Date date) {
+                        initialDate = date;
+                        endDate = null;
+                        endDateEditText.setText("");
+                        endDateEditText.setEnabled(!isGraduatedCheckBox.isChecked() && initialDate != null);
+                        startDateEditText.setText(new ApplicationDateFormat().toString(date));
+                    }
+                });
+            }
+        });
+        endDateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                educationalFormationButtonListener.onFinalCalendarSolitude(initialDate,
+                                                                           new OnCalendarSelectionListener() {
+                                                                               @Override
+                                                                               public void onCalendarSelection(Date date) {
+                                                                                   endDate = date;
+                                                                                   endDateEditText.setText(new ApplicationDateFormat().toString(date));
+                                                                               }
+                                                                           });
             }
         });
     }
@@ -90,6 +141,12 @@ public class EducationalFormationCreation extends Fragment {
 
         void onCloseButtonPressed(int index);
 
-        void onCalendarSolitude();
+        void onInitialCalendarSolitude(OnCalendarSelectionListener onCalendarSelectionListener);
+
+        void onFinalCalendarSolitude(Date initialDate, OnCalendarSelectionListener onCalendarSelectionListener);
+    }
+
+    public static interface OnCalendarSelectionListener {
+        void onCalendarSelection(Date date);
     }
 }

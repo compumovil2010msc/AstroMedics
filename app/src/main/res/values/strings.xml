@@ -197,6 +197,7 @@
     <string name="educational_formation_creation_start_date">Fecha de Inicio</string>
     <string name="educational_formation_creation_end_date">Fecha de Grado</string>
     <string name="educational_formation_creation_not_graduated">No me he graduado</string>
+    <string name="educational_formation_creation_title">Formación</string>
     <string-array name="blood_types_1">
         <item>A</item>
         <item>B</item>
