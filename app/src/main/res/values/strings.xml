@@ -155,6 +155,11 @@
     <string name="cancel_open_location_settings">Cancelar</string>
     <string name="activity_account_type_pacient_button">Registrarme como paciente</string>
     <string name="activity_account_type_therapist_button">Registrarme como terapeuta</string>
+    <string name="activity_create_pacient_image">Es necesario que suba una foto de perfil</string>
+    <string name="activity_create_pacient_fill_all_data">Por favor rellene todos los campos</string>
+    <string name="activity_create_pacient_fill_invalid_pass">Las contraseñas deben ser iguales</string>
+    <string name="activity_create_pacient_fill_invalid_email">Por favor ingrese un correo electronico valido</string>
+    <string name="activity_create_pacient_info_register_failed">El registro ha fallado</string>
     <string name="activity_create_pacient_info_1">Registro de Paciente</string>
     <string name="activity_create_pacient_user_info">Usuario</string>
     <string name="activity_create_pacient_email">Correo Electronico</string>
@@ -198,6 +203,7 @@
     <string name="educational_formation_creation_end_date">Fecha de Grado</string>
     <string name="educational_formation_creation_not_graduated">No me he graduado</string>
     <string name="educational_formation_creation_title">Formación</string>
+    <string name="educational_formation_creation_exception">Por favor verifique la información académica</string>
     <string-array name="blood_types_1">
         <item>A</item>
         <item>B</item>

@@ -125,14 +125,14 @@ public class CreatePacientActivity extends AppCompatActivity {
                                                                        .toString())) {
                             hideLoader();
                             Toast.makeText(getApplicationContext(),
-                                           "Las contraseñas deben ser iguales",
+                                           getString(R.string.activity_create_pacient_fill_invalid_pass),
                                            Toast.LENGTH_SHORT)
                                  .show();
                         } else if (!isValidEmail(emailEditText.getText()
                                                               .toString())) {
                             hideLoader();
                             Toast.makeText(getApplicationContext(),
-                                           "Por favor ingrese un correo electronico valido",
+                                           getString(R.string.activity_create_pacient_fill_invalid_email),
                                            Toast.LENGTH_SHORT)
                                  .show();
                         } else {
@@ -141,7 +141,7 @@ public class CreatePacientActivity extends AppCompatActivity {
                     } else {
                         hideLoader();
                         Toast.makeText(getApplicationContext(),
-                                       "Por favor rellene todos los campos",
+                                       getString(R.string.activity_create_pacient_fill_all_data),
                                        Toast.LENGTH_SHORT)
                              .show();
                     }
@@ -179,7 +179,7 @@ public class CreatePacientActivity extends AppCompatActivity {
                                     } else {
                                         hideLoader();
                                         Toast.makeText(getApplicationContext(),
-                                                       "El registro ha fallado",
+                                                       getString(R.string.activity_create_pacient_info_register_failed),
                                                        Toast.LENGTH_LONG)
                                              .show();
                                     }
@@ -258,12 +258,21 @@ public class CreatePacientActivity extends AppCompatActivity {
         registerButton.setClickable(true);
     }
 
-    private boolean hasText(EditText editText) {
+    private boolean hasText(EditText editText) throws Exception {
+        if (editText.getText() == null || editText.getText()
+                                                  .toString()
+                                                  .equals("")) {
+            throw new Exception(getString(R.string.activity_create_pacient_fill_all_data));
+        }
         return editText != null && !editText.getText()
+                                            .toString()
                                             .equals("");
     }
 
-    private boolean hasImage(ImageView imageView) {
+    private boolean hasImage(ImageView imageView) throws Exception {
+        if (imageView.getDrawable() == null) {
+            throw new Exception(getString(R.string.activity_create_pacient_image));
+        }
         return imageView.getDrawable() != null;
     }
 
