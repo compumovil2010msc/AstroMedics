@@ -35,5 +35,13 @@ public class AccountTypeSelection extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        therapistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),
+                                           CreateTherapistActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

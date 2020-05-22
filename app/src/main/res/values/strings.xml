@@ -154,7 +154,7 @@
     <string name="report_creation_info_report">Creacion de Reporte</string>
     <string name="cancel_open_location_settings">Cancelar</string>
     <string name="activity_account_type_pacient_button">Registrarme como paciente</string>
-    <string name="activity_account_type_therapist_button">Registrarme como medico</string>
+    <string name="activity_account_type_therapist_button">Registrarme como terapeuta</string>
     <string name="activity_create_pacient_info_1">Registro de Paciente</string>
     <string name="activity_create_pacient_user_info">Usuario</string>
     <string name="activity_create_pacient_email">Correo Electronico</string>
@@ -174,6 +174,29 @@
     <string name="activity_create_pacient_weight">Peso (Kilogramos)</string>
     <string name="menu_take_photo">Tomar Foto</string>
     <string name="menu_use_photo_gallery">Usar Galeria</string>
+    <string name="activity_create_therapist_info_1">Registro de Terapeuta</string>
+    <string name="activity_create_therapist_user_info">Usuario</string>
+    <string name="activity_create_therapist_email">Correo Electrónico</string>
+    <string name="activity_create_therapist_password_1">Contraseña</string>
+    <string name="activity_create_therapist_password_2">Repetir Contraseña</string>
+    <string name="activity_create_therapist_info_2">Información Básica</string>
+    <string name="activity_create_therapist_personal_data">Datos Personales</string>
+    <string name="activity_create_therapist_full_name">Nombre Completo</string>
+    <string name="activity_create_therapist_identification_number">Número de Identificación</string>
+    <string name="activity_create_therapist_phone_number">Teléfono Fijo</string>
+    <string name="activity_create_therapist_cell_number">Número Celular</string>
+    <string name="activity_create_therapist_address">Direccíon</string>
+    <string name="activity_create_therapist_info_3">Información Adicional</string>
+    <string name="activity_create_therapist_medical_record">Registro Médico</string>
+    <string name="activity_create_therapist_blood_type">Tipo de Sangre</string>
+    <string name="activity_create_therapist_height">Estatura (Metros)</string>
+    <string name="activity_create_therapist_weight">Peso (Kilogramos)</string>
+    <string name="educational_formation_creation_info">Información Académica</string>
+    <string name="educational_formation_creation_institution">Insitución Académica</string>
+    <string name="educational_formation_creation_title_obtained">Titulo Obtenido</string>
+    <string name="educational_formation_creation_start_date">Fecha de Inicio</string>
+    <string name="educational_formation_creation_end_date">Fecha de Grado</string>
+    <string name="educational_formation_creation_not_graduated">No me he graduado</string>
     <string-array name="blood_types_1">
         <item>A</item>
         <item>B</item>
