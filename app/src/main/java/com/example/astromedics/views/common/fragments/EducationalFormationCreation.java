@@ -57,7 +57,7 @@ public class EducationalFormationCreation extends Fragment {
                                      .equals("") ||
                 initialDate == null ||
                 (endDate == null && !isGraduatedCheckBox.isChecked())) {
-            throw new Exception(getString(R.string.educational_formation_creation_exception));
+            throw new Exception(getContext().getString(R.string.educational_formation_creation_exception));
         }
 
 

@@ -146,7 +146,7 @@ public class CreateTherapistActivity extends AppCompatActivity {
                     .remove(fragment)
                     .commit();
         }
-        educationalFormationFragments.remove(new Integer(index));
+        educationalFormationFragments.remove(new Integer(i));
     }
 
     private List<EducationalFormation> getEducationalFormation() throws Exception {
