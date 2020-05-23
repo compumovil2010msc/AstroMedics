@@ -1,11 +1,15 @@
 package com.example.astromedics;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.cloudinary.android.MediaManager;
 import com.example.astromedics.helpers.FileHandler;
@@ -21,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {
 
+    protected static final int MY_STORAGE_PERMISSION = 503;
     private FirebaseAuth mAuth;
     private UserService userService;
 
@@ -32,16 +37,47 @@ public class SplashActivity extends AppCompatActivity {
         FileHandler.getInstance(getApplicationContext());
         this.userService = App.get()
                               .getUserService();
-        Intent intentMain = new Intent(this,
-                                       MainActivity.class);
         Log.i("SPLASH_ACT",
               this.mAuth.getCurrentUser() == null ? "NOT USER LOGGED" : "USER LOOGED: " + this.mAuth.getCurrentUser()
                                                                                                     .getEmail());
+
+        if (ContextCompat.checkSelfPermission(this,
+                                              Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this,
+                                                  Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            init();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                                              new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
+                                              MY_STORAGE_PERMISSION);
+        }
+    }
+
+    private void init() {
         if (this.mAuth.getCurrentUser() != null) {
             verifyData(this.mAuth.getCurrentUser()
                                  .getEmail());
         } else {
+            Intent intentMain = new Intent(this,
+                                           MainActivity.class);
             startActivity(intentMain);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_STORAGE_PERMISSION:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED &&
+                        grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    init();
+                } else {
+                    Toast.makeText(SplashActivity.this,
+                                   "Es necesario otorgar permisos de escritura para iniciar la aplicacion",
+                                   Toast.LENGTH_SHORT)
+                         .show();
+                }
+                break;
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.astromedics.repository.test;
 
 import com.example.astromedics.helpers.DateComparator;
 import com.example.astromedics.model.Appointment;
+import com.example.astromedics.model.EducationalFormation;
 import com.example.astromedics.model.Evolution;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Person;
@@ -14,6 +15,29 @@ import java.util.Date;
 import java.util.List;
 
 public class TestTherapistRepository implements TherapistRepository {
+    @Override
+    public Therapist createTherapist(Therapist therapist) throws Exception {
+        for (Person person : RepositorySimulator.getInstance()
+                                                .getPersons()) {
+            if (person.getEmail() == therapist.getEmail()) {
+                throw new Exception("El terapeuta ya se encuentra registrado");
+            }
+        }
+
+        for (EducationalFormation educationalFormation : therapist.getEducationalFormation()) {
+            educationalFormation.setEducationalFormationId(RepositorySimulator.idHelper.educationalFormationId++);
+        }
+
+        therapist.setAppointments(new ArrayList<>());
+
+        List<Person> persons = RepositorySimulator.getInstance()
+                                                  .getPersons();
+        persons.add(therapist);
+        RepositorySimulator.getInstance()
+                           .setPersons(persons);
+        return therapist;
+    }
+
     @Override
     public Therapist getTherapist(String email) throws Exception {
         for (Person person : RepositorySimulator.getInstance()

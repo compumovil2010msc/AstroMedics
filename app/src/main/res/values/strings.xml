@@ -204,6 +204,8 @@
     <string name="educational_formation_creation_not_graduated">No me he graduado</string>
     <string name="educational_formation_creation_title">Formación</string>
     <string name="educational_formation_creation_exception">Por favor verifique la información académica</string>
+    <string name="activity_create_therapist_emphasis">Enfasis</string>
+    <string name="activity_create_therapist_price">Costo por consulta</string>
     <string-array name="blood_types_1">
         <item>A</item>
         <item>B</item>
