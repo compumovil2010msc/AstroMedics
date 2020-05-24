@@ -45,11 +45,22 @@ public class FireBaseNotificationService extends IntentService {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                         PersonNotifier notifier = singleSnapshot.getValue(PersonNotifier.class);
-
+                        String id = singleSnapshot.getKey();
                         if (notifier.getEmail()
                                     .equals(Session.getInstance()
-                                                   .getEmail())) {
+                                                   .getEmail()) && !notifier.isAlreadyNotified()) {
                             createNotification(notifier.getMedicalConsultationId());
+                            notifier.setAlreadyNotified(true);
+
+                            String PATH_NOTIFICATIONS = "PersonNotifier/";
+                            FirebaseDatabase database;
+                            DatabaseReference myRef;
+                            database = FirebaseDatabase.getInstance();
+                            myRef = database.getReference(PATH_NOTIFICATIONS + id);
+                            myRef.setValue(notifier);
+
+
+                            break;
                         }
                     }
                 }

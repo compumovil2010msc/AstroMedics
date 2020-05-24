@@ -5,6 +5,14 @@ public class PersonNotifier {
 
     private int medicalConsultationId;
 
+    public boolean isAlreadyNotified() {
+        return alreadyNotified;
+    }
+
+    public void setAlreadyNotified(boolean alreadyNotified) {
+        this.alreadyNotified = alreadyNotified;
+    }
+
     private boolean alreadyNotified;
 
     public PersonNotifier() {
