@@ -14,6 +14,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.astromedics.R;
 import com.example.astromedics.adapters.PageAdapter;
+import com.example.astromedics.notifications.TherapistNotificationService;
 import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.common.fragments.UserSettings;
 import com.example.astromedics.views.therapist.fragments.Reports;
@@ -28,7 +29,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class HomeTherapist extends AppCompatActivity {
 
     MenuItem prevMenuItem;
-    private static final String CHANNEL_ID = "AstromedicsNotificationChannel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,6 @@ public class HomeTherapist extends AppCompatActivity {
         setContentView(R.layout.activity_home_therapist);
         final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_user);
         final ViewPager viewPager = findViewById(R.id.viewPagerUser);
-
-        // TODO: borrar esto, esta para probar el funcionamiento de notificaciones
-        showNotification("[usuario] ha pedido una cita, entra a la aplicacion para ver los detalles");
-        listenChanges();
 
         // ejemplo para agregar una segunda base de datos junto a la original
         //.setApplicationId("1:530266078999:android:481c4ecf3253701e") // Required for Analytics.
@@ -57,9 +53,9 @@ public class HomeTherapist extends AppCompatActivity {
 //        FirebaseApp.initializeApp(getApplicationContext(), options, "temporal");
 
 //        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> se agrega bd secundaria");
-//        startService(
-//                new Intent(this, TherapistNotificationService.class)
-//        );
+        startService(
+                new Intent(this, TherapistNotificationService.class)
+        );
 
         bottomNavigationView.setOnNavigationItemSelectedListener( new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -109,68 +105,6 @@ public class HomeTherapist extends AppCompatActivity {
             }
         });
         setUpViewPager(viewPager);
-    }
-
-    public void listenChanges() {
-        // el usuario en este punto nunca deberia ser null, ya que esto comienza al entrar a HomeTherapist
-        FirebaseUser fu = FirebaseAuth.getInstance().getCurrentUser() ;
-
-        if(fu == null)
-        {
-            System.out.println("el usuario es null");
-            return;
-        }
-
-        // TODO: quitar pruebas
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        // referencia
-//        authFirebaseRef.getRoot().child("sos/emergencyservices"‌​).addValueEventListe‌​ner(new ValueEventListener() { };
-        ref.getRoot().child("citas").setValue("hola");
-        ref.getRoot().child("citas/loquesea").setValue("hola");
-//        ref.setValue("Hello World!");
-        return ;
-
-
-        // Attach a listener to read the data at our posts reference
-        // TODO: encontrar como conseguir permiso para la modificacion/lectura de archivos de la bd
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("citas/" + fu.getUid() );
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-////                Post post = dataSnapshot.getValue(Post.class);
-////                System.out.println(post);
-//                // hacer algo con la info del dataSnapshot
-//                showNotification("[usuario] ha pedido una cita, entra a la aplicacion para ver los detalles");
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: " + databaseError.getCode());
-//            }
-//        });
-//        ref.setValue("Hello World!");
-    }
-
-    // para conectarse a la base de datos secundaria
-    DatabaseReference setNewDatabase(String referencePath) {
-        System.out.println(referencePath);
-        FirebaseApp app = FirebaseApp.getInstance("temporal");
-        final FirebaseDatabase db = FirebaseDatabase.getInstance(app);
-        return db.getReference(referencePath);
-    }
-
-    void showNotification(String texto) {
-        Log.i("mensajes", "=====================================oiga, han cambiado los datos");
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.planet)
-                .setContentTitle("Astromedics")
-                .setContentText(texto)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-// notificationId is a unique int for each notification that you must define
-        notificationManager.notify(5, builder.build());
     }
 
     private void setUpViewPager(ViewPager viewPager) {
