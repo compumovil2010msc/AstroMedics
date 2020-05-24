@@ -1,6 +1,9 @@
 package com.example.astromedics;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,32 +16,30 @@ import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 
-import com.example.astromedics.util.SharedPreferencesUtils;
-import com.example.astromedics.views.Login;
 import com.example.astromedics.views.MainActivity;
 import com.example.astromedics.views.pacient.HomeUserActivity;
 import com.example.astromedics.views.therapist.HomeTherapist;
 import com.google.firebase.auth.FirebaseAuth;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class SplashActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private UserService userService;
+    private static final String CHANNEL_ID = "AstromedicsNotificationChannel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mAuth=FirebaseAuth.getInstance();
         this.userService=App.get().getUserService();
-        Intent intentMain=new Intent(this, MainActivity.class);
+
+        createNotificationChannel();
+
         Log.i("SPLASH_ACT",this.mAuth.getCurrentUser()==null?"NOT USER LOGGED":"USER LOOGED: "+this.mAuth.getCurrentUser().getEmail());
         if(this.mAuth.getCurrentUser()!=null){
             verifyData(this.mAuth.getCurrentUser().getEmail());
         }else{
+            Intent intentMain=new Intent(this, MainActivity.class);
             startActivity(intentMain);
         }
     }
@@ -89,6 +90,23 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = new Intent(this,
                                        HomeUserActivity.class);
             startActivity(intent);
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = CHANNEL_ID;
+            String description = "Astromedics notification channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            //IMPORTANCE_MAX MUESTRA LA NOTIFICACIÓN ANIMADA
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 }
