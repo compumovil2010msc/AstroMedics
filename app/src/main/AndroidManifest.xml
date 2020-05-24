@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.astromedics">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -19,7 +20,11 @@
         android:roundIcon="@drawable/planet"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.CreateTherapistActivity"></activity>
+        <service
+            android:name=".services.FireBaseNotificationService"
+            android:exported="false"></service>
+
+        <activity android:name=".views.CreateTherapistActivity" />
         <activity android:name=".views.therapist.ReportCreationActivity" />
         <activity android:name=".views.therapist.ReportDetails" />
         <activity android:name=".views.CreateAccount" />

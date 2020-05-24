@@ -24,9 +24,12 @@ import com.example.astromedics.model.Localization;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.model.dto.ApplicationDate;
+import com.example.astromedics.model.dto.PersonNotifier;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.pacient.HomeUserActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -127,7 +130,8 @@ public class TherapistAvailableAppointments extends Fragment {
 
                                                        public void onClick(DialogInterface dialog, int whichButton) {
                                                            try {
-                                                               MedicalConsultation createdMedicalConsultarion = Repository.getInstance()
+
+                                                               MedicalConsultation createdMedicalConsultation = Repository.getInstance()
                                                                                                                           .getPacientRepository()
                                                                                                                           .createMedicalConsultation(Repository.getInstance()
                                                                                                                                                                .getPacientRepository()
@@ -137,6 +141,18 @@ public class TherapistAvailableAppointments extends Fragment {
                                                                                                                                                      emphasis,
                                                                                                                                                      localization,
                                                                                                                                                      selectedAppointment);
+
+                                                               String PATH_NOTIFICATIONS = "PersonNotifier/";
+                                                               FirebaseDatabase database;
+                                                               DatabaseReference myRef;
+                                                               database = FirebaseDatabase.getInstance();
+                                                               myRef = database.getReference(PATH_NOTIFICATIONS);
+                                                               String key = myRef.push()
+                                                                                 .getKey();
+                                                               myRef = database.getReference(PATH_NOTIFICATIONS + key);
+                                                               PersonNotifier personNotifier = new PersonNotifier(therapist.getEmail(),
+                                                                                                                  createdMedicalConsultation.getMedicalConsultationId());
+                                                               myRef.setValue(personNotifier);
 
                                                                Intent intent = new Intent(getContext(),
                                                                                           HomeUserActivity.class);

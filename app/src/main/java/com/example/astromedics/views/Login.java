@@ -22,7 +22,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.astromedics.App;
 import com.example.astromedics.R;
+import com.example.astromedics.SplashActivity;
 import com.example.astromedics.model.Person;
+import com.example.astromedics.services.FireBaseNotificationService;
 import com.example.astromedics.services.UserService;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
@@ -245,6 +247,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Di
         });
     */
         try {
+            getApplicationContext().stopService(new Intent(getApplicationContext(), FireBaseNotificationService.class));
+            Intent notificationIntent = new Intent(Login.this,
+                                       FireBaseNotificationService.class);
+            startService(notificationIntent);
             Person person = Repository.getInstance()
                                       .getPersonRepository()
                                       .get(Session.getInstance().getEmail());

@@ -1,6 +1,8 @@
 package com.example.astromedics;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import com.example.astromedics.helpers.FileHandler;
 import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Therapist;
 import com.example.astromedics.repository.Repository;
+import com.example.astromedics.services.FireBaseNotificationService;
 import com.example.astromedics.services.UserService;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.MainActivity;
@@ -25,9 +28,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashActivity extends AppCompatActivity {
 
+    public static String CHANNEL_ID = "MyApp";
+    int notificationId = 0;
     protected static final int MY_STORAGE_PERMISSION = 503;
     private FirebaseAuth mAuth;
     private UserService userService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +104,7 @@ public class SplashActivity extends AppCompatActivity {
         }
     */
         try {
+            createNotificationChannel();
             Person person = Repository.getInstance()
                                       .getPersonRepository()
                                       .get(Session.getInstance()
@@ -119,15 +126,19 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void redirect(boolean doctor) {
-        if (doctor) {
-            Intent intent = new Intent(this,
-                                       HomeTherapist.class);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(this,
-                                       HomeUserActivity.class);
-            startActivity(intent);
-        }
+    private void createNotificationChannel() {
+        CharSequence name = "channel";
+        String description = "channel description";
+
+        NotificationChannel channel = new NotificationChannel(CHANNEL_ID,
+                                                              name,
+                                                              NotificationManager.IMPORTANCE_HIGH);
+        channel.setDescription(description);
+
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
+        notificationManager.createNotificationChannel(channel);
+        Intent intent = new Intent(SplashActivity.this,
+                                   FireBaseNotificationService.class);
+        startService(intent);
     }
 }

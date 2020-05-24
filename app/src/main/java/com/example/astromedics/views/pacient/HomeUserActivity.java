@@ -92,8 +92,6 @@ public class HomeUserActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent setIntent = new Intent(getApplicationContext(),
-                                      MainActivity.class);
-        startActivity(setIntent);
+        finish();
     }
 }

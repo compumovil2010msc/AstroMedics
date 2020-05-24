@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "1010345819855",
-    "firebase_url": "https://my-projecto-260001.firebaseio.com",
-    "project_id": "my-projecto-260001",
-    "storage_bucket": "my-projecto-260001.appspot.com"
+    "project_number": "698749343330",
+    "firebase_url": "https://astromedics-a3d0c.firebaseio.com",
+    "project_id": "astromedics-a3d0c",
+    "storage_bucket": "astromedics-a3d0c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1010345819855:android:9c4e1cf2b2883bc9b381ba",
+        "mobilesdk_app_id": "1:698749343330:android:5a4fc0adc17d0df247e33b",
         "android_client_info": {
           "package_name": "com.example.astromedics"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1010345819855-jf9hncgmtbc4t0kkads6q2dvke8l2ghe.apps.googleusercontent.com",
+          "client_id": "698749343330-em01o2hvc6fonjk6af8ripnvhn2fhudd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.astromedics",
+            "certificate_hash": "799a6ad23ea9dca02b1279ce14efcceed9e7f13a"
+          }
+        },
+        {
+          "client_id": "698749343330-707oj3vsl40sa9493304cb8ljpck6aq6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAVVFwXyKBSE1UEDTyEqTfS60nx-cwt75U"
+          "current_key": "AIzaSyDo_apNpKHy95fz7CUoizs40bk-eXeMWKA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1010345819855-jf9hncgmtbc4t0kkads6q2dvke8l2ghe.apps.googleusercontent.com",
+              "client_id": "698749343330-707oj3vsl40sa9493304cb8ljpck6aq6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
