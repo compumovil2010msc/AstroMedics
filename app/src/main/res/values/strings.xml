@@ -69,7 +69,7 @@
     <string name="therapist_available_appointment_confirm_dialog_yes">Agendar</string>
     <string name="therapist_available_appointment_confirm_dialog_no">Cancelar</string>
     <string name="therapist_available_appointment_confirm_dialog_message">¿Esta seguro que desea agendar la cita con el terapeuta [THERAPIST] para el [DAY] a las [TIME]?</string>
-    <string name="book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
+    <string name="book_appointment_no_appointments">Parece que no tienes ninguna consulta agendada</string>
     <string name="therapist_search_result_no_therapists">No se encontraron terapeutas disponibles</string>
     <string name="history_no_history">Todavia no tienes consultas historicas</string>
     <string name="history_no_calification">CALIFICACIÓN PENDIENTE</string>
@@ -111,7 +111,7 @@
     <string name="account_details_therapist_title">AstroMedics</string>
     <string name="account_details_therapist_number_of_appointments">Numero de consultas realizadas</string>
     <string name="account_details_therapist_calification">Calificación</string>
-    <string name="therapist_book_appointment_no_appointments">Ups! parece que no tienes ninguna consulta agendada</string>
+    <string name="therapist_book_appointment_no_appointments">Parece que no tienes ninguna consulta agendada</string>
     <string name="book_appointment_details_pacient_name">Paciente</string>
     <string name="pacient_details_name">Nombre completo</string>
     <string name="pacient_details_email">Correo electronico</string>
