@@ -30,8 +30,6 @@ public class TherapistNotificationService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        // TODO: borrar esto, esta para probar el funcionamiento de notificaciones
-        showNotification("[usuario] ha pedido una cita, entra a la aplicacion para ver los detalles");
         listenChanges();
     }
 
@@ -54,18 +52,10 @@ public class TherapistNotificationService extends IntentService {
             return;
         }
 
-        // TODO: quitar pruebas
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        // referencia
-//        authFirebaseRef.getRoot().child("sos/emergencyservices"‌​).addValueEventListe‌​ner(new ValueEventListener() { };
-        ref.getRoot().child("citas").setValue("hola");
-        ref.getRoot().child("citas/loquesea").setValue("hola");
-//        ref.setValue("Hello World!");
-
-        if (true) return ;
-
         // TODO: encontrar como conseguir permiso para la modificacion/lectura de archivos de la bd
-        DatabaseReference dateReference = FirebaseDatabase.getInstance().getReference("citas/" + fu.getUid() );
+        String path = "citas/" + fu.getUid() ;
+        System.out.println( "escuchando cambios en :" + fu.getUid());
+        DatabaseReference dateReference = FirebaseDatabase.getInstance().getReference(path);
         dateReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -73,6 +63,9 @@ public class TherapistNotificationService extends IntentService {
 //                System.out.println(post);
                 // hacer algo con la info del dataSnapshot
                 // tal vez se podria conseguir el usuario desde ahi, de forma que pueda salir en la notificacion
+                Log.i("mensajes", ">>>>>>>>>>>>>>>> cambio algo :v <<<<<<<<<<<<<<<<<<<<<<<");
+                Log.i("mensajes", ">>>>>>>>>>>>>>>> " + dataSnapshot + " <<<<<<<<<<<<<<<<<<<<<<<");
+
                 showNotification("[usuario] ha pedido una cita, entra a la aplicacion para ver los detalles");
             }
 
@@ -81,7 +74,6 @@ public class TherapistNotificationService extends IntentService {
                 System.out.println("The read failed: " + databaseError.getCode());
             }
         });
-        ref.setValue("Hello World!");
     }
 
     // para conectarse a la base de datos secundaria
