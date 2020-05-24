@@ -36,23 +36,7 @@ public class HomeTherapist extends AppCompatActivity {
         setContentView(R.layout.activity_home_therapist);
         final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation_user);
         final ViewPager viewPager = findViewById(R.id.viewPagerUser);
-
-        // ejemplo para agregar una segunda base de datos junto a la original
-        //.setApplicationId("1:530266078999:android:481c4ecf3253701e") // Required for Analytics.
-        //.setApiKey("AIzaSyBRxOyIj5dJkKgAVPXRLYFkdZwh2Xxq51k") // Required for Auth.
-        //.setDatabaseUrl("https://project-1765055333176374514.firebaseio.com/") // Required for RTDB.
-
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setApplicationId("autenticacion-ea619") // Required for Analytics.
-//                .setApiKey("AIzaSyDW18AE508FHwZ89xhxtCuQ6JZqa1e66xc")
-//                .setDatabaseUrl("https://autenticacion-ea619.firebaseio.com") // Required for RTDB.
-//                .setStorageBucket("autenticacion-ea619.appspot.com")
-//                .build();
-//        FirebaseApp.initializeApp(this); // ya que no se esta usando para nada mas, hacia falta inicializarla
-        // de forma que pudiera poner la segunda base de datos, para poder realizar las pruebas
-//        FirebaseApp.initializeApp(getApplicationContext(), options, "temporal");
-
-//        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> se agrega bd secundaria");
+        
         startService(
                 new Intent(this, TherapistNotificationService.class)
         );

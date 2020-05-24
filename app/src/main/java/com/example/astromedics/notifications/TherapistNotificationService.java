@@ -30,41 +30,31 @@ public class TherapistNotificationService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        listenChanges();
+        listenToChanges();
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
-            final String action = intent.getAction();
-//            if (THERAPY_REQUEST.equals(action)) {
-//            }
-        }
-    }
+    protected void onHandleIntent(Intent intent) { }
 
-    public void listenChanges() {
-        // el usuario en este punto nunca deberia ser null, ya que esto comienza al entrar a HomeTherapist
+    public void listenToChanges() {
         FirebaseUser fu = FirebaseAuth.getInstance().getCurrentUser() ;
-
-        if(fu == null)
-        {
+        if(fu == null) {
             System.out.println("el usuario es null");
             return;
         }
+        // email y medicalconsultationID
+        // conseguir paciente getinstance
 
-        // TODO: encontrar como conseguir permiso para la modificacion/lectura de archivos de la bd
         String path = "citas/" + fu.getUid() ;
-        System.out.println( "escuchando cambios en :" + fu.getUid());
+        Log.i("NotificationService", "escuchando cambios en :" + fu.getUid());
         DatabaseReference dateReference = FirebaseDatabase.getInstance().getReference(path);
         dateReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                Post post = dataSnapshot.getValue(Post.class);
-//                System.out.println(post);
                 // hacer algo con la info del dataSnapshot
                 // tal vez se podria conseguir el usuario desde ahi, de forma que pueda salir en la notificacion
-                Log.i("mensajes", ">>>>>>>>>>>>>>>> cambio algo :v <<<<<<<<<<<<<<<<<<<<<<<");
-                Log.i("mensajes", ">>>>>>>>>>>>>>>> " + dataSnapshot + " <<<<<<<<<<<<<<<<<<<<<<<");
+                Log.i("NotificationService", ">>>>>>>>>>>>>>>> cambio algo <<<<<<<<<<<<<<<<<<<<<<<");
+                Log.i("NotificationService", ">>>>>>>>>>>>>>>> " + dataSnapshot + " <<<<<<<<<<<<<<<<<<<<<<<");
 
                 showNotification("[usuario] ha pedido una cita, entra a la aplicacion para ver los detalles");
             }
@@ -76,16 +66,7 @@ public class TherapistNotificationService extends IntentService {
         });
     }
 
-    // para conectarse a la base de datos secundaria
-    DatabaseReference getNewDatabase(String referencePath) {
-        System.out.println(referencePath);
-        FirebaseApp app = FirebaseApp.getInstance("temporal");
-        final FirebaseDatabase db = FirebaseDatabase.getInstance(app);
-        return db.getReference(referencePath);
-    }
-
     void showNotification(String text) {
-        Log.i("mensajes", "=====================================oiga, han cambiado los datos");
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.planet)
                 .setContentTitle("Astromedics")
