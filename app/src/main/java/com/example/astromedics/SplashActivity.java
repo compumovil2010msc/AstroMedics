@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -104,26 +105,40 @@ public class SplashActivity extends AppCompatActivity {
         }
     */
         try {
-            createNotificationChannel();
-            Person person = Repository.getInstance()
-                                      .getPersonRepository()
-                                      .get(Session.getInstance()
-                                                  .getEmail());
-            if (person instanceof Therapist) {
-                Intent intent = new Intent(getApplicationContext(),
-                                           HomeTherapist.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(getApplicationContext(),
-                                           HomeUserActivity.class);
-                startActivity(intent);
-            }
+            login();
         } catch (Exception ex) {
             Toast.makeText(SplashActivity.this,
                            "Error en autenticacion",
                            Toast.LENGTH_SHORT)
                  .show();
         }
+    }
+
+    private void login() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+                                public void run() {
+                                    try {
+                                        createNotificationChannel();
+                                        Person person = Repository.getInstance()
+                                                                  .getPersonRepository()
+                                                                  .get(Session.getInstance()
+                                                                              .getEmail());
+                                        if (person instanceof Therapist) {
+                                            Intent intent = new Intent(getApplicationContext(),
+                                                                       HomeTherapist.class);
+                                            startActivity(intent);
+                                        } else {
+                                            Intent intent = new Intent(getApplicationContext(),
+                                                                       HomeUserActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    } catch (Exception ex) {
+                                        login();
+                                    }
+                                }
+                            },
+                            2000);
     }
 
     private void createNotificationChannel() {

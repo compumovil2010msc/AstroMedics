@@ -1,12 +1,14 @@
 package com.example.astromedics.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 
 public class MedicalConsultation implements Serializable, Comparable<MedicalConsultation> {
     private int medicalConsultationId;
     @JsonIgnore
+    @Exclude
     private Appointment appointment;
     private int appointmentId;
     private Evolution evolution;
@@ -37,6 +39,7 @@ public class MedicalConsultation implements Serializable, Comparable<MedicalCons
         this.medicalConsultationId = medicalConsultationId;
     }
 
+    @Exclude
     public Appointment getAppointment() {
         return appointment;
     }

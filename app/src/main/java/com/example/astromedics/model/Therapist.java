@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.astromedics.R;
 import com.example.astromedics.helpers.DateComparator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -67,8 +68,10 @@ public class Therapist extends Person implements Serializable {
         }
     }
 
-    public Therapist(){
-
+    public Therapist() {
+        this.emphasis = new ArrayList<>();
+        this.appointments = new ArrayList<>();
+        this.educationalFormation = new ArrayList<>();
     }
 
     public Therapist(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
@@ -121,6 +124,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     @JsonIgnore
+    @Exclude
     public int getNumberOfCompletedMedicalConsultations() {
         int returnable = 0;
 
@@ -136,6 +140,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     @JsonIgnore
+    @Exclude
     public double getAverageCalification() {
         int numberOfAppointments = 0;
         double sumOfCalifications = 0;
@@ -154,6 +159,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     @JsonIgnore
+    @Exclude
     public List<Date> getAvailableDays(Date startDate, Date endDate) {
         List<Date> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();
@@ -177,6 +183,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     @JsonIgnore
+    @Exclude
     public List<Date> getAvailableDays() {
         List<Date> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();
@@ -196,6 +203,7 @@ public class Therapist extends Person implements Serializable {
     }
 
     @JsonIgnore
+    @Exclude
     public List<Appointment> getAvailableAppointmentsByDate(Date date) {
         List<Appointment> returnable = new ArrayList<>();
         DateComparator dateComparator = new DateComparator();

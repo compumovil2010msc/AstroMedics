@@ -2,6 +2,8 @@ package com.example.astromedics.repository.test;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.FileHandler;
 import com.example.astromedics.helpers.JsonHandler;
@@ -17,6 +19,11 @@ import com.example.astromedics.model.Person;
 import com.example.astromedics.model.Report;
 import com.example.astromedics.model.Therapist;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +40,10 @@ public class RepositorySimulator {
     rodriguez@test.com -> test1234
      */
     public static IdHelper idHelper;
+    private static String PATH_USERS = "users";
+    private static String PATH_USERS_ID = "users/id";
+    private static String PATH_USERS_PACIENT = "users/pacient";
+    private static String PATH_USERS_THERAPIST = "users/therapist";
 
     public static String pacientFilePath = "/sdcard/repositoryPacient.json", therapistFilePath = "/sdcard/repositoryTherapist.json", idFilePath = "/sdcard/repositoryId.json";
     private static RepositorySimulator instance;
@@ -47,16 +58,91 @@ public class RepositorySimulator {
         return instance;
     }
 
+    public void addListener() {
+        FirebaseDatabase database;
+        DatabaseReference myRef;
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(PATH_USERS);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Person> persons = new ArrayList<>();
+                ArrayList<Pacient> pacients = new ArrayList<>();
+                ArrayList<Therapist> therapists = new ArrayList<>();
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    if (singleSnapshot.getKey()
+                                      .equals("id")) {
+                        idHelper = singleSnapshot.getValue(IdHelper.class);
+                    } else if (singleSnapshot.getKey()
+                                             .equals("pacient")) {
+                        for(DataSnapshot pacientSnapshot : singleSnapshot.getChildren()){
+                            pacients.add(pacientSnapshot.getValue(Pacient.class));
+                        }
+                    } else if (singleSnapshot.getKey()
+                                             .equals("therapist")) {
+                        for(DataSnapshot therapistSnapshot : singleSnapshot.getChildren()){
+                            therapists.add(therapistSnapshot.getValue(Therapist.class));
+                        }
+                    }
+                }
+
+                for (Pacient pacient : pacients) {
+                    for (MedicalConsultation medicalConsultation : pacient.getMedicalHistory()) {
+                        for (Therapist therapist : therapists) {
+                            for (Appointment appointment : therapist.getAppointments()) {
+                                if (medicalConsultation.getAppointmentId() == appointment.getAppointmentId()) {
+                                    medicalConsultation.setAppointment(appointment);
+                                    appointment.setMedicalConsultation(medicalConsultation);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                persons.addAll(pacients);
+                persons.addAll(therapists);
+                instance.persons = persons;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void addPersonsToFireBase(List<Person> persons) {
+        ArrayList<Person> pacients = new ArrayList<Person>(persons);
+        pacients.removeIf(s -> !(s instanceof Pacient));
+        ArrayList<Person> therapists = new ArrayList<Person>(persons);
+        therapists.removeIf(s -> !(s instanceof Therapist));
+
+        FirebaseDatabase database;
+        DatabaseReference myRef;
+        database = FirebaseDatabase.getInstance();
+
+        myRef = database.getReference(PATH_USERS_ID);
+        myRef.setValue(idHelper);
+        myRef = database.getReference(PATH_USERS_PACIENT);
+        myRef.setValue(pacients);
+        myRef = database.getReference(PATH_USERS_THERAPIST);
+        myRef.setValue(therapists);
+    }
+
     public void setPersons(List<Person> persons) {
         this.persons = persons;
-        saveCurrentUsers(persons);
+        //saveCurrentUsers(persons);
+        addPersonsToFireBase(persons);
     }
 
     public List<Person> getPersons() {
-        if (this.persons == null || this.persons.size() == 0) {
+        /*if (this.persons == null || this.persons.size() == 0) {
             this.persons = getPersonsFromStorage();
+        }*/
+        if(this.persons == null){
+            return new ArrayList<>();
         }
-
         return this.persons;
     }
 
@@ -124,7 +210,8 @@ public class RepositorySimulator {
     }
 
     private void init() {
-        if (RepositorySimulator.getInstance()
+        addListener();
+        /*if (RepositorySimulator.getInstance()
                                .getPersons()
                                .size() > 0) {
             return;
@@ -190,7 +277,7 @@ public class RepositorySimulator {
         initialPersons.add(pacient1);
         initialPersons.add(pacient2);
 
-        this.setPersons(initialPersons);
+        this.setPersons(initialPersons);*/
     }
 
     private Therapist getTestTherapist1() {

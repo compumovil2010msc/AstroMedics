@@ -1,6 +1,7 @@
 package com.example.astromedics.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class Pacient extends Person implements Serializable {
     private List<MedicalConsultation> medicalHistory;
 
     public Pacient(){
-
+        medicalHistory = new ArrayList<>();
     }
 
     public Pacient(int identificationNumber, String name, String photoURL, long houseNumber, long phoneNumber, String address, String email,
