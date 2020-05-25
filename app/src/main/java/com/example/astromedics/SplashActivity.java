@@ -40,7 +40,11 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mAuth = FirebaseAuth.getInstance();
-        MediaManager.init(getApplicationContext());
+        try {
+            MediaManager.init(getApplicationContext());
+        } catch (Exception ex) {
+
+        }
         FileHandler.getInstance(getApplicationContext());
         this.userService = App.get()
                               .getUserService();

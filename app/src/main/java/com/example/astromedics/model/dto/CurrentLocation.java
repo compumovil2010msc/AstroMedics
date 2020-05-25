@@ -7,6 +7,9 @@ public class CurrentLocation {
     private Localization targetLocation;
     private Localization currentLocation;
 
+    public CurrentLocation() {
+    }
+
     public CurrentLocation(String uniqueId, Localization targetLocation, Localization currentLocation) {
         this.uniqueId = uniqueId;
         this.targetLocation = targetLocation;

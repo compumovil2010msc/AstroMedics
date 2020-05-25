@@ -27,6 +27,7 @@ public class BookAppointmentDetails extends AppCompatActivity {
     private Pacient pacient;
     private Therapist therapist;
     private MedicalConsultation medicalConsultation;
+    public static MedicalConsultation notificationMedicalConsultation;
 
     private FloatingActionButton floatingActionButton;
     TextView emphasisTextView, therapistTextView, locationTextView, dateTextView, startDateTextView, endDateTextView, pacientNameTextView, pacientNameTitleTextView;
@@ -43,6 +44,11 @@ public class BookAppointmentDetails extends AppCompatActivity {
 
     private void obtainObjects() {
         medicalConsultation = (MedicalConsultation) getIntent().getSerializableExtra(MEDICAL_CONSULTATION);
+
+        if(medicalConsultation == null){
+            medicalConsultation = notificationMedicalConsultation;
+        }
+
         try {
             therapist = Repository.getInstance()
                                   .getTherapistRepository()

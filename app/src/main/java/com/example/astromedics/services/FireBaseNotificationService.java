@@ -17,6 +17,7 @@ import com.example.astromedics.model.dto.PersonNotifier;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
 import com.example.astromedics.views.common.BookAppointmentDetails;
+import com.example.astromedics.views.common.LocationDisplayActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -115,7 +116,8 @@ public class FireBaseNotificationService extends IntentService {
             mBuilder.setContentText("El terapeuta va de camino a la ubicación de la consulta");
             mBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
             Intent intent = new Intent(this,
-                                       BookAppointmentDetails.class);
+                                       LocationDisplayActivity.class);
+            LocationDisplayActivity.key = id;
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this,
                                                                     0,
@@ -154,9 +156,7 @@ public class FireBaseNotificationService extends IntentService {
             mBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
             Intent intent = new Intent(this,
                                        BookAppointmentDetails.class);
-            intent.putExtra(BookAppointmentDetails.MEDICAL_CONSULTATION,
-                            medicalConsultation);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            BookAppointmentDetails.notificationMedicalConsultation = medicalConsultation;
             PendingIntent pendingIntent = PendingIntent.getActivity(this,
                                                                     0,
                                                                     intent,

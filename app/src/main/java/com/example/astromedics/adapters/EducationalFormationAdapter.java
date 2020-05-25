@@ -65,7 +65,7 @@ public class EducationalFormationAdapter extends RecyclerView.Adapter<Educationa
             titleTextView.setText(educationalFormation.getTitle());
             institutionTextView.setText(educationalFormation.getInstitution());
             startDateTextView.setText(new ApplicationDateFormat().toString(educationalFormation.getStartDate()));
-            endDateTextView.setText(new ApplicationDateFormat().toString(educationalFormation.getEnDate()));
+            endDateTextView.setText(educationalFormation.getEnDate() != null ? new ApplicationDateFormat().toString(educationalFormation.getEnDate()): "No graduado");
             graduatedTextView.setText(educationalFormation.isGraduated()
                                               ? view.getContext()
                                                     .getString(R.string.educational_formation_graduated_yes)
