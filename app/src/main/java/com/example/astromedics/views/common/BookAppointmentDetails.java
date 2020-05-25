@@ -95,6 +95,8 @@ public class BookAppointmentDetails extends AppCompatActivity {
                 pacientNameTextView.setVisibility(View.VISIBLE);
                 pacientNameTitleTextView.setVisibility(View.VISIBLE);
                 pacientNameTextView.setText(pacient.getName());
+            } else {
+                pacient = (Pacient) currentPerson;
             }
         } catch (Exception ex) {
             Toast.makeText(getApplicationContext(),
@@ -134,6 +136,8 @@ public class BookAppointmentDetails extends AppCompatActivity {
                                            BookAppointmentLocationDisplayActivity.class);
                 intent.putExtra(BookAppointmentLocationDisplayActivity.LOCATION,
                                 medicalConsultation.getLocalization());
+                intent.putExtra(BookAppointmentLocationDisplayActivity.PACIENT,
+                                pacient);
                 startActivity(intent);
             }
         });

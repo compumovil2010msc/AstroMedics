@@ -22,6 +22,13 @@ import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.helpers.PermissionHandler;
 import com.example.astromedics.model.Localization;
+import com.example.astromedics.model.Pacient;
+import com.example.astromedics.model.Person;
+import com.example.astromedics.model.Therapist;
+import com.example.astromedics.model.dto.CurrentLocation;
+import com.example.astromedics.model.dto.LocationNotifier;
+import com.example.astromedics.repository.Repository;
+import com.example.astromedics.session.Session;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -38,6 +45,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
@@ -52,6 +61,11 @@ import java.util.List;
 
 public class BookAppointmentLocationDisplayActivity extends FragmentActivity implements OnMapReadyCallback {
     public static String LOCATION = "localization";
+    public static String PACIENT = "pacient";
+    String PATH_NOTIFICATIONS = "LocationNotifier/";
+    String PATH_NOTIFICATIONS2 = "LocationNotifier2/";
+    private String key;
+    private Pacient pacient;
     private PermissionHandler permissionHandler = new PermissionHandler(this);
     private Localization localization;
     private LatLng currentLocation, selectedLocation;
@@ -92,6 +106,7 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
     }
 
     private void obtainObjects() {
+        pacient = (Pacient) getIntent().getSerializableExtra(PACIENT);
         localization = (Localization) getIntent().getSerializableExtra(LOCATION);
     }
 
@@ -114,10 +129,37 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
                 initializeLocationElements();
                 indicationsEnabled = true;
                 refreshMap();
+                sendNotificationToPacient();
             }
         });
     }
 
+    private void sendNotificationToPacient() {
+        try {
+            Person currentPerson = Repository.getInstance()
+                                             .getPersonRepository()
+                                             .get(Session.getInstance()
+                                                         .getEmail());
+
+            if (currentPerson instanceof Therapist) {
+                FirebaseDatabase database;
+                DatabaseReference myRef;
+                database = FirebaseDatabase.getInstance();
+                myRef = database.getReference(PATH_NOTIFICATIONS);
+                key = myRef.push()
+                           .getKey();
+                myRef = database.getReference(PATH_NOTIFICATIONS + key);
+                LocationNotifier locationNotifier = new LocationNotifier(key,
+                                                                         pacient.getEmail());
+                myRef.setValue(locationNotifier);
+            }
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),
+                           ex.getMessage(),
+                           Toast.LENGTH_SHORT)
+                 .show();
+        }
+    }
 
     private void initializeLocationElements() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -146,7 +188,8 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
                         .show();
             }
         } catch (Exception ex) {
-            Log.e("", ex.getMessage());
+            Log.e("",
+                  ex.getMessage());
         }
 
     }
@@ -177,6 +220,16 @@ public class BookAppointmentLocationDisplayActivity extends FragmentActivity imp
                                                                               currentLocation) > 10)) {
             currentLocation = location;
             refreshMap();
+            FirebaseDatabase database;
+            DatabaseReference myRef;
+            database = FirebaseDatabase.getInstance();
+            myRef = database.getReference(PATH_NOTIFICATIONS2 + key);
+            CurrentLocation currentLocation = new CurrentLocation(key,
+                                                                  localization,
+                                                                  new Localization(location.latitude,
+                                                                                   location.longitude,
+                                                                                   ""));
+            myRef.setValue(currentLocation);
         }
     }
 

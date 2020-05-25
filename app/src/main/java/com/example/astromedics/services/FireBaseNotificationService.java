@@ -12,6 +12,7 @@ import com.example.astromedics.R;
 import com.example.astromedics.helpers.ApplicationDateFormat;
 import com.example.astromedics.model.MedicalConsultation;
 import com.example.astromedics.model.Pacient;
+import com.example.astromedics.model.dto.LocationNotifier;
 import com.example.astromedics.model.dto.PersonNotifier;
 import com.example.astromedics.repository.Repository;
 import com.example.astromedics.session.Session;
@@ -70,6 +71,62 @@ public class FireBaseNotificationService extends IntentService {
 
                 }
             });
+
+            myRef = database.getReference("LocationNotifier/");
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                        LocationNotifier notifier = singleSnapshot.getValue(LocationNotifier.class);
+                        String id = singleSnapshot.getKey();
+                        if (notifier.getEmail()
+                                    .equals(Session.getInstance()
+                                                   .getEmail()) && !notifier.getAlreadyNotified()) {
+                            notifier.setAlreadyNotified(true);
+
+                            String PATH_NOTIFICATIONS = "LocationNotifier/";
+                            FirebaseDatabase database;
+                            DatabaseReference myRef;
+                            database = FirebaseDatabase.getInstance();
+                            myRef = database.getReference(PATH_NOTIFICATIONS + id);
+                            myRef.setValue(notifier);
+                            createLocationNotification(id);
+                            break;
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    private void createLocationNotification(String id) {
+        try {
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this,
+                                                                                 CHANNEL_ID);
+            mBuilder.setSmallIcon(R.drawable.planet);
+            mBuilder.setContentTitle("Tu terapeuta va en camino");
+            mBuilder.setContentText("El terapeuta va de camino a la ubicación de la consulta");
+            mBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
+            Intent intent = new Intent(this,
+                                       BookAppointmentDetails.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                                                                    0,
+                                                                    intent,
+                                                                    0);
+            mBuilder.setContentIntent(pendingIntent);
+            mBuilder.setAutoCancel(true);
+            notificationManager.notify(notificationId++,
+                                       mBuilder.build());
+        } catch (Exception ex) {
+
         }
     }
 
